@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "808719170141",
+    "project_id": "helbage",
+    "storage_bucket": "helbage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808719170141:android:1b848533e223b755712bb4",
+        "android_client_info": {
+          "package_name": "com.example.helbage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808719170141-pgpff4lvg579s1dqhk3j5emvdbsopj31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAACmvNkfMySk3_NjJWTlCcK28tJ5dsgzs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808719170141-pgpff4lvg579s1dqhk3j5emvdbsopj31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
