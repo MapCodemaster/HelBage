@@ -10,6 +10,9 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../services/FirebaseServices/FirebaseAuth.dart';
+import '../services/FirebaseServices/auth_service.dart';
+
 final locator = StackedLocator.instance;
 
 void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
@@ -21,4 +24,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => SnackbarService());
+  locator.registerLazySingleton<AuthService>(() => FirebaseAuthService());
 }

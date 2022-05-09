@@ -1,3 +1,5 @@
+import 'package:helbage/services/FirebaseServices/FirebaseAuth.dart';
+import 'package:helbage/services/FirebaseServices/auth_service.dart';
 import 'package:helbage/view/authentication/ForgetPassword.dart';
 import 'package:helbage/view/authentication/UserRegister.dart';
 import 'package:helbage/view/home/HomeScreen.dart';
@@ -18,5 +20,6 @@ import 'package:helbage/view/authentication/UserLogin.dart';
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),
   LazySingleton(classType: SnackbarService),
+  LazySingleton(classType: FirebaseAuthService, asType: AuthService)
 ])
 class AppSetup {}

@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:helbage/services/FirebaseServices/auth_service.dart';
 
-class FirebaseAuthService {
+class FirebaseAuthService implements AuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   String getUID() {
     return _auth.currentUser!.uid;
   }
 
-  Future signInWithEmailAndPassword(String email, String password) async {
+  Future signIn(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email.trim(), password: password.trim());
