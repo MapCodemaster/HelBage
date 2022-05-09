@@ -15,7 +15,7 @@ import 'package:helbage/view/authentication/UserLogin.dart';
   MaterialRoute(page: UserRegister),
   MaterialRoute(page: ResidentMainScreen),
   MaterialRoute(page: AdminMainScreen),
-  MaterialRoute(page: ForgetPassword)
+  MaterialRoute(page: ForgetPassword),
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),
