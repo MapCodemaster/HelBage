@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseStor implements storage_service {
   @override
+  FirebaseFirestore db = FirebaseFirestore.instance;
   Future<bool> insert(String uid, String table, dynamic data) async {
-    FirebaseFirestore db = FirebaseFirestore.instance;
     try {
       print(uid);
       print(table);
@@ -22,7 +22,6 @@ class FirebaseStor implements storage_service {
 
   Future<bool> update(
       String uid, String table, String field, dynamic data) async {
-    FirebaseFirestore db = FirebaseFirestore.instance;
     try {
       db.collection(table).doc(uid).update({'${field}': data}).onError(
           (error, stackTrace) => {throw Exception()});
@@ -30,5 +29,9 @@ class FirebaseStor implements storage_service {
       return false;
     }
     return true;
+  }
+
+  Future<DocumentSnapshot> read(String collection, String document) async {
+    return db.collection(collection).doc(document).get();
   }
 }
