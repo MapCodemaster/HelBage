@@ -13,7 +13,6 @@ import '../model/userModel.dart';
 class SignUpViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
-
   final auth = locator<AuthService>();
   final stor=locator<FirebaseStor>();
   Future<bool> signUp(GlobalKey<FormState> _formkey, TextEditingController email,
@@ -71,9 +70,8 @@ class SignUpViewModel extends BaseViewModel {
           "homeNo":home.text,
           "profilePictureURL":"null"
       };
-      print(auth.getUID());
+
       await stor.insert(auth.getUID(), "user", data);
-      print("inserted");
         return true;
       }
     }}

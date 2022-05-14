@@ -26,8 +26,8 @@ class _UserSignUp extends State<UserSignUp> {
   TextEditingController _stateField = TextEditingController();
   TextEditingController _postcodeField = TextEditingController();
   TextEditingController _cityField = TextEditingController();
-  String dropdownValue="undefined";
-  
+  String dropdownValue = "undefined";
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SignUpViewModel>.nonReactive(
@@ -51,21 +51,45 @@ class _UserSignUp extends State<UserSignUp> {
                             _passwordField),
                         TextinputForm(
                             "Name", Colors.black, Colors.white, _nameField),
-                        DropdownInputForm("Gender",dropdownValue),
+                        Container(
+                            padding: EdgeInsets.only(top: 10),
+                            width: MediaQuery.of(context).size.width -
+                                MediaQuery.of(context).size.width / 5,
+                            child: DropdownButtonFormField(
+                                decoration: InputDecoration(
+                                  enabledBorder: inputFieldDefaultBorderStyle,
+                                  focusedBorder: inputFieldFocusedBorderStyle,
+                                ),
+                                hint: Text("gender"),
+                                value:dropdownValue,
+                                items: [
+                                  DropdownMenuItem(
+                                    child: Text("Male"),
+                                    value: "Male",
+                                  ),
+                                  DropdownMenuItem(
+                                    child: Text("Female"),
+                                    value: "Female",
+                                  ),
+                                  DropdownMenuItem(
+                                      child: Text("Other"), value: "Other"),
+                                ],
+                                onChanged: (val) => {
+                                      setState(
+                                          () => dropdownValue = val as String)
+                                    })),
                         TextinputForm("Phone Number", Colors.black,
                             Colors.white, _phoneField),
                         TextinputForm("Address", Colors.black, Colors.white,
                             _addressField),
-                        TextinputForm("City", Colors.black, Colors.white,
-                            _cityField),
                         TextinputForm(
                             "City", Colors.black, Colors.white, _cityField),
-                        TextinputForm("State", Colors.black, Colors.white,
-                            _stateField),
+                        TextinputForm(
+                            "State", Colors.black, Colors.white, _stateField),
                         TextinputForm("Postcode", Colors.black, Colors.white,
                             _postcodeField),
-                        TextinputForm("Home No", Colors.black, Colors.white,
-                            _homeField),
+                        TextinputForm(
+                            "Home No", Colors.black, Colors.white, _homeField),
                         Container(
                             padding: EdgeInsets.only(top: 20),
                             width: MediaQuery.of(context).size.width / 2,
@@ -73,11 +97,21 @@ class _UserSignUp extends State<UserSignUp> {
                                 child: ElevatedButton(
                                     onPressed: () async {
                                       bool check = await model.signUp(
-                                          _formkey, _emailField, _passwordField,_nameField,_phoneField,_addressField,_cityField,_stateField,_postcodeField,_homeField,dropdownValue);
-                                      
+                                          _formkey,
+                                          _emailField,
+                                          _passwordField,
+                                          _nameField,
+                                          _phoneField,
+                                          _addressField,
+                                          _cityField,
+                                          _stateField,
+                                          _postcodeField,
+                                          _homeField,
+                                          dropdownValue);
+
                                       if (check) {
-                                      model.NaviageToMain();
-                                    }
+                                        model.NaviageToMain();
+                                      }
                                     },
                                     child: Text("Sign Up"))))
                       ],
@@ -120,12 +154,17 @@ class TextinputForm extends StatelessWidget {
   }
 }
 
-class DropdownInputForm extends StatelessWidget {
+class DropdownInputForm extends StatefulWidget {
+  final String placeholder;
+  const DropdownInputForm(this.placeholder, {Key? key}) : super(key: key);
+  @override
+  State<DropdownInputForm> createState() => _DropdownInputForm();
+}
+
+class _DropdownInputForm extends State<DropdownInputForm> {
   dynamic item;
-  dynamic value;
-  String placeholder;
-  DropdownInputForm(this.placeholder,this.value) {
-    
+  String? Datavalue;
+  DropdownInputForm() {
     item = [
       DropdownMenuItem(
         child: Text("Male"),
@@ -138,6 +177,7 @@ class DropdownInputForm extends StatelessWidget {
       DropdownMenuItem(child: Text("Other"), value: "Other"),
     ];
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -145,13 +185,12 @@ class DropdownInputForm extends StatelessWidget {
         width: MediaQuery.of(context).size.width -
             MediaQuery.of(context).size.width / 5,
         child: DropdownButtonFormField(
-            
             decoration: InputDecoration(
               enabledBorder: inputFieldDefaultBorderStyle,
               focusedBorder: inputFieldFocusedBorderStyle,
             ),
-            hint: Text(this.placeholder),
+            hint: Text(widget.placeholder),
             items: this.item,
-            onChanged: (val) => {  value = val as String}));
+            onChanged: (val) => {setState(() => Datavalue = val as String)}));
   }
 }
