@@ -26,7 +26,7 @@ class _UserSignUp extends State<UserSignUp> {
   TextEditingController _stateField = TextEditingController();
   TextEditingController _postcodeField = TextEditingController();
   TextEditingController _cityField = TextEditingController();
-  String dropdownValue = "undefined";
+  String dropdownValue = "Male";
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,6 @@ class _UserSignUp extends State<UserSignUp> {
                                   focusedBorder: inputFieldFocusedBorderStyle,
                                 ),
                                 hint: Text("gender"),
-                                value:dropdownValue,
                                 items: [
                                   DropdownMenuItem(
                                     child: Text("Male"),
@@ -115,9 +114,7 @@ class _UserSignUp extends State<UserSignUp> {
                                     },
                                     child: Text("Sign Up"))))
                       ],
-                    ))
-                // This trailing comma makes auto-formatting nicer for build methods.
-                )));
+                    )))));
   }
 }
 
@@ -151,46 +148,5 @@ class TextinputForm extends StatelessWidget {
               focusedBorder: inputFieldFocusedBorderStyle,
               hintText: placeholder),
         ));
-  }
-}
-
-class DropdownInputForm extends StatefulWidget {
-  final String placeholder;
-  const DropdownInputForm(this.placeholder, {Key? key}) : super(key: key);
-  @override
-  State<DropdownInputForm> createState() => _DropdownInputForm();
-}
-
-class _DropdownInputForm extends State<DropdownInputForm> {
-  dynamic item;
-  String? Datavalue;
-  DropdownInputForm() {
-    item = [
-      DropdownMenuItem(
-        child: Text("Male"),
-        value: "Male",
-      ),
-      DropdownMenuItem(
-        child: Text("Female"),
-        value: "Female",
-      ),
-      DropdownMenuItem(child: Text("Other"), value: "Other"),
-    ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.only(top: 10),
-        width: MediaQuery.of(context).size.width -
-            MediaQuery.of(context).size.width / 5,
-        child: DropdownButtonFormField(
-            decoration: InputDecoration(
-              enabledBorder: inputFieldDefaultBorderStyle,
-              focusedBorder: inputFieldFocusedBorderStyle,
-            ),
-            hint: Text(widget.placeholder),
-            items: this.item,
-            onChanged: (val) => {setState(() => Datavalue = val as String)}));
   }
 }
