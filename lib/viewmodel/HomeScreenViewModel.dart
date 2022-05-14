@@ -14,6 +14,6 @@ class HomeScreenViewModel extends BaseViewModel {
   }
 
   void NavigateToRegister() {
-    _navigationService.navigateTo(Routes.userRegister);
+    _navigationService.navigateTo(Routes.userSignUp);
   }
 }

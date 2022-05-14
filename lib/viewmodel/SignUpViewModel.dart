@@ -14,75 +14,59 @@ class SignUpViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
-  final stor=locator<FirebaseStor>();
-  Future<bool> signUp(GlobalKey<FormState> _formkey, TextEditingController email,
+  final stor = locator<storage_service>();
+  Future<bool> signUp(
+      GlobalKey<FormState> _formkey,
+      TextEditingController email,
       TextEditingController password,
       TextEditingController name,
       TextEditingController phone,
       TextEditingController address,
       TextEditingController city,
-      TextEditingController state,
+      String? state,
       TextEditingController postcode,
       TextEditingController home,
-      String gender) async {
-
+      String? gender) async {
     Future.delayed(Duration(seconds: 5));
     if (!_formkey.currentState!.validate()) {
       return false;
     } else {
       dynamic result = await auth.signUp(email.text, password.text);
       print(result);
-      if (result !=true) {
+      if (result != true) {
         _dialogService.showDialog(
             title: "Register Error",
             description: result,
             dialogPlatform: DialogPlatform.Material);
         return false;
       } else {
-
-        /*UserModel user=new UserModel
-        (
-          email:email.text,
-          name:name.text,
-          userID:authservice.getUID(),
-          address:address.text,
-          userType: "User",
-          city:city.text,
-          postcode:postcode.text,
-          state:state.text,
-          gender:gender,
-          phoneNo:phone.text,
-          homeNo:home.text,
-          profilePictureURL:"null"
-      )};*/
-      final data=
-      {
-          "email":email.text,
-          "name":name.text,
-          "userID":auth.getUID(),
-          "address":address.text,
+        final data = {
+          "email": email.text,
+          "name": name.text,
+          "userID": auth.getUID(),
+          "address": address.text,
           "userType": "User",
-          "city":city.text,
-          "postcode":postcode.text,
-          "state":state.text,
-          "gender":gender,
-          "phoneNo":phone.text,
-          "homeNo":home.text,
-          "profilePictureURL":"null"
-      };
+          "city": city.text,
+          "postcode": postcode.text,
+          "state": state,
+          "gender": gender,
+          "phoneNo": phone.text,
+          "homeNo": home.text,
+          "profilePictureURL": "null"
+        };
 
-      await stor.insert(auth.getUID(), "user", data);
+        await stor.insert(auth.getUID(), "user", data);
         return true;
       }
-    }}
-  
+    }
+  }
 
   void NaviageToMain() {
     _navigationService.navigateTo(Routes.residentMainScreen);
   }
 
   void NavigateToRegister() {
-    _navigationService.navigateTo(Routes.userRegister);
+    _navigationService.navigateTo(Routes.userSignUp);
   }
 
   void NavigateToForgetPassword() {

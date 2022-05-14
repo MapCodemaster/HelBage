@@ -9,10 +9,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
-import '../view/authentication/UserSignUp.dart';
+
 import '../view/authentication/ForgetPassword.dart';
 import '../view/authentication/UserLogin.dart';
-import '../view/authentication/UserRegister.dart';
+import '../view/authentication/UserSignUp.dart';
 import '../view/home/HomeScreen.dart';
 import '../view/main/AdminMainScreen.dart';
 import '../view/main/ResidentMainScreen.dart';
@@ -20,17 +20,17 @@ import '../view/main/ResidentMainScreen.dart';
 class Routes {
   static const String homeScreen = '/';
   static const String userLogin = '/user-login';
-  static const String userRegister = '/user-sign-up';
   static const String residentMainScreen = '/resident-main-screen';
   static const String adminMainScreen = '/admin-main-screen';
   static const String forgetPassword = '/forget-password';
+  static const String userSignUp = '/user-sign-up';
   static const all = <String>{
     homeScreen,
     userLogin,
-    userRegister,
     residentMainScreen,
     adminMainScreen,
     forgetPassword,
+    userSignUp,
   };
 }
 
@@ -40,10 +40,10 @@ class StackedRouter extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.homeScreen, page: HomeScreen),
     RouteDef(Routes.userLogin, page: UserLogin),
-    RouteDef(Routes.userRegister, page: UserSignUp),
     RouteDef(Routes.residentMainScreen, page: ResidentMainScreen),
     RouteDef(Routes.adminMainScreen, page: AdminMainScreen),
     RouteDef(Routes.forgetPassword, page: ForgetPassword),
+    RouteDef(Routes.userSignUp, page: UserSignUp),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -57,12 +57,6 @@ class StackedRouter extends RouterBase {
     UserLogin: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const UserLogin(),
-        settings: data,
-      );
-    },
-    UserSignUp: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const UserSignUp(),
         settings: data,
       );
     },
@@ -81,6 +75,12 @@ class StackedRouter extends RouterBase {
     ForgetPassword: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const ForgetPassword(),
+        settings: data,
+      );
+    },
+    UserSignUp: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const UserSignUp(),
         settings: data,
       );
     },

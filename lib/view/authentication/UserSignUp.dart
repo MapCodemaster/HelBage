@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:helbage/shared/buttons.dart';
 import 'package:helbage/shared/styles.dart';
 import 'package:helbage/shared/validation.dart';
 import 'package:stacked/stacked.dart';
 import 'package:helbage/viewmodel/SignUpViewModel.dart';
+import 'package:helbage/shared/color.dart';
 
 class UserSignUp extends StatefulWidget {
   const UserSignUp({Key? key}) : super(key: key);
@@ -26,95 +28,240 @@ class _UserSignUp extends State<UserSignUp> {
   TextEditingController _stateField = TextEditingController();
   TextEditingController _postcodeField = TextEditingController();
   TextEditingController _cityField = TextEditingController();
-  String dropdownValue = "Male";
-
+  String? dropdownValue = "Male";
+  String? state = "Johor";
+  Validation validate = Validation();
+  bool _loading = false;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SignUpViewModel>.nonReactive(
         viewModelBuilder: () => SignUpViewModel(),
         builder: (context, model, child) => Scaffold(
             backgroundColor: Colors.white,
-            body: SingleChildScrollView(
-                child: Form(
-                    key: _formkey,
-                    child: Column(
-                      children: [
-                        Container(
-                            child: Center(
-                          child: Image.asset('assets/images/profile.png',
-                              width: MediaQuery.of(context).size.height / 4,
-                              height: MediaQuery.of(context).size.height / 4),
-                        )),
-                        TextinputForm("Email", Colors.black, Colors.white,
-                            _emailField, validateFields.validateEmail),
-                        TextinputForm("Password", Colors.black, Colors.white,
-                            _passwordField),
-                        TextinputForm(
-                            "Name", Colors.black, Colors.white, _nameField),
-                        Container(
-                            padding: EdgeInsets.only(top: 10),
-                            width: MediaQuery.of(context).size.width -
-                                MediaQuery.of(context).size.width / 5,
-                            child: DropdownButtonFormField(
-                                decoration: InputDecoration(
-                                  enabledBorder: inputFieldDefaultBorderStyle,
-                                  focusedBorder: inputFieldFocusedBorderStyle,
-                                ),
-                                hint: Text("gender"),
-                                items: [
-                                  DropdownMenuItem(
-                                    child: Text("Male"),
-                                    value: "Male",
-                                  ),
-                                  DropdownMenuItem(
-                                    child: Text("Female"),
-                                    value: "Female",
-                                  ),
-                                  DropdownMenuItem(
-                                      child: Text("Other"), value: "Other"),
-                                ],
-                                onChanged: (val) => {
-                                      setState(
-                                          () => dropdownValue = val as String)
-                                    })),
-                        TextinputForm("Phone Number", Colors.black,
-                            Colors.white, _phoneField),
-                        TextinputForm("Address", Colors.black, Colors.white,
-                            _addressField),
-                        TextinputForm(
-                            "City", Colors.black, Colors.white, _cityField),
-                        TextinputForm(
-                            "State", Colors.black, Colors.white, _stateField),
-                        TextinputForm("Postcode", Colors.black, Colors.white,
-                            _postcodeField),
-                        TextinputForm(
-                            "Home No", Colors.black, Colors.white, _homeField),
-                        Container(
-                            padding: EdgeInsets.only(top: 20),
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Center(
-                                child: ElevatedButton(
-                                    onPressed: () async {
-                                      bool check = await model.signUp(
-                                          _formkey,
-                                          _emailField,
-                                          _passwordField,
-                                          _nameField,
-                                          _phoneField,
-                                          _addressField,
-                                          _cityField,
-                                          _stateField,
-                                          _postcodeField,
-                                          _homeField,
-                                          dropdownValue);
+            body: _loading
+                ? Center(child: CircularProgressIndicator())
+                : SingleChildScrollView(
+                    child: Form(
+                        key: _formkey,
+                        child: Column(
+                          children: [
+                            Container(
+                                child: Center(
+                              child: Image.asset('assets/images/profile.png',
+                                  width: MediaQuery.of(context).size.height / 4,
+                                  height:
+                                      MediaQuery.of(context).size.height / 4),
+                            )),
+                            TextinputForm(
+                              "Email",
+                              Colors.black,
+                              Colors.white,
+                              _emailField,
+                              validator: validate.validateEmail,
+                              inputype: TextInputType.emailAddress,
+                            ),
+                            TextinputForm(
+                              "Password",
+                              Colors.black,
+                              Colors.white,
+                              _passwordField,
+                              validator: validate.validatePassword,
+                              inputype: TextInputType.visiblePassword,
+                            ),
+                            TextinputForm(
+                              "Name",
+                              Colors.black,
+                              Colors.white,
+                              _nameField,
+                              validator: validate.validateForEmpty,
+                              inputype: TextInputType.name,
+                            ),
+                            Container(
+                                padding: EdgeInsets.only(top: 10),
+                                width: MediaQuery.of(context).size.width -
+                                    MediaQuery.of(context).size.width / 5,
+                                child: DropdownButtonFormField(
+                                    decoration: InputDecoration(
+                                      enabledBorder:
+                                          inputFieldDefaultBorderStyle,
+                                      focusedBorder:
+                                          inputFieldFocusedBorderStyle,
+                                    ),
+                                    hint: Text("gender"),
+                                    items: [
+                                      DropdownMenuItem(
+                                        child: Text("Male"),
+                                        value: "Male",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Female"),
+                                        value: "Female",
+                                      ),
+                                    ],
+                                    onChanged: (String? val) => {
+                                          setState(() {
+                                            dropdownValue = val;
+                                          })
+                                        })),
+                            TextinputForm(
+                              "Phone Number (Start with 01x-)",
+                              Colors.black,
+                              Colors.white,
+                              _phoneField,
+                              validator: validate.validatePhoneNo,
+                              inputype: TextInputType.phone,
+                            ),
+                            TextinputForm(
+                              "Address",
+                              Colors.black,
+                              Colors.white,
+                              _addressField,
+                              validator: validate.validateForEmpty,
+                              inputype: TextInputType.streetAddress,
+                            ),
+                            TextinputForm(
+                              "City",
+                              Colors.black,
+                              Colors.white,
+                              _cityField,
+                              validator: validate.validateForEmpty,
+                              inputype: TextInputType.text,
+                            ),
+                            Container(
+                                padding: EdgeInsets.only(top: 10),
+                                width: MediaQuery.of(context).size.width -
+                                    MediaQuery.of(context).size.width / 5,
+                                child: DropdownButtonFormField(
+                                    decoration: InputDecoration(
+                                      enabledBorder:
+                                          inputFieldDefaultBorderStyle,
+                                      focusedBorder:
+                                          inputFieldFocusedBorderStyle,
+                                    ),
+                                    hint: Text("State"),
+                                    items: [
+                                      DropdownMenuItem(
+                                        child: Text("Johor"),
+                                        value: "Johor",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Kedah"),
+                                        value: "Kedah",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Kelantan"),
+                                        value: "Kelantan",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Malacca"),
+                                        value: "Malacca",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Negeri Sembilan"),
+                                        value: "Negeri Sembilan",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Pahang"),
+                                        value: "Pahang",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Penang"),
+                                        value: "Penang",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Perak"),
+                                        value: "Perak",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Perlis"),
+                                        value: "Perlis",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Sabah"),
+                                        value: "Sabah",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Sarawak"),
+                                        value: "Sarawak",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Selangor"),
+                                        value: "Selangor",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Kuala Lumpur"),
+                                        value: "Kuala Lumpur",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Labuan"),
+                                        value: "Labuan",
+                                      ),
+                                      DropdownMenuItem(
+                                        child: Text("Putrajaya"),
+                                        value: "Putrajaya",
+                                      ),
+                                    ],
+                                    onChanged: (String? val) => {
+                                          setState(() {
+                                            state = val;
+                                          })
+                                        })),
+                            TextinputForm(
+                              "Postcode",
+                              Colors.black,
+                              Colors.white,
+                              _postcodeField,
+                              validator: validate.validatePostcode,
+                              inputype: TextInputType.numberWithOptions(),
+                            ),
+                            TextinputForm(
+                              "Home No (Start with 0x- or 0xx-)",
+                              Colors.black,
+                              Colors.white,
+                              _homeField,
+                              validator: validate.validateHomeNo,
+                              inputype: TextInputType.phone,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            txtButton("Sign Up", () async {
+                              setState(() {
+                                _loading = true;
+                              });
+                              bool check = await model
+                                  .signUp(
+                                      _formkey,
+                                      _emailField,
+                                      _passwordField,
+                                      _nameField,
+                                      _phoneField,
+                                      _addressField,
+                                      _cityField,
+                                      state,
+                                      _postcodeField,
+                                      _homeField,
+                                      dropdownValue)
+                                  .whenComplete(() {
+                                setState(() {
+                                  _loading = false;
+                                });
+                              });
 
-                                      if (check) {
-                                        model.NaviageToMain();
-                                      }
-                                    },
-                                    child: Text("Sign Up"))))
-                      ],
-                    )))));
+                              if (check) {
+                                model.NaviageToMain();
+                              }
+                            },
+                                Colors.blue,
+                                120,
+                                20,
+                                TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                                radius: 50)
+                          ],
+                        )))));
   }
 }
 
@@ -124,13 +271,10 @@ class TextinputForm extends StatelessWidget {
   Color backgroundColor = Colors.white;
   TextEditingController? controller = null;
   dynamic validator = null;
-  TextinputForm(placeholder, borderColor, backgroundColor, controller,
-      [this.validator]) {
-    this.placeholder = placeholder;
-    this.borderColor = borderColor;
-    this.backgroundColor = backgroundColor;
-    this.controller = controller;
-  }
+  TextInputType? inputype;
+  TextinputForm(
+      this.placeholder, this.borderColor, this.backgroundColor, this.controller,
+      {this.validator, this.inputype});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -138,6 +282,7 @@ class TextinputForm extends StatelessWidget {
         width: MediaQuery.of(context).size.width -
             MediaQuery.of(context).size.width / 5,
         child: TextFormField(
+          keyboardType: inputype,
           controller: controller,
           validator: validator,
           decoration: InputDecoration(
