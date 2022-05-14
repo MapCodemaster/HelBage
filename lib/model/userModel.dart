@@ -24,6 +24,8 @@ class UserModel {
       required this.phoneNo,
       required this.homeNo,
       required this.profilePictureURL});
+      
+
   // UserModel.fromJson(Map<dynamic, dynamic> map) {
 
   // }

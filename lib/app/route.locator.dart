@@ -6,6 +6,7 @@
 
 // ignore_for_file: public_member_api_docs
 
+import 'package:helbage/services/FirebaseServices/FirebaseStorage.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -25,4 +26,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton<AuthService>(() => FirebaseAuthService());
+  locator.registerLazySingleton<FirebaseStor>(() => FirebaseStor());
 }
