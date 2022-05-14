@@ -2,6 +2,7 @@ import 'package:helbage/services/FirebaseServices/FirebaseAuth.dart';
 import 'package:helbage/services/FirebaseServices/auth_service.dart';
 import 'package:helbage/view/authentication/ForgetPassword.dart';
 import 'package:helbage/view/authentication/UserRegister.dart';
+import 'package:helbage/view/authentication/UserSignUp.dart';
 import 'package:helbage/view/home/HomeScreen.dart';
 import 'package:helbage/view/main/AdminMainScreen.dart';
 import 'package:helbage/view/main/ResidentMainScreen.dart';
@@ -16,6 +17,7 @@ import 'package:helbage/view/authentication/UserLogin.dart';
   MaterialRoute(page: ResidentMainScreen),
   MaterialRoute(page: AdminMainScreen),
   MaterialRoute(page: ForgetPassword),
+  MaterialRoute(page: UserSignUp),
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),
