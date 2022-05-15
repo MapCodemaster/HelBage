@@ -6,3 +6,4 @@ Color primaryColor = Color(Colors.grey[600]!.value);
 Color white = Colors.white;
 Color darkText = Colors.black54;
 Color highlightColor = Colors.green;
+const Color logoColor = const Color(0xffa194cf);

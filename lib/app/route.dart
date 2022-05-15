@@ -1,4 +1,6 @@
+import 'package:helbage/services/FirebaseServices/FileStorage.dart';
 import 'package:helbage/services/FirebaseServices/FirebaseAuth.dart';
+import 'package:helbage/services/FirebaseServices/FirebaseFileStorage.dart';
 import 'package:helbage/services/FirebaseServices/FirebaseStorage.dart';
 import 'package:helbage/services/FirebaseServices/auth_service.dart';
 import 'package:helbage/services/FirebaseServices/storage_service.dart';
@@ -23,6 +25,8 @@ import 'package:helbage/view/authentication/UserLogin.dart';
   LazySingleton(classType: DialogService),
   LazySingleton(classType: SnackbarService),
   LazySingleton(classType: FirebaseAuthService, asType: AuthService),
-  LazySingleton(classType: FirebaseStor, asType: storage_service)
+  LazySingleton(classType: FirebaseStor, asType: storage_service),
+  LazySingleton(classType: BottomSheetService),
+  LazySingleton(classType: FirebaseFileStorage, asType: FileStorage)
 ])
 class AppSetup {}

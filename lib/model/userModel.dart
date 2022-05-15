@@ -1,5 +1,5 @@
 class UserModel {
-  String email,
+  late String email,
       name,
       userID,
       userType,
@@ -9,8 +9,8 @@ class UserModel {
       gender,
       phoneNo,
       homeNo,
-      profilePictureURL;
-  int postcode;
+      profilePictureURL,
+      postcode;
   UserModel(
       {required this.email,
       required this.name,
@@ -24,11 +24,21 @@ class UserModel {
       required this.phoneNo,
       required this.homeNo,
       required this.profilePictureURL});
-      
 
-  // UserModel.fromJson(Map<dynamic, dynamic> map) {
-
-  // }
+  UserModel.fromJson(Map<String, dynamic>? map) {
+    this.email = map!["email"];
+    this.address = map["address"];
+    this.city = map["city"];
+    this.gender = map["gender"];
+    this.homeNo = map["homeNo"];
+    this.phoneNo = map["phoneNo"];
+    this.name = map["name"];
+    this.postcode = map["postcode"];
+    this.state = map["state"];
+    this.userType = map["userType"];
+    this.userID = map["userID"];
+    this.profilePictureURL = map["profilePictureURL"];
+  }
 
   toJson() {}
 }

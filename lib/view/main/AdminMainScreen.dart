@@ -6,6 +6,7 @@ import 'package:helbage/shared/buttons.dart';
 import 'package:helbage/view/authentication/UserLogin.dart';
 
 import 'package:helbage/view/authentication/UserSignUp.dart';
+import 'package:helbage/view/main/MoreScreen.dart';
 import 'package:stacked/stacked.dart';
 import 'package:helbage/viewmodel/MainScreenViewModel.dart';
 
@@ -18,7 +19,7 @@ class AdminMainScreen extends StatelessWidget {
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
               // sets the background color of the `BottomNavigationBar`
-              canvasColor: primaryColor,
+              canvasColor: logoColor,
               // sets the active color of the `BottomNavigationBar` if `Brightness` is light
               primaryColor: Colors.white,
               textTheme: Theme.of(context)
@@ -39,7 +40,7 @@ class AdminMainScreen extends StatelessWidget {
               BottomNavigationBarItem(
                   icon: Icon(Icons.recycling), label: "Recycling\nGuidelines"),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.settings), label: "Setting"),
+                  icon: Icon(Icons.more_horiz_rounded), label: "More"),
             ],
           ),
         ),
@@ -58,10 +59,9 @@ class AdminMainScreen extends StatelessWidget {
         return UserLogin();
       case 3:
         return UserLogin();
-      case 4:
-        return UserLogin();
+
       default:
-        return UserLogin();
+        return MoreScreen();
     }
   }
 }

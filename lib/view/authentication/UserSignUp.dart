@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:helbage/shared/buttons.dart';
+import 'package:helbage/shared/dropdownbuttonfield.dart';
 import 'package:helbage/shared/styles.dart';
 import 'package:helbage/shared/validation.dart';
 import 'package:stacked/stacked.dart';
@@ -131,81 +132,10 @@ class _UserSignUp extends State<UserSignUp> {
                                 padding: EdgeInsets.only(top: 10),
                                 width: MediaQuery.of(context).size.width -
                                     MediaQuery.of(context).size.width / 5,
-                                child: DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                      enabledBorder:
-                                          inputFieldDefaultBorderStyle,
-                                      focusedBorder:
-                                          inputFieldFocusedBorderStyle,
-                                    ),
-                                    hint: Text("State"),
-                                    items: [
-                                      DropdownMenuItem(
-                                        child: Text("Johor"),
-                                        value: "Johor",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Kedah"),
-                                        value: "Kedah",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Kelantan"),
-                                        value: "Kelantan",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Malacca"),
-                                        value: "Malacca",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Negeri Sembilan"),
-                                        value: "Negeri Sembilan",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Pahang"),
-                                        value: "Pahang",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Penang"),
-                                        value: "Penang",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Perak"),
-                                        value: "Perak",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Perlis"),
-                                        value: "Perlis",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Sabah"),
-                                        value: "Sabah",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Sarawak"),
-                                        value: "Sarawak",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Selangor"),
-                                        value: "Selangor",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Kuala Lumpur"),
-                                        value: "Kuala Lumpur",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Labuan"),
-                                        value: "Labuan",
-                                      ),
-                                      DropdownMenuItem(
-                                        child: Text("Putrajaya"),
-                                        value: "Putrajaya",
-                                      ),
-                                    ],
-                                    onChanged: (String? val) => {
-                                          setState(() {
-                                            state = val;
-                                          })
-                                        })),
+                                child:
+                                    getStateDropDown(onChanged: (String value) {
+                                  dropdownValue = value;
+                                })),
                             TextinputForm(
                               "Postcode",
                               Colors.black,
