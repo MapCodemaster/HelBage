@@ -38,7 +38,7 @@ class Validation {
     if (value!.isEmpty) {
       return "The phone no cannot be empty";
     }
-    if (!RegExp("^01[0-9]{1}-[0-9]{7,8}").hasMatch(value)) {
+    if (!RegExp("^01([0-9]){1}-([0-9]){7,8}").hasMatch(value)) {
       return 'Please enter a valid phone no';
     }
     return null;
@@ -48,7 +48,7 @@ class Validation {
     if (value!.isEmpty) {
       return "The phone no cannot be empty";
     }
-    if (!RegExp("^0[0-9]{1,2}-[0-9]{6,8}").hasMatch(value)) {
+    if (!RegExp('(^0+[0-9]){1,2}-([0-9]){6,8}').hasMatch(value)) {
       return 'Please enter a valid home no';
     }
     return null;

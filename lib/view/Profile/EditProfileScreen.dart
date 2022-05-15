@@ -5,6 +5,7 @@ import 'package:helbage/model/userModel.dart';
 import 'package:helbage/shared/buttons.dart';
 import 'package:helbage/shared/color.dart';
 import 'package:helbage/shared/dropdownbuttonfield.dart';
+import 'package:helbage/shared/validation.dart';
 import 'package:helbage/viewmodel/EditProfileScreenViewModel.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,6 +24,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   XFile? _selectedFile;
   bool _loading = false;
   final ImagePicker _picker = ImagePicker();
+
   Widget build(BuildContext context) {
     return ViewModelBuilder<EditProfileScreenViewModel>.reactive(
         viewModelBuilder: () => EditProfileScreenViewModel(),
@@ -173,6 +175,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
                             child: TextFormField(
+                              validator: Validation().validatePhoneNo,
                               controller: _phone,
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(bottom: 3),
@@ -193,6 +196,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
                             child: TextFormField(
+                              validator: Validation().validateHomeNo,
                               controller: _home,
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(bottom: 3),
@@ -214,6 +218,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
                             child: TextFormField(
                               controller: _address,
+                              validator: Validation().validateForEmpty,
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(bottom: 3),
                                   labelStyle: TextStyle(
@@ -233,6 +238,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
                             child: TextFormField(
+                              validator: Validation().validateForEmpty,
                               controller: _city,
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(bottom: 3),
@@ -253,6 +259,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
                             child: TextFormField(
+                              validator: Validation().validatePostcode,
                               controller: _postcode,
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.only(bottom: 3),
@@ -300,27 +307,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                                 RaisedButton(
                                   onPressed: () async {
-                                    setState(() {
-                                      _loading = true;
-                                    });
-                                    await Future.delayed(Duration(seconds: 2));
-                                    model
-                                        .edit(
-                                            _phone,
-                                            _home,
-                                            _address,
-                                            _city,
-                                            _postcode,
-                                            state,
-                                            model.data!.profilePictureURL,
-                                            imagePath: _selectedFile != null
-                                                ? _selectedFile!.path
-                                                : "Empty")
-                                        .whenComplete(() {
+                                    if (!_profileform.currentState!
+                                        .validate()) {
+                                    } else {
                                       setState(() {
-                                        _loading = false;
+                                        _loading = true;
                                       });
-                                    });
+                                      await Future.delayed(
+                                          Duration(seconds: 2));
+                                      model
+                                          .edit(
+                                              _phone,
+                                              _home,
+                                              _address,
+                                              _city,
+                                              _postcode,
+                                              state,
+                                              model.data!.profilePictureURL,
+                                              imagePath: _selectedFile != null
+                                                  ? _selectedFile!.path
+                                                  : "Empty")
+                                          .whenComplete(() {
+                                        setState(() {
+                                          _loading = false;
+                                        });
+                                      });
+                                    }
                                   },
                                   color: logoColor,
                                   padding: EdgeInsets.symmetric(horizontal: 40),
