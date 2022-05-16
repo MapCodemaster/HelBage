@@ -277,11 +277,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   )),
                             ),
                           ),
-                          getStateDropDown(
-                              onChanged: (String value) {
-                                state = value;
-                              },
-                              value: model.data!.state),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
+                            child: getStateDropDown(
+                                onChanged: (String value) {
+                                  state = value;
+                                },
+                                value: model.data!.state),
+                          ),
                           SizedBox(
                             height: 30,
                           ),
