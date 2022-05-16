@@ -3,13 +3,20 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:helbage/shared/color.dart';
 
-FlatButton froyoFlatBtn(String text, onPressed) {
-  return FlatButton(
+TextButton froyoFlatBtn(String text, onPressed) {
+  return TextButton(
     onPressed: onPressed,
-    child: Text(text),
-    textColor: white,
-    color: primaryColor,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+    child: Text(
+      text,
+      style: TextStyle(
+        color: white,
+      ),
+    ),
+    style: ButtonStyle(
+        backgroundColor:
+            MaterialStateColor.resolveWith((states) => primaryColor),
+        shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)))),
   );
 }
 
