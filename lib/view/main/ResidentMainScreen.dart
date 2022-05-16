@@ -58,7 +58,7 @@ class ResidentMainScreen extends StatelessWidget {
   Widget getViewForIndex(int index) {
     switch (index) {
       case 0:
-        return UserSignUp();
+        return Container(child: Center(child:Text("Welcome")),);
       case 1:
         return UserLogin();
       case 2:

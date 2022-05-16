@@ -82,6 +82,7 @@ class _UserSignUp extends State<UserSignUp> {
                                 width: MediaQuery.of(context).size.width -
                                     MediaQuery.of(context).size.width / 5,
                                 child: DropdownButtonFormField(
+                                    value: dropdownValue,
                                     decoration: InputDecoration(
                                       enabledBorder:
                                           inputFieldDefaultBorderStyle,
@@ -133,9 +134,9 @@ class _UserSignUp extends State<UserSignUp> {
                                 width: MediaQuery.of(context).size.width -
                                     MediaQuery.of(context).size.width / 5,
                                 child:
-                                    getStateDropDown(onChanged: (String value) {
-                                  dropdownValue = value;
-                                })),
+                                    getStateDropDown(onChanged: (String? value) =>{
+                                        state = value
+                                },value:state )),
                             TextinputForm(
                               "Postcode",
                               Colors.black,
@@ -177,7 +178,6 @@ class _UserSignUp extends State<UserSignUp> {
                                   _loading = false;
                                 });
                               });
-
                               if (check) {
                                 model.NaviageToMain();
                               }

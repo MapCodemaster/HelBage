@@ -39,6 +39,21 @@ class UserModel {
     this.userID = map["userID"];
     this.profilePictureURL = map["profilePictureURL"];
   }
-
-  toJson() {}
+  Map toJson()=>{};
+  
+  Map<String, dynamic> toFirestore(){
+    return{
+    "email": email,
+    "name": name,
+    "userID": userID,
+    "address": address,
+    "userType": userType,
+    "city": city,
+    "postcode": postcode,
+    "state": state,
+    "gender": gender,
+    "phoneNo": phoneNo,
+    "homeNo": homeNo,
+    "profilePictureURL": profilePictureURL
+  };}
 }

@@ -9,8 +9,12 @@ class FirebaseStor implements storage_service {
       db
           .collection(table)
           .doc(uid)
-          .set(data)
-          .onError((error, stackTrace) => {throw Exception()});
+          .set(data);
+          final docRef = db.collection(table).doc(uid);
+          if(docRef==null)
+          {
+            throw Exception();
+          }
     } catch (e) {
       return false;
     }

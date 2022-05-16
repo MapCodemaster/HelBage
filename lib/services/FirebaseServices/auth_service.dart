@@ -4,4 +4,5 @@ abstract class AuthService {
   Future signUp(String email,String password);
   Future<void> resetPassword(String email);
   Future signOut();
+  void deleteAccount();
 }

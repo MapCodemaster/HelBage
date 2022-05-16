@@ -23,7 +23,9 @@ class FirebaseAuthService implements AuthService {
   Future signUp(String email,String password)async{
   try
   {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(email:email,password:password);
+    dynamic result=await FirebaseAuth.instance.createUserWithEmailAndPassword(email:email,password:password);
+    print("Displaying create result");
+    print(result);
     return true;
   }on FirebaseAuthException catch(e)
   {
@@ -37,6 +39,7 @@ class FirebaseAuthService implements AuthService {
     
   }catch(e)
   {
+    //other exception
     return e.toString();
   }
 }
@@ -50,7 +53,13 @@ class FirebaseAuthService implements AuthService {
       return await _auth.signOut();
     } catch (error) {
       print(error.toString());
-      return null;
+      return false;
     }
+  }
+  void deleteAccount()
+  {
+      _auth.currentUser!.delete();
+    
+    
   }
 }
