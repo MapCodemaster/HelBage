@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:helbage/model/userModel.dart';
 import 'package:helbage/shared/buttons.dart';
 import 'package:helbage/shared/color.dart';
-import 'package:helbage/viewmodel/AccountBodyInfoPartViewModel.dart';
-import 'package:helbage/viewmodel/AccountBodyScreenViewModel.dart';
+import 'package:helbage/viewmodel/main/AccountBodyInfoPartViewModel.dart';
+
 import 'package:stacked/stacked.dart';
 
 class AccountBodyInfoPart extends StatefulWidget {

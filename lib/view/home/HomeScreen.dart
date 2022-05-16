@@ -4,8 +4,9 @@ import 'package:helbage/shared/styles.dart';
 import 'package:helbage/shared/color.dart';
 import 'package:helbage/shared/buttons.dart';
 import 'package:helbage/view/authentication/UserLogin.dart';
+import 'package:helbage/viewmodel/main/HomeScreenViewModel.dart';
 import 'package:stacked/stacked.dart';
-import 'package:helbage/viewmodel/HomeScreenViewModel.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<HomeScreenViewModel>.nonReactive(
+    var viewModelBuilder2 = ViewModelBuilder<HomeScreenViewModel>.nonReactive(
         viewModelBuilder: () => HomeScreenViewModel(),
         builder: (context, model, child) => Scaffold(
               body: Center(
@@ -57,5 +58,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               backgroundColor: bgColor,
             ));
+    return viewModelBuilder2;
   }
 }

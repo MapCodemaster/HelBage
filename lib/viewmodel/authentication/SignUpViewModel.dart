@@ -8,7 +8,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:helbage/app/route.router.dart';
 
-import '../model/userModel.dart';
+import '../../model/userModel.dart';
 
 class SignUpViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();

@@ -23,7 +23,7 @@ class ForgetPasswordViewModel extends BaseViewModel {
   }
 
   void NaviageToHome() {
-    _navigationService.navigateTo(Routes.homeScreen);
+    _navigationService.pushNamedAndRemoveUntil(Routes.homeScreen);
   }
 
   void NavigateToRegister() {

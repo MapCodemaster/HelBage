@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:helbage/shared/color.dart';
 
@@ -11,15 +13,26 @@ FlatButton froyoFlatBtn(String text, onPressed) {
   );
 }
 
-OutlineButton froyoOutlineBtn(String text, onPressed) {
-  return OutlineButton(
-    onPressed: onPressed,
-    child: Text(text),
-    textColor: primaryColor,
-    highlightedBorderColor: highlightColor,
-    borderSide: BorderSide(color: primaryColor),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-  );
+OutlinedButton froyoOutlineBtn(String text, onPressed) {
+  return OutlinedButton(
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: TextStyle(color: primaryColor),
+      ),
+      style: ButtonStyle(
+        textStyle: MaterialStateProperty.all(
+          TextStyle(
+            color: primaryColor,
+          ),
+        ),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        ),
+        side: MaterialStateBorderSide.resolveWith(
+          ((states) => BorderSide(color: primaryColor)),
+        ),
+      ));
 }
 
 txtButton(String label, onPressed, Color color, double widthSize,

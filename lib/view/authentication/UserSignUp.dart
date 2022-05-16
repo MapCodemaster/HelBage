@@ -6,7 +6,7 @@ import 'package:helbage/shared/dropdownbuttonfield.dart';
 import 'package:helbage/shared/styles.dart';
 import 'package:helbage/shared/validation.dart';
 import 'package:stacked/stacked.dart';
-import 'package:helbage/viewmodel/SignUpViewModel.dart';
+import 'package:helbage/viewmodel/authentication/SignUpViewModel.dart';
 import 'package:helbage/shared/color.dart';
 
 class UserSignUp extends StatefulWidget {
@@ -182,7 +182,7 @@ class _UserSignUp extends State<UserSignUp> {
                                 model.NaviageToMain();
                               }
                             },
-                                Colors.blue,
+                                primaryColor,
                                 120,
                                 20,
                                 TextStyle(
