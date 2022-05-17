@@ -299,24 +299,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  RaisedButton(
-                                    onPressed: () {},
-                                    color: Colors.white,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 40),
-                                    elevation: 2,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Text(
-                                      "Cancel",
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          letterSpacing: 1.5,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                  RaisedButton(
+                                  ElevatedButton(
                                     onPressed: () async {
                                       if (!_profileform.currentState!
                                           .validate()) {
@@ -345,13 +328,58 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         });
                                       }
                                     },
-                                    color: logoColor,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 40),
-                                    elevation: 2,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                    child: Text(
+                                      "Cancel",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          letterSpacing: 1.5,
+                                          color: Colors.black),
+                                    ),
+                                    style: ButtonStyle(
+                                        elevation:
+                                            MaterialStateProperty.resolveWith(
+                                                (states) => 2),
+                                        backgroundColor:
+                                            MaterialStateColor.resolveWith(
+                                                (states) => Colors.white),
+                                        padding: MaterialStateProperty.all(
+                                          EdgeInsets.symmetric(horizontal: 40),
+                                        ),
+                                        shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        20)))),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      if (!_profileform.currentState!
+                                          .validate()) {
+                                      } else {
+                                        setState(() {
+                                          _loading = true;
+                                        });
+                                        await Future.delayed(
+                                            Duration(seconds: 2));
+                                        model
+                                            .edit(
+                                                _phone,
+                                                _home,
+                                                _address,
+                                                _city,
+                                                _postcode,
+                                                state,
+                                                model.data!.profilePictureURL,
+                                                imagePath: _selectedFile != null
+                                                    ? _selectedFile!.path
+                                                    : "Empty")
+                                            .whenComplete(() {
+                                          setState(() {
+                                            _loading = false;
+                                          });
+                                        });
+                                      }
+                                    },
                                     child: Text(
                                       "SAVE",
                                       style: TextStyle(
@@ -359,6 +387,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           letterSpacing: 1.5,
                                           color: Colors.white),
                                     ),
+                                    style: ButtonStyle(
+                                        elevation:
+                                            MaterialStateProperty.resolveWith(
+                                                (states) => 2),
+                                        backgroundColor:
+                                            MaterialStateColor.resolveWith(
+                                                (states) => logoColor),
+                                        padding: MaterialStateProperty.all(
+                                          EdgeInsets.symmetric(horizontal: 40),
+                                        ),
+                                        shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        20)))),
                                   )
                                 ],
                               ),
