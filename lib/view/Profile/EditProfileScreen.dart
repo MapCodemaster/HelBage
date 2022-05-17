@@ -29,18 +29,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return ViewModelBuilder<EditProfileScreenViewModel>.reactive(
         viewModelBuilder: () => EditProfileScreenViewModel(),
         builder: (context, model, child) {
-          TextEditingController _phone =
-              TextEditingController(text: model.data!.phoneNo.toString());
-          TextEditingController _home =
-              TextEditingController(text: model.data!.homeNo.toString());
-          TextEditingController _address =
-              TextEditingController(text: model.data!.address.toString());
-          TextEditingController _city =
-              TextEditingController(text: model.data!.city.toString());
-          TextEditingController _postcode =
-              TextEditingController(text: model.data!.postcode.toString());
-          String state = model.data!.state;
-
           ImageProvider showImage() {
             if (_selectedFile == null) {
               if (model.data!.profilePictureURL == "null" ||
@@ -59,6 +47,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               child: Text("There is no data yet"),
             );
           } else {
+            TextEditingController _phone =
+                TextEditingController(text: model.data!.phoneNo.toString());
+            TextEditingController _home =
+                TextEditingController(text: model.data!.homeNo.toString());
+            TextEditingController _address =
+                TextEditingController(text: model.data!.address.toString());
+            TextEditingController _city =
+                TextEditingController(text: model.data!.city.toString());
+            TextEditingController _postcode =
+                TextEditingController(text: model.data!.postcode.toString());
+            String? state = model.data!.state;
             return Form(
               key: _profileform,
               child: Scaffold(
