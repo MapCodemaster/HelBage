@@ -27,7 +27,13 @@ class _AccountBodyInfoPartState extends State<AccountBodyInfoPart> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<AccountBodyInfoPartViewModel>.reactive(
         viewModelBuilder: () => AccountBodyInfoPartViewModel(),
-        builder: ((context, model, child) => SizedBox(
+        builder: ((context, model, child) {
+          if (!model.dataReady) {
+            return Center(
+              child: Text("There is no data yet"),
+            );
+          } else {
+            return SizedBox(
               height: 240, // 240
               child: Stack(
                 children: <Widget>[
@@ -89,7 +95,9 @@ class _AccountBodyInfoPartState extends State<AccountBodyInfoPart> {
                   )
                 ],
               ),
-            )));
+            );
+          }
+        }));
   }
 }
 
