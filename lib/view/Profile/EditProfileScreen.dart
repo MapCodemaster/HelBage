@@ -284,7 +284,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(30, 5, 30, 10),
                               child: getStateDropDown(
-                                  onChanged: (String value) {
+                                  onChanged: (String? value) {
                                     state = value;
                                   },
                                   value: model.data!.state),

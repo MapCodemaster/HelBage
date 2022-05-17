@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:helbage/shared/color.dart';
 import 'package:helbage/shared/styles.dart';
 
-Widget getStateDropDown({onChanged,String? value}) {
+Widget getStateDropDown({onChanged, String? value}) {
   double size = 15;
   return Container(
     height: 55.0,

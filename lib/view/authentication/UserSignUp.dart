@@ -133,10 +133,10 @@ class _UserSignUp extends State<UserSignUp> {
                                 padding: EdgeInsets.only(top: 10),
                                 width: MediaQuery.of(context).size.width -
                                     MediaQuery.of(context).size.width / 5,
-                                child:
-                                    getStateDropDown(onChanged: (String? value) =>{
-                                        state = value
-                                },value:state )),
+                                child: getStateDropDown(
+                                    onChanged: (String? value) =>
+                                        {state = value},
+                                    value: state)),
                             TextinputForm(
                               "Postcode",
                               Colors.black,
