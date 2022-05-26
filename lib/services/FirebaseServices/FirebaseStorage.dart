@@ -6,15 +6,11 @@ class FirebaseStor implements storage_service {
   FirebaseFirestore db = FirebaseFirestore.instance;
   Future<bool> insert(String uid, String table, dynamic data) async {
     try {
-      db
-          .collection(table)
-          .doc(uid)
-          .set(data);
-          final docRef = db.collection(table).doc(uid);
-          if(docRef==null)
-          {
-            throw Exception();
-          }
+      db.collection(table).doc(uid).set(data);
+      final docRef = db.collection(table).doc(uid);
+      if (docRef == null) {
+        throw Exception();
+      }
     } catch (e) {
       return false;
     }
@@ -39,8 +35,18 @@ class FirebaseStor implements storage_service {
     return db.collection(collection).doc(document).get();
   }
 
+  Future<QuerySnapshot<Map<String, dynamic>>> readCollectionAsFuture(
+      String collection) async {
+    return db.collection(collection).get();
+  }
+
   Stream<DocumentSnapshot<Map<String, dynamic>>> readDocumentAsStream(
       String collection, String document) {
     return db.collection(collection).doc(document).snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> readCollectionAsStream(
+      String collection) {
+    return db.collection(collection).snapshots();
   }
 }

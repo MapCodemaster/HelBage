@@ -7,6 +7,7 @@ import 'package:helbage/view/authentication/UserLogin.dart';
 
 import 'package:helbage/view/authentication/UserSignUp.dart';
 import 'package:helbage/view/main/MoreScreen.dart';
+import 'package:helbage/view/resident/noticeboard/noticeboard.dart';
 import 'package:helbage/viewmodel/main/MainScreenViewModel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -58,7 +59,7 @@ class ResidentMainScreen extends StatelessWidget {
   Widget getViewForIndex(int index) {
     switch (index) {
       case 0:
-        return Container(child: Center(child:Text("Welcome")),);
+        return NoticeBoard();
       case 1:
         return UserLogin();
       case 2:

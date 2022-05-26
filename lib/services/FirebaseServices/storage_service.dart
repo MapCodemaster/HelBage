@@ -7,4 +7,8 @@ abstract class storage_service {
       String collection, String document);
   Stream<DocumentSnapshot<Map<String, dynamic>>> readDocumentAsStream(
       String collection, String document);
+  Stream<QuerySnapshot<Map<String, dynamic>>> readCollectionAsStream(
+      String collection);
+  Future<QuerySnapshot<Map<String, dynamic>>> readCollectionAsFuture(
+      String collection);
 }
