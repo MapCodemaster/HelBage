@@ -32,7 +32,7 @@ class _UserLoginState extends State<UserLogin> {
                   style: TextStyle(
                       color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     model.NavigateToRegister();
                   },
@@ -68,7 +68,7 @@ class _UserLoginState extends State<UserLogin> {
                                       controller: _pass,
                                       validator:
                                           validateFields.validatePassword),
-                                  FlatButton(
+                                  TextButton(
                                     onPressed: () {
                                       model.NavigateToForgetPassword();
                                     },
@@ -80,7 +80,7 @@ class _UserLoginState extends State<UserLogin> {
                               Positioned(
                                 bottom: 15,
                                 right: -15,
-                                child: FlatButton(
+                                child: TextButton(
                                   onPressed: () async {
                                     setState(() {
                                       loading = true;
@@ -95,11 +95,17 @@ class _UserLoginState extends State<UserLogin> {
                                       model.NaviageToMain();
                                     }
                                   },
-                                  color: primaryColor,
-                                  padding: EdgeInsets.all(13),
-                                  shape: CircleBorder(),
-                                  child:
-                                      Icon(Icons.arrow_forward, color: white),
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateColor.resolveWith(
+                                              (states) => primaryColor),
+                                      shape: MaterialStateProperty.all(
+                                          CircleBorder())),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(13),
+                                    child:
+                                        Icon(Icons.arrow_forward, color: white),
+                                  ),
                                 ),
                               )
                             ],

@@ -28,14 +28,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: white,
-              title: FlatButton(
+              title: TextButton(
                 onPressed: () {
                   model.NavigateToLogin();
                 },
                 child: Text('Sign In', style: contrastText),
               ),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     model.NavigateToRegister();
                   },
