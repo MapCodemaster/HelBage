@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:helbage/shared/buttons.dart';
 import 'package:helbage/shared/dropdownbuttonfield.dart';
 import 'package:helbage/shared/styles.dart';
+import 'package:helbage/shared/textInputForm.dart';
 import 'package:helbage/shared/validation.dart';
 import 'package:stacked/stacked.dart';
 import 'package:helbage/viewmodel/authentication/SignUpViewModel.dart';
@@ -195,33 +196,4 @@ class _UserSignUp extends State<UserSignUp> {
   }
 }
 
-class TextinputForm extends StatelessWidget {
-  String placeholder = "placeholder";
-  Color borderColor = Colors.black;
-  Color backgroundColor = Colors.white;
-  TextEditingController? controller = null;
-  dynamic validator = null;
-  TextInputType? inputype;
-  TextinputForm(
-      this.placeholder, this.borderColor, this.backgroundColor, this.controller,
-      {this.validator, this.inputype});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.only(top: 10),
-        width: MediaQuery.of(context).size.width -
-            MediaQuery.of(context).size.width / 5,
-        child: TextFormField(
-          keyboardType: inputype,
-          controller: controller,
-          validator: validator,
-          decoration: InputDecoration(
-              labelText: this.placeholder,
-              fillColor: backgroundColor,
-              filled: true,
-              enabledBorder: inputFieldDefaultBorderStyle,
-              focusedBorder: inputFieldFocusedBorderStyle,
-              hintText: placeholder),
-        ));
-  }
-}
+

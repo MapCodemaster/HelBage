@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:helbage/shared/styles.dart';
 import 'package:helbage/shared/color.dart';
 import 'package:helbage/shared/buttons.dart';
+import 'package:helbage/view/Schedule/CreateSchedule.dart';
 import 'package:helbage/view/authentication/UserLogin.dart';
 
 import 'package:helbage/view/authentication/UserSignUp.dart';
@@ -61,7 +62,7 @@ class ResidentMainScreen extends StatelessWidget {
       case 0:
         return NoticeBoard();
       case 1:
-        return UserLogin();
+        return CreateSchedule();
       case 2:
         return UserLogin();
       case 3:

@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+import 'package:helbage/view/Schedule/CreateSchedule.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -24,6 +25,7 @@ class Routes {
   static const String adminMainScreen = '/admin-main-screen';
   static const String forgetPassword = '/forget-password';
   static const String userSignUp = '/user-sign-up';
+  static const String createSchedule = '/create-schedule';
   static const all = <String>{
     homeScreen,
     userLogin,
@@ -31,6 +33,7 @@ class Routes {
     adminMainScreen,
     forgetPassword,
     userSignUp,
+    createSchedule,
   };
 }
 
@@ -81,6 +84,13 @@ class StackedRouter extends RouterBase {
     UserSignUp: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const UserSignUp(),
+        settings: data,
+      );
+      
+    },
+    CreateSchedule: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const CreateSchedule(),
         settings: data,
       );
     },
