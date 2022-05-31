@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helbage/shared/buttons.dart';
+import 'package:helbage/shared/textInputForm.dart';
 import 'package:helbage/shared/color.dart';
+import 'package:helbage/shared/validation.dart';
 import 'package:helbage/shared/validation.dart';
 import 'package:helbage/view/authentication/UserSignUp.dart';
 import 'package:helbage/viewmodel/admin/noticeboard/insertNewsModel.dart';

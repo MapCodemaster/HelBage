@@ -12,6 +12,7 @@ class NewsViewModel extends StreamViewModel<List<NewsModel>> {
   @override
   Stream<List<NewsModel>> get stream => fetchNews();
   Stream<List<NewsModel>> fetchNews() {
+    
     return storageService.readCollectionAsStream("news").map((event) =>
         event.docs.map((e) => NewsModel.fromJson(e.data())).toList());
   }

@@ -23,6 +23,13 @@ class Validation {
       return "This field cannot be empty";
     }
   }
+  String? validateDateTime(DateTime? value)
+  {
+    if(value==null)
+    {
+      return "This field cannot be empty";
+    }
+  }
 
   String? validatePostcode(String? value) {
     if (value!.isEmpty) {
@@ -40,6 +47,15 @@ class Validation {
     }
     if (!RegExp("^01([0-9]){1}-([0-9]){7,8}").hasMatch(value)) {
       return 'Please enter a valid phone no';
+    }
+    return null;
+  }
+  String? validateNumOnly(String? value) {
+    if (value!.isEmpty) {
+      return "The phone no cannot be empty";
+    }
+    if (!RegExp("^[0-9]+").hasMatch(value)) {
+      return 'number only';
     }
     return null;
   }

@@ -53,4 +53,16 @@ class FirebaseStor implements storage_service {
   Future<void> newsSetup(String url) async {
     db.collection("news").add({'url': url, 'datetime': DateTime.now()});
   }
+  Future<bool> delete(String collection,String document) async{
+    try{
+      db.collection(collection).doc(document).delete().then((value) => true).onError((error, stackTrace) => false);
+    return true;}
+    catch(e)
+    {
+      return false;
+    }
+    
+  }
+
+  
 }

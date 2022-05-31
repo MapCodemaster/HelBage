@@ -7,7 +7,11 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
-import 'package:helbage/view/Schedule/CreateSchedule.dart';
+import 'package:helbage/model/pathModel.dart';
+import 'package:helbage/model/scheduleModel.dart';
+import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
+import 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
+import 'package:helbage/view/admin/Schedule/ViewSchedule.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -26,6 +30,8 @@ class Routes {
   static const String forgetPassword = '/forget-password';
   static const String userSignUp = '/user-sign-up';
   static const String createSchedule = '/create-schedule';
+  static const String singleScheduleView='/single-schedule-view';
+  static const String viewSchedule='/view-schedule';
   static const all = <String>{
     homeScreen,
     userLogin,
@@ -34,6 +40,8 @@ class Routes {
     forgetPassword,
     userSignUp,
     createSchedule,
+    singleScheduleView,
+    viewSchedule,
   };
 }
 
@@ -47,6 +55,9 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.adminMainScreen, page: AdminMainScreen),
     RouteDef(Routes.forgetPassword, page: ForgetPassword),
     RouteDef(Routes.userSignUp, page: UserSignUp),
+    RouteDef(Routes.singleScheduleView, page: SingleScheduleView),
+    RouteDef(Routes.createSchedule, page: CreateSchedule),
+    RouteDef(Routes.viewSchedule, page: ViewSchedule),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -91,6 +102,20 @@ class StackedRouter extends RouterBase {
     CreateSchedule: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const CreateSchedule(),
+        settings: data,
+      );
+    },
+    SingleScheduleView: (data) {
+
+      
+      return MaterialPageRoute<dynamic>(
+        builder: (context) =>  SingleScheduleView(value:data.arguments as scheduleModel),
+        settings: data,
+      );
+    },
+    ViewSchedule: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) =>  const ViewSchedule(),
         settings: data,
       );
     },
