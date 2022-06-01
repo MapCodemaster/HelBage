@@ -13,7 +13,6 @@ class _SingleScheduleView extends State<SingleScheduleView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SingleScheduleViewModel>.nonReactive(
-<<<<<<< HEAD
       viewModelBuilder: ()=>SingleScheduleViewModel(), 
       builder: (context,model,child)=>Scaffold(
         appBar:AppBar(
@@ -73,76 +72,6 @@ class _SingleScheduleView extends State<SingleScheduleView> {
         
       ))
       );
-=======
-        viewModelBuilder: () => SingleScheduleViewModel(),
-        builder: (context, model, child) => Scaffold(
-            appBar: AppBar(
-              // leading:IconButton(onPressed:(() => model.quit()),icon:Icon(Icons.arrow_back)),
-              title: Text(widget.value.pathName),
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      model.delete(widget.value);
-                    },
-                    icon: Icon(Icons.delete)),
-                IconButton(
-                    onPressed: () {
-                      model.edit();
-                    },
-                    icon: Icon(Icons.edit))
-              ],
-            ),
-            body: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  //upper part(Path Info)
-                  Row(
-                    children: [
-                      Image.asset('assets/images/cover.png',
-                          width: MediaQuery.of(context).size.height / 4,
-                          height: MediaQuery.of(context).size.height / 4),
-                      Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.all(5),
-                            child: Text(widget.value.pathName +
-                                " (Vehicle: " +
-                                widget.value.getPath().getVehicle() +
-                                ")"),
-                          ),
-                          Container(
-                              margin: EdgeInsets.all(5),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(widget.value.getPath().startLocation),
-                                  Icon(Icons.arrow_forward_outlined),
-                                  Text(widget.value.getPath().endLocation),
-                                ],
-                              )),
-                        ],
-                      )
-                    ],
-                  ),
-
-                  //End of upper part
-
-                  //Bottom Part (Locations)
-                  SingleChildScrollView(
-                      child: Container(
-                          margin: EdgeInsets.all(40),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: buildPathList(
-                                widget.value.getPath().getLocationList(),
-                                widget.value.getPath().getDurationList()),
-                          )))
-                ],
-              ),
-            )));
->>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
   }
 }
 

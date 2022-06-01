@@ -31,14 +31,9 @@ class Routes {
   static const String forgetPassword = '/forget-password';
   static const String userSignUp = '/user-sign-up';
   static const String createSchedule = '/create-schedule';
-<<<<<<< HEAD
   static const String singleScheduleView='/single-schedule-view';
   static const String viewSchedule='/view-schedule';
   static const String editScheduleView='/edit-schedule-view';
-=======
-  static const String singleScheduleView = '/single-schedule-view';
-  static const String viewSchedule = '/view-schedule';
->>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
   static const all = <String>{
     homeScreen,
     userLogin,
