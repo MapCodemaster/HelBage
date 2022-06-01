@@ -16,18 +16,12 @@ class ViewSchedule extends StatefulWidget {
   @override
   State<ViewSchedule> createState() => _viewSchedule();
 }
-<<<<<<< HEAD
 class _viewSchedule extends State<ViewSchedule>
 {
   int index=2;
-=======
-
-class _viewSchedule extends State<ViewSchedule> {
->>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<viewScheduleViewModel>.reactive(
-<<<<<<< HEAD
       viewModelBuilder: ()=>viewScheduleViewModel(), 
       builder: (context,model,child)=>Scaffold(
           appBar: AppBar(
@@ -39,7 +33,7 @@ class _viewSchedule extends State<ViewSchedule> {
             ],
           ),
           body:SingleChildScrollView(child: buildBody(model.status,model)),
-          bottomNavigationBar: Theme(
+          /*bottomNavigationBar: Theme(
             data: Theme.of(context).copyWith(
                 // sets the background color of the `BottomNavigationBar`
                 canvasColor: logoColor,
@@ -77,34 +71,9 @@ class _viewSchedule extends State<ViewSchedule> {
                     icon: Icon(Icons.more_horiz_rounded), label: "More"),
               ],),
           
-        ),
+        ),*/
       
       ));
-=======
-        viewModelBuilder: () => viewScheduleViewModel(),
-        builder: (context, model, child) => Scaffold(
-              appBar: widget.showAdd
-                  ? AppBar(
-                      leading: Container(),
-                      title: Center(child: Text("Schedule")),
-                      backgroundColor: logoColor,
-                      actions: [
-                        IconButton(
-                            onPressed: () {
-                              model.addSchedule();
-                            },
-                            icon: Icon(Icons.add)),
-                      ],
-                    )
-                  : AppBar(
-                      leading: Container(),
-                      title: Center(child: Text("Schedule")),
-                      backgroundColor: logoColor,
-                    ),
-              body:
-                  SingleChildScrollView(child: buildBody(model.status, model)),
-            ));
->>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
   }
 }
 
@@ -171,7 +140,3 @@ Widget buildSchedule(list, model) {
       });
   return Center(child: Column(children: scheduleList));
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8

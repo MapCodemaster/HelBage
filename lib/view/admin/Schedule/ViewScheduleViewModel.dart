@@ -116,12 +116,12 @@ class viewScheduleViewModel extends BaseViewModel{
   {
     print("call navigate");
     switch (index) {
-      case 0: _navigationService.navigateTo(Routes.residentMainScreen);break;
-      case 1:_navigationService.navigateTo(Routes.residentMainScreen);break;
-      case 2:_navigationService.navigateTo(Routes.residentMainScreen);break;
-      case 3:_navigationService.navigateTo(Routes.residentMainScreen);break;
-      case 4:_navigationService.navigateTo(Routes.residentMainScreen);break;
-      default:_navigationService.navigateTo(Routes.residentMainScreen);break;
+      case 0: _navigationService.navigateTo(Routes.adminMainScreen);break;
+      case 1:_navigationService.navigateTo(Routes.adminMainScreen);break;
+      case 2:_navigationService.navigateTo(Routes.adminMainScreen);break;
+      case 3:_navigationService.navigateTo(Routes.adminMainScreen);break;
+      case 4:_navigationService.navigateTo(Routes.adminMainScreen);break;
+      default:_navigationService.navigateTo(Routes.adminMainScreen);break;
     }
   }
   

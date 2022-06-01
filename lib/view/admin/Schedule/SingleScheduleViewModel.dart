@@ -13,23 +13,18 @@ class SingleScheduleViewModel extends BaseViewModel {
   final stor = locator<storage_service>();
 
   Future<void> delete(schedule) async {
+    String previouspath = _navigationService.previousRoute;
     bool isDelete = await stor.delete(
         "schedule/" + schedule.state + "/Path", schedule.pathName);
-    String previouspath = _navigationService.previousRoute;
+    
     _navigationService.pushNamedAndRemoveUntil(previouspath);
   }
-<<<<<<< HEAD
   void edit(schedule)
   {
     _navigationService.navigateTo(Routes.editScheduleView,arguments: schedule);
   }
   void quit()
   {
-=======
-
-  void edit() {}
-  void quit() {
->>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
     _navigationService.navigateTo(Routes.viewSchedule);
   }
 }

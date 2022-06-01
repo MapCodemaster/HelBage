@@ -63,13 +63,8 @@ class CreateScheduleViewModel extends BaseViewModel {
     );*/
     notifyListeners();
   }
-<<<<<<< HEAD
   Future<bool> create(state,city,_formkey,_timeField) async
   {
-=======
-
-  bool create(state, city, _formkey, _timeField) {
->>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
     if (!_formkey.currentState!.validate()) {
       return false;
     } else {
@@ -80,7 +75,6 @@ class CreateScheduleViewModel extends BaseViewModel {
         createDurationList.add(element[1].text);
       });
 
-<<<<<<< HEAD
     MalaysiaState s=MalaysiaState.Johor;
     
     pathModel newPath=new pathModel.fromInput(
@@ -97,24 +91,6 @@ class CreateScheduleViewModel extends BaseViewModel {
             description: "Error happen in registration, try again later",
             dialogPlatform: DialogPlatform.Material);
             return false;
-=======
-      MalaysiaState s = MalaysiaState.Johor;
-      pathModel newPath = new pathModel.fromInput(
-          startTime: _timeField.text,
-          locationList: createLocationList,
-          durationList: createDurationList);
-      scheduleModel schedule = new scheduleModel(s, newPath, city);
-
-      stor.insert(schedule.pathName, 'schedule/' + schedule.state + "/Path",
-          schedule.getPath().toFirestore());
-      ControllerList.forEach((element) {
-        element.forEach((element) {
-          print(element.text);
-        });
-      });
-
-      return true;
->>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
     }
       
      _navigationService.navigateTo(Routes.viewSchedule);
@@ -128,17 +104,10 @@ class CreateScheduleViewModel extends BaseViewModel {
   void quit() {
     _navigationService.navigateTo(Routes.viewSchedule);
   }
-<<<<<<< HEAD
   void deleteLastRow()
   {
     if(InputList.length>2)
     {
-=======
-
-  void deleteLastRow() {
-    print(InputList.length);
-    if (InputList.length > 1) {
->>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
       ControllerList.removeLast();
       InputList.removeLast();
       notifyListeners();
