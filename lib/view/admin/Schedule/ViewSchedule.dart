@@ -9,20 +9,25 @@ import 'package:helbage/view/main/MoreScreen.dart';
 import 'package:helbage/view/resident/noticeboard/noticeboard.dart';
 import 'package:stacked/stacked.dart';
 
-class ViewSchedule extends StatefulWidget
-{
-   const ViewSchedule({Key? key}):super(key: key);
+class ViewSchedule extends StatefulWidget {
+  final showAdd;
+  const ViewSchedule({Key? key, this.showAdd}) : super(key: key);
 
   @override
-  State<ViewSchedule> createState()=>_viewSchedule();
+  State<ViewSchedule> createState() => _viewSchedule();
 }
+<<<<<<< HEAD
 class _viewSchedule extends State<ViewSchedule>
 {
   int index=2;
+=======
+
+class _viewSchedule extends State<ViewSchedule> {
+>>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return ViewModelBuilder<viewScheduleViewModel>.reactive(
+<<<<<<< HEAD
       viewModelBuilder: ()=>viewScheduleViewModel(), 
       builder: (context,model,child)=>Scaffold(
           appBar: AppBar(
@@ -75,32 +80,51 @@ class _viewSchedule extends State<ViewSchedule>
         ),
       
       ));
+=======
+        viewModelBuilder: () => viewScheduleViewModel(),
+        builder: (context, model, child) => Scaffold(
+              appBar: widget.showAdd
+                  ? AppBar(
+                      leading: Container(),
+                      title: Center(child: Text("Schedule")),
+                      backgroundColor: logoColor,
+                      actions: [
+                        IconButton(
+                            onPressed: () {
+                              model.addSchedule();
+                            },
+                            icon: Icon(Icons.add)),
+                      ],
+                    )
+                  : AppBar(
+                      leading: Container(),
+                      title: Center(child: Text("Schedule")),
+                      backgroundColor: logoColor,
+                    ),
+              body:
+                  SingleChildScrollView(child: buildBody(model.status, model)),
+            ));
+>>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
   }
 }
 
-
-Widget buildBody(schedule,model)
-{
-  if(!schedule)
-  {
-
-    return Container(margin:EdgeInsets.only(top:10),child: Center(child:Text("loading")));
-  }
-  else{
-    if(model.scheduleList.isEmpty)
-    {
-      return Container(margin:EdgeInsets.only(top:10),child: Center(child:Text("No schedule in database")));
+Widget buildBody(schedule, model) {
+  if (!schedule) {
+    return Container(
+        margin: EdgeInsets.only(top: 10),
+        child: Center(child: Text("loading")));
+  } else {
+    if (model.scheduleList.isEmpty) {
+      return Container(
+          margin: EdgeInsets.only(top: 10),
+          child: Center(child: Text("No schedule in database")));
     }
-    model.scheduleList.forEach((key,value)
-    {
- 
-    });
-    return buildSchedule(model.scheduleList,model);
+    model.scheduleList.forEach((key, value) {});
+    return buildSchedule(model.scheduleList, model);
   }
 }
-Widget buildSchedule(list,model)
-{
-  
+
+Widget buildSchedule(list, model) {
   List<Widget> scheduleList = new List.empty(growable: true);
   list.forEach((key, element) => {
         scheduleList.add(InkWell(
@@ -131,21 +155,23 @@ Widget buildSchedule(list,model)
                     ),
                     Container(
                         margin: EdgeInsets.all(5),
-                        child:
-                            Text("Path: " + element.pathName)),
-                            Container(
+                        child: Text("Path: " + element.pathName)),
+                    Container(
                         margin: EdgeInsets.all(5),
-                        child:Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                          Text(element.getPath().startLocation),
-                          Icon(Icons.arrow_forward_outlined),
-                          Text(element.getPath().endLocation),                          
-                        ],))
-                            
+                            Text(element.getPath().startLocation),
+                            Icon(Icons.arrow_forward_outlined),
+                            Text(element.getPath().endLocation),
+                          ],
+                        ))
                   ]),
             )))
       });
   return Center(child: Column(children: scheduleList));
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04886bbbe6967b13021f07fe96a0c17fd113fef8
