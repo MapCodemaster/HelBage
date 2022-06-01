@@ -7,7 +7,7 @@ import 'package:stacked/stacked.dart';
 
 class ViewSchedule extends StatefulWidget {
   final showAdd;
-  const ViewSchedule({Key? key, required this.showAdd}) : super(key: key);
+  const ViewSchedule({Key? key, this.showAdd}) : super(key: key);
 
   @override
   State<ViewSchedule> createState() => _viewSchedule();
