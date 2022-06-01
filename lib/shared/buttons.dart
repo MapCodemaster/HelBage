@@ -44,7 +44,7 @@ OutlinedButton froyoOutlineBtn(String text, onPressed) {
 
 txtButton(String label, onPressed, Color color, double widthSize,
     double heightSize, TextStyle txtStyle,
-    {double radius = 50}) {
+    {double? radius}) {
   return ElevatedButton(
     onPressed: onPressed,
     child: Text(
@@ -56,6 +56,6 @@ txtButton(String label, onPressed, Color color, double widthSize,
         primary: color,
         fixedSize: Size(widthSize, heightSize),
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius))),
+            borderRadius: BorderRadius.circular(radius == null ? 50 : radius))),
   );
 }
