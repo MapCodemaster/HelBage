@@ -23,7 +23,7 @@ class _SingleScheduleView extends State<SingleScheduleView>
         title:Text(widget.value.pathName),
         actions: [
           IconButton(onPressed: (){model.delete(widget.value);}, icon: Icon(Icons.delete)),
-          IconButton(onPressed: (){model.edit();}, icon: Icon(Icons.edit))
+          IconButton(onPressed: (){model.edit(widget.value);}, icon: Icon(Icons.edit))
         ],),
         body: 
         Container(
@@ -36,11 +36,11 @@ class _SingleScheduleView extends State<SingleScheduleView>
               Image.asset('assets/images/cover.png',
                           width: MediaQuery.of(context).size.height / 4,
                           height: MediaQuery.of(context).size.height / 4),
-              Column(
+              Expanded(child: Column(
                 children: [
                   Container(
                     margin: EdgeInsets.all(5),
-                    child:Text(widget.value.pathName+" (Vehicle: "+widget.value.getPath().getVehicle()+")"),),
+                    child:Text(widget.value.pathName+" (Vehicle: "+widget.value.getPath().vehicle+")"),),
                   Container(
                     margin: EdgeInsets.all(5),
                     child:Row(
@@ -53,7 +53,7 @@ class _SingleScheduleView extends State<SingleScheduleView>
                   
                   
                 ],
-              )
+              )),
             ],),
 
             //End of upper part
@@ -66,7 +66,7 @@ class _SingleScheduleView extends State<SingleScheduleView>
               margin:EdgeInsets.all(40),
               child:Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: buildPathList(widget.value.getPath().getLocationList(),widget.value.getPath().getDurationList()),
+              children: buildPathList(widget.value.getPath().location_List,widget.value.getPath().duration_List),
             )))
             
           ],

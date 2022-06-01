@@ -48,7 +48,6 @@ class viewScheduleViewModel extends BaseViewModel{
     .listen((event) {});
     listener.onData((event){
       event.docs.forEach((element) { 
-        print(element['StartTime']);
         try{
         scheduleList[element.id]=new scheduleModel(
           MalaysiaState.Johor, 
@@ -65,7 +64,7 @@ class viewScheduleViewModel extends BaseViewModel{
 
        status=true;
        notifyListeners();
-       listener.cancel();
+       //listener.cancel();
     }
        );
      //cancel update listner
@@ -113,4 +112,17 @@ class viewScheduleViewModel extends BaseViewModel{
   {
     _navigationService.navigateTo(Routes.viewSchedule);
   }
+  void navigate(int index)
+  {
+    print("call navigate");
+    switch (index) {
+      case 0: _navigationService.navigateTo(Routes.residentMainScreen);break;
+      case 1:_navigationService.navigateTo(Routes.residentMainScreen);break;
+      case 2:_navigationService.navigateTo(Routes.residentMainScreen);break;
+      case 3:_navigationService.navigateTo(Routes.residentMainScreen);break;
+      case 4:_navigationService.navigateTo(Routes.residentMainScreen);break;
+      default:_navigationService.navigateTo(Routes.residentMainScreen);break;
+    }
+  }
+  
 }

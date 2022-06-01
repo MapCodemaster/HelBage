@@ -23,8 +23,9 @@ class Validation {
       return "This field cannot be empty";
     }
   }
-  String? validateDateTime(DateTime? value)
+  String? validateDateTime(dynamic? value)
   {
+    print(value);
     if(value==null)
     {
       return "This field cannot be empty";

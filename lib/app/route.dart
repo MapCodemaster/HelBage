@@ -5,6 +5,7 @@ import 'package:helbage/services/FirebaseServices/FirebaseStorage.dart';
 import 'package:helbage/services/FirebaseServices/auth_service.dart';
 import 'package:helbage/services/FirebaseServices/storage_service.dart';
 import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
+import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
 import 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
 import 'package:helbage/view/admin/Schedule/ViewSchedule.dart';
 import 'package:helbage/view/authentication/ForgetPassword.dart';
@@ -26,6 +27,7 @@ import 'package:helbage/view/authentication/UserLogin.dart';
   MaterialRoute(page: CreateSchedule),
   MaterialRoute(page: SingleScheduleView),
   MaterialRoute(page: ViewSchedule),
+  MaterialRoute(page: EditScheduleView),
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),

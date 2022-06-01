@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:helbage/model/pathModel.dart';
 import 'package:helbage/model/scheduleModel.dart';
 import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
+import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
 import 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
 import 'package:helbage/view/admin/Schedule/ViewSchedule.dart';
 import 'package:stacked/stacked.dart';
@@ -32,6 +33,7 @@ class Routes {
   static const String createSchedule = '/create-schedule';
   static const String singleScheduleView='/single-schedule-view';
   static const String viewSchedule='/view-schedule';
+  static const String editScheduleView='/edit-schedule-view';
   static const all = <String>{
     homeScreen,
     userLogin,
@@ -42,6 +44,7 @@ class Routes {
     createSchedule,
     singleScheduleView,
     viewSchedule,
+    editScheduleView
   };
 }
 
@@ -58,6 +61,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.singleScheduleView, page: SingleScheduleView),
     RouteDef(Routes.createSchedule, page: CreateSchedule),
     RouteDef(Routes.viewSchedule, page: ViewSchedule),
+    RouteDef(Routes.editScheduleView, page: EditScheduleView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -116,6 +120,12 @@ class StackedRouter extends RouterBase {
     ViewSchedule: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) =>  const ViewSchedule(),
+        settings: data,
+      );
+    },
+    EditScheduleView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) =>  EditScheduleView(schedule: data.arguments as scheduleModel),
         settings: data,
       );
     },

@@ -21,8 +21,10 @@ class SingleScheduleViewModel extends BaseViewModel
     _navigationService.navigateTo(Routes.viewSchedule);
     
   }
-  void edit()
-  {}
+  void edit(schedule)
+  {
+    _navigationService.navigateTo(Routes.editScheduleView,arguments: schedule);
+  }
   void quit()
   {
     _navigationService.navigateTo(Routes.viewSchedule);

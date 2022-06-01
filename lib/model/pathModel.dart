@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
+import 'time.dart';
 class pathModel
 {
-  TimeOfDay? startTime;
-  TimeOfDay? endTime;
+  Time? _startTime;
+  Time? _endTime;
   String? vehicle;
   List<dynamic> locationList;
   List<dynamic> durationList;
-  //Map<String,dynamic>? locationList;
-  String? _startLocation;
-  String? _endLocation;
-  /*pathModel({required String startTimeString,required Map<String,dynamic> locList,this.vehicle})
-  {
-    try{
-      startTime=stringToTime(startTimeString);
-    }catch(e)
-    {
-      throw Exception("Data format error (unable to parse String to int)");
-    }
-    
-  }*/
+
+  String get startTime=>startTime.toString();
+  String get endTime=>_endTime.toString();
+  String? get startLocation=>locationList.first;
+  String? get endLocation=>locationList.last;
+  List<dynamic> get location_List=>locationList;
+  List<dynamic> get duration_List=>durationList;
+
   pathModel.fromInput(
-    {required String startTime,
+    {required String startTimeString,
     required this.locationList,
     required this.durationList,
     this.vehicle="undefined"}
-  );
+  )
+  {
+    
+    _startTime=Time.fromString(timeInString: startTimeString);
+    setEndTime();
+    
+  }
   
   pathModel.fromFireStore(
     {required String startTimeString,
@@ -34,10 +36,8 @@ class pathModel
     this.vehicle})
     {
       try{
-      startTime=stringToTime(startTimeString);
-      endTime=stringToTime(endTimeString);
-      _startLocation=locationList.first;
-      _endLocation=locationList.last;
+      _startTime=Time.fromString(timeInString:startTimeString);
+      setEndTime();
     }catch(e)
     {
       print(e.toString());
@@ -46,41 +46,63 @@ class pathModel
     }
     TimeOfDay stringToTime(String time)
     {
-      return new TimeOfDay(hour:int.parse(time.split(':')[0]), minute: int.parse(time.split(':')[0]));
+      return new TimeOfDay(hour:int.parse(time.split(':')[0]), minute: int.parse(time.split(':')[1]));
     }
     @override
     String toString()
     {
       return vehicle.toString();
     }
+
   Map<String, dynamic> toFirestore() {
     return {
-      "StartTime": startTime.toString(),
-      "EndTime": endTime.toString(),
-      "vehicle": startTime.toString(),
+      "StartTime": _startTime.toString(),
+      "EndTime": _endTime.toString(),
+      "vehicle": vehicle,
       "locationList": locationList,
-      "durationList":durationList,
+      "durationList":dynamicToInt(durationList),
       "vehicle":vehicle,
       };
     }
-    
+  //set End Time, called in Constructor;
+  void setEndTime()
+  {
 
-  String getStartTime()
-  {
-    return (startTime?.hour).toString()+":"+(startTime?.minute).toString();
+    List<int> tempList=dynamicToInt(this.durationList);
+    int totalDuration=0;
+    tempList.forEach((element) {totalDuration+=element;});
+    totalDuration+=_startTime!.minute;
+    _endTime=_startTime?.clone();
+    _endTime?.addMinute(totalDuration);
+
   }
-  List getLocationList()
+  
+ 
+  //convert List<dynamic> to List<int>
+  List<int> dynamicToInt(List<dynamic> convertList)
   {
-    return locationList;
+    List<int> tempList=new List.empty(growable: true);
+    convertList.forEach((element) {
+      try{
+      //int.tryParse(element);
+      if(element.runtimeType==int)
+      {
+        tempList.add(element);
+      }
+      else{
+        tempList.add(int.parse(element));
+      }
+      
+      }catch(e)
+      {
+        throw Exception(e.toString()+"in dynamicToInt in pathModel");
+      }
+    });
+    return tempList;
   }
-  List getDurationList()
+  Time? getStartTime()
   {
-    return durationList;
+    return _startTime;
   }
-  String getVehicle()
-  {
-    return "JKA 1234";
-  }
-  String? get startLocation=>_startLocation;
-  String? get endLocation=>_endLocation;
+  
 }

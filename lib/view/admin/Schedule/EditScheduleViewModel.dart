@@ -11,27 +11,34 @@ import 'package:helbage/shared/validation.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class CreateScheduleViewModel extends BaseViewModel
+class EditScheduleViewModel extends BaseViewModel
 {
   final _navigationService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
-  final auth = locator<AuthService>();
   final stor = locator<storage_service>();
-  
+  scheduleModel originalschedule;
   List<Row> InputList=new List.empty(growable: true);
-
   List<List<TextEditingController>> ControllerList=List.empty(growable: true);
   
-  Validation validate = Validation();
-  CreateScheduleViewModel()
-  {
-    addNewRow();
-    addNewRow();
-  }
+   Validation validate = Validation();
 
-  void addNewRow()
+   EditScheduleViewModel({required this.originalschedule})
+   {
+     List locationList=originalschedule.getPath().location_List;
+     List durationList=originalschedule.getPath().durationList;
+     for(int i=0;i<locationList.length;i++)
+     {
+       addNewRow(locationList[i], durationList[i]);
+     }
+   }
+
+  void quit()
   {
-    ControllerList.add([TextEditingController(),TextEditingController()]);
+    _navigationService.navigateTo(Routes.viewSchedule);
+  }
+  void addNewRow(location,duration)
+  {
+    ControllerList.add([TextEditingController(text: location),TextEditingController(text: duration.toString())]);
     InputList.add(
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -56,19 +63,19 @@ class CreateScheduleViewModel extends BaseViewModel
               ),
               ])
               );
-    /*ControllerList.add(TextEditingController());
-    InputList.add(
-      TextinputForm(
-                "City",
-                Colors.black,
-                Colors.white,
-                ControllerList.last,
-                validator: validate.validateForEmpty,
-                inputype: TextInputType.text,
-              )
-    );*/
+
     notifyListeners();
   }
+  void deleteLastRow()
+  {
+    if(InputList.length>2)
+    {
+      ControllerList.removeLast();
+    InputList.removeLast();
+    notifyListeners();
+    }
+  }
+
   Future<bool> create(state,city,_formkey,_timeField) async
   {
     if (!_formkey.currentState!.validate()) {
@@ -91,6 +98,8 @@ class CreateScheduleViewModel extends BaseViewModel
       durationList: createDurationList);
     scheduleModel schedule=new scheduleModel(s, newPath, city);
     
+  
+    await stor.delete("schedule/"+originalschedule.state+"/Path", originalschedule.pathName);
     bool successInsert=await stor.insert(schedule.pathName, 'schedule/'+schedule.state+"/Path",schedule.getPath().toFirestore());
     if(!successInsert)
     {
@@ -108,20 +117,4 @@ class CreateScheduleViewModel extends BaseViewModel
     
 
   }
-  void quit()
-  {
-    _navigationService.navigateTo(Routes.viewSchedule);
-    
-  }
-  void deleteLastRow()
-  {
-    if(InputList.length>2)
-    {
-      ControllerList.removeLast();
-    InputList.removeLast();
-    notifyListeners();
-    }
-    
-    
-  }
-}
+} 

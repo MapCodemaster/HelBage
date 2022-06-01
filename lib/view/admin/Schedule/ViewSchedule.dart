@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helbage/model/scheduleModel.dart';
 import 'package:helbage/shared/color.dart';
+import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
 import 'package:helbage/view/admin/Schedule/ViewScheduleViewModel.dart';
+import 'package:helbage/view/authentication/UserLogin.dart';
+import 'package:helbage/view/main/MoreScreen.dart';
+import 'package:helbage/view/resident/noticeboard/noticeboard.dart';
 import 'package:stacked/stacked.dart';
 
 class ViewSchedule extends StatefulWidget
@@ -14,6 +18,7 @@ class ViewSchedule extends StatefulWidget
 }
 class _viewSchedule extends State<ViewSchedule>
 {
+  int index=2;
   @override
   Widget build(BuildContext context)
   {
@@ -40,6 +45,16 @@ class _viewSchedule extends State<ViewSchedule>
                     .copyWith(caption: new TextStyle(color: Colors.yellow))),
             child: BottomNavigationBar(
             backgroundColor: logoColor,
+            currentIndex: index,
+            onTap:(value)
+            {
+              print(value);
+              print(index);
+              if(value!=index)
+              {
+                model.navigate(index);
+              }
+            },
           items: [
                 BottomNavigationBarItem(
                   
@@ -133,3 +148,4 @@ Widget buildSchedule(list,model)
       });
   return Center(child: Column(children: scheduleList));
 }
+

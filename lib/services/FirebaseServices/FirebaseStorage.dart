@@ -5,7 +5,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirebaseStor implements storage_service {
   FirebaseFirestore db = FirebaseFirestore.instance;
   Future<bool> insert(String uid, String table, dynamic data) async {
+   
     try {
+      if(await db.collection(table).doc(uid).get().then((value) => value.exists))
+      {
+        throw Exception("Document Exist");
+      }
+       
       db.collection(table).doc(uid).set(data);
       final docRef = db.collection(table).doc(uid);
       if (docRef == null) {
