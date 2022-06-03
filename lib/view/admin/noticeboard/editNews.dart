@@ -74,6 +74,8 @@ class _EditNewsScreenState extends State<EditNewsScreen> {
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                       )),
+                                      maxLines: 5,
+                                      minLines: 1,
                                 ),
                               ),
                               SizedBox(
@@ -116,7 +118,7 @@ class _EditNewsScreenState extends State<EditNewsScreen> {
                                                   (states) => 2),
                                           backgroundColor:
                                               MaterialStateColor.resolveWith(
-                                                  (states) => Colors.white),
+                                                  (states) => Colors.green),
                                           padding: MaterialStateProperty.all(
                                             EdgeInsets.symmetric(
                                                 horizontal: 40),
@@ -144,7 +146,7 @@ class _EditNewsScreenState extends State<EditNewsScreen> {
                                                   (states) => 2),
                                           backgroundColor:
                                               MaterialStateColor.resolveWith(
-                                                  (states) => Colors.white),
+                                                  (states) => Color.fromARGB(255, 220, 100, 92)),
                                           padding: MaterialStateProperty.all(
                                             EdgeInsets.symmetric(
                                                 horizontal: 40),
@@ -155,6 +157,17 @@ class _EditNewsScreenState extends State<EditNewsScreen> {
                                                       BorderRadius.circular(
                                                           20)))),
                                     ),
+                                    
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(27, 10, 27, 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
                                     ElevatedButton(
                                       onPressed: () async {
                                         setState(() {});
@@ -188,10 +201,11 @@ class _EditNewsScreenState extends State<EditNewsScreen> {
                                     ),
                                   ],
                                 ),
-                              ),
-                            ]),
-                          )
-                          )
+                              )
+                            ]
+                            ),
+                          ),
+                          ),
                           );
           }
         }

@@ -38,7 +38,8 @@ class _NewsListState extends State<NewsList> {
                 title: Text("Manage Noticeboard"),
               ),
               floatingActionButton: FloatingActionButton(
-                foregroundColor: Colors.red,
+                child: Icon(Icons.add),
+                backgroundColor: Colors.blue,
                 onPressed: () {
                   model.navigateToNewsInsert();
                 },

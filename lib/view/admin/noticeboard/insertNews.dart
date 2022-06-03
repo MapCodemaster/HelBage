@@ -46,11 +46,17 @@ class _EditNewsPageState extends State<EditNewsPage> {
     return ViewModelBuilder<insertNewsViewModel>.nonReactive(
         viewModelBuilder: () => insertNewsViewModel(),
         builder: (context, model, child) => Scaffold(
-              appBar: buildAppBar(context),
+              appBar: AppBar(
+                      elevation: 0,
+                      backgroundColor: logoColor,
+                      centerTitle: true,
+                      title: Text("Insert Url"),
+                    ),
               body: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 physics: const BouncingScrollPhysics(),
                 children: [
+                  SizedBox(height: 30),
                   TextinputForm(
                     "Url",
                     Colors.black,
@@ -88,19 +94,4 @@ class _EditNewsPageState extends State<EditNewsPage> {
             ));
   }
 
-  AppBar buildAppBar(BuildContext context) {
-    const icon = CupertinoIcons.moon_stars;
-
-    return AppBar(
-      leading: const BackButton(),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      actions: [
-        IconButton(
-          icon: const Icon(icon),
-          onPressed: () {},
-        )
-      ],
-    );
-  }
 }
