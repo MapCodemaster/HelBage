@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../view/admin/noticeboard/newsList.dart';
 import '../view/authentication/ForgetPassword.dart';
 import '../view/authentication/UserLogin.dart';
 import '../view/authentication/UserSignUp.dart';
@@ -24,6 +25,7 @@ class Routes {
   static const String adminMainScreen = '/admin-main-screen';
   static const String forgetPassword = '/forget-password';
   static const String userSignUp = '/user-sign-up';
+  static const String newsList = '/news-list';
   static const all = <String>{
     homeScreen,
     userLogin,
@@ -31,6 +33,7 @@ class Routes {
     adminMainScreen,
     forgetPassword,
     userSignUp,
+    newsList,
   };
 }
 
@@ -44,6 +47,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.adminMainScreen, page: AdminMainScreen),
     RouteDef(Routes.forgetPassword, page: ForgetPassword),
     RouteDef(Routes.userSignUp, page: UserSignUp),
+    RouteDef(Routes.newsList, page: NewsList),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -81,6 +85,12 @@ class StackedRouter extends RouterBase {
     UserSignUp: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const UserSignUp(),
+        settings: data,
+      );
+    },
+    NewsList: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const NewsList(),
         settings: data,
       );
     },

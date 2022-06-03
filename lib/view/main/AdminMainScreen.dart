@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:helbage/shared/styles.dart';
 import 'package:helbage/shared/color.dart';
 import 'package:helbage/shared/buttons.dart';
+import 'package:helbage/view/admin/noticeboard/newsList.dart';
 import 'package:helbage/view/authentication/UserLogin.dart';
 
 import 'package:helbage/view/authentication/UserSignUp.dart';
@@ -56,7 +57,7 @@ class AdminMainScreen extends StatelessWidget {
   Widget getViewForIndex(int index) {
     switch (index) {
       case 0:
-        return UserSignUp();
+        return NewsList();
       case 1:
         return UserLogin();
       case 2:
