@@ -1,5 +1,4 @@
-enum MalaysiaState
-{
+enum MalaysiaState {
   Johor,
   Kedah,
   Kelantan,
@@ -13,14 +12,14 @@ enum MalaysiaState
   Sarawak,
   Selangor;
 
-  String getString()
-    {
-      
-    switch(this.name)
-    {
-      case "Kuala_Lumpur":return "Kuala Lumpur";
-      case "Negeri_Sembilan":return "Negeri Sembilan";
-      default : return this.name;
+  String getString() {
+    switch (this.name) {
+      case "Kuala_Lumpur":
+        return "Kuala Lumpur";
+      case "Negeri_Sembilan":
+        return "Negeri Sembilan";
+      default:
+        return this.name;
     }
-    }
+  }
 }

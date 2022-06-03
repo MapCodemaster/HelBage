@@ -10,78 +10,42 @@ import 'package:helbage/view/resident/noticeboard/noticeboard.dart';
 import 'package:stacked/stacked.dart';
 
 class ViewSchedule extends StatefulWidget {
-  final showAdd;
-  const ViewSchedule({Key? key, this.showAdd}) : super(key: key);
+  const ViewSchedule({Key? key}) : super(key: key);
 
   @override
   State<ViewSchedule> createState() => _viewSchedule();
 }
-class _viewSchedule extends State<ViewSchedule>
-{
-  int index=2;
+
+class _viewSchedule extends State<ViewSchedule> {
+  int index = 2;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<viewScheduleViewModel>.reactive(
-      viewModelBuilder: ()=>viewScheduleViewModel(), 
-      builder: (context,model,child)=>Scaffold(
-          appBar: AppBar(
-            leading: Container(),
-            title:Center(child: Text("Schedule")),
-            backgroundColor: logoColor,
-            actions: [
-              IconButton(onPressed: (){model.addSchedule();}, icon: Icon(Icons.add)),
-            ],
-          ),
-          body:SingleChildScrollView(child: buildBody(model.status,model)),
-          /*bottomNavigationBar: Theme(
-            data: Theme.of(context).copyWith(
-                // sets the background color of the `BottomNavigationBar`
-                canvasColor: logoColor,
-                // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Colors.white,
-                textTheme: Theme.of(context)
-                    .textTheme
-                    .copyWith(caption: new TextStyle(color: Colors.yellow))),
-            child: BottomNavigationBar(
-            backgroundColor: logoColor,
-            currentIndex: index,
-            onTap:(value)
-            {
-              print(value);
-              print(index);
-              if(value!=index)
-              {
-                model.navigate(index);
-              }
-            },
-          items: [
-                BottomNavigationBarItem(
-                  
-                    icon: Icon(Icons.newspaper), label: "Noticeboard"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.calendar_month), label: "Schedule"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.fmd_good), label: "Collection\nPoint"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.recycling),
-                    label: "Recycling\nGuidelines"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications), label: "Notification"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.more_horiz_rounded), label: "More"),
-              ],),
-          
-        ),*/
-      
-      ));
+        viewModelBuilder: () => viewScheduleViewModel(),
+        builder: (context, model, child) => Scaffold(
+              appBar: AppBar(
+                leading: Container(),
+                title: Center(child: Text("Schedule")),
+                backgroundColor: logoColor,
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        model.addSchedule();
+                      },
+                      icon: Icon(Icons.add)),
+                ],
+              ),
+              body:
+                  SingleChildScrollView(child: buildBody(model.status, model)),
+            ));
   }
 }
 
 Widget buildBody(schedule, model) {
   if (!schedule) {
-    return Container(
-        margin: EdgeInsets.only(top: 10),
-        child: Center(child: Text("loading")));
+    return Center(
+      child: CircularProgressIndicator(),
+    );
   } else {
     if (model.scheduleList.isEmpty) {
       return Container(
@@ -119,7 +83,7 @@ Widget buildSchedule(list, model) {
                     InkWell(
                       child: Container(
                         margin: EdgeInsets.all(5),
-                        child: Text("State: " + element.pathName),
+                        child: Text("State: " + element.state),
                       ),
                     ),
                     Container(

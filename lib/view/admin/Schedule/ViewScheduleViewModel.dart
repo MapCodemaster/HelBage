@@ -9,20 +9,20 @@ import 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class viewScheduleViewModel extends BaseViewModel{
+class viewScheduleViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
- 
-  Map<String,scheduleModel> scheduleList=new Map();
-  bool status=false;
+
+  Map<String, scheduleModel> scheduleList = new Map();
+  bool status = false;
   /*
   Stream<Map<String,scheduleModel>> get stream => fetchNews();
   Stream<Map<String,scheduleModel>> fetchNews() {
     stor.readDocumentAsStream("schedule/Johor/Path","Johor").map((event) {
       scheduleList[event.id]=new scheduleModel(
-          MalaysiaState.Johor, 
+          MalaysiaState.Johor,
           new pathModel.fromFireStore(
             startTimeString:event['StartTime'],
             locationList: event['location'],
@@ -31,55 +31,90 @@ class viewScheduleViewModel extends BaseViewModel{
 
             ));
     });
-    
+
     return scheduleList;
   }
   */
-  viewScheduleViewModel (){
-    status=false;
-    
+  viewScheduleViewModel() {
+    status = false;
+
     setScheduleList("Johor");
-    
   }
 
-  void setScheduleList(String state)
-  {
-    var listener=stor.readCollectionAsStream("schedule/"+state+"/Path")
-    .listen((event) {});
-    listener.onData((event){
-      event.docs.forEach((element) { 
-        try{
-        scheduleList[element.id]=new scheduleModel(
-          MalaysiaState.Johor, 
-          new pathModel.fromFireStore(
-            startTimeString:element['StartTime'],
-            locationList: element['locationList'],
-            durationList: element['durationList'],
-            vehicle:element['vehicle'],
-            endTimeString: element['EndTime']),element.id);
-        }catch(e)
-        {
-        }
+  void setScheduleList(String state) {
+    var listener = stor
+        .readCollectionAsStream("schedule/" + state + "/Path")
+        .listen((event) {});
+    listener.onData((event) {
+      event.docs.forEach((element) {
+        try {
+          scheduleList[element.id] = new scheduleModel(
+              MalaysiaState.Johor,
+              new pathModel.fromFireStore(
+                  startTimeString: element['StartTime'],
+                  locationList: element['locationList'],
+                  durationList: element['durationList'],
+                  vehicle: element['vehicle'],
+                  endTimeString: element['EndTime']),
+              element.id);
+        } catch (e) {}
       });
+    });
 
-       status=true;
-       notifyListeners();
-       //listener.cancel();
-    }
-       );
-     //cancel update listner
-     
+    // listener.onData((event) {
+    //   // scheduleList.clear();
+
+    //   event.docs.forEach((element) {
+    //     print("yes");
+    //     print("id: " + element.id);
+    //     stor.readCollectionAsStream(element.id + "/Path").forEach((element) {
+    //       element.docs.forEach((element) {
+    //         try {
+    //           scheduleList[element.id] = new scheduleModel(
+    //               MalaysiaState.Johor,
+    //               new pathModel.fromFireStore(
+    //                   startTimeString: element['StartTime'],
+    //                   locationList: element['locationList'],
+    //                   durationList: element['durationList'],
+    //                   vehicle: element['vehicle'],
+    //                   endTimeString: element['EndTime']),
+    //               element.id);
+    //         } catch (e) {}
+    //       });
+    //     });
+    //   });
+    // });
+    // event.docs.forEach((element) {
+    //   try {
+    //     scheduleList[element.id] = new scheduleModel(
+    //         MalaysiaState.Johor,
+    //         new pathModel.fromFireStore(
+    //             startTimeString: element['StartTime'],
+    //             locationList: element['locationList'],
+    //             durationList: element['durationList'],
+    //             vehicle: element['vehicle'],
+    //             endTimeString: element['EndTime']),
+    //         element.id);
+    //   } catch (e) {}
+    // });
+
+    status = true;
+    notifyListeners();
+    //listener.cancel();
   }
+
+  //cancel update listner
+
   /*void getData()
   {
-    
+
     //update data when change
-    
+
     var listener=stor.readDocumentAsStream("schedule/Johor/Path","Johor")
     .listen((event) {});
     listener.onData((event){
         scheduleList[event.id]=new scheduleModel(
-          MalaysiaState.Johor, 
+          MalaysiaState.Johor,
           new pathModel.fromFireStore(
             startTimeString:event['StartTime'],
             locationList: event['location'],
@@ -90,39 +125,27 @@ class viewScheduleViewModel extends BaseViewModel{
        listener.cancel();
        print(scheduleList);});
      //cancel update listner
-    
-     
-      
-  
+
+
+
+
   }*/
-  bool getStatus()
-  {
+  bool getStatus() {
     return status;
   }
-  void checkPrint(scheduleItem)
-  {
-    
-    _navigationService.navigateTo(Routes.singleScheduleView,arguments: scheduleItem);//pass to router.router.dart
+
+  void checkPrint(scheduleItem) {
+    // _navigationService.navigateTo(Routes.singleScheduleView,
+    //     arguments: scheduleItem);
+    // //pass to router.router.dart
+    _navigationService.navigateToView(SingleScheduleView(value: scheduleItem));
   }
-  void addSchedule()
-  {
+
+  void addSchedule() {
     _navigationService.navigateTo(Routes.createSchedule);
   }
-  void quit()
-  {
+
+  void quit() {
     _navigationService.navigateTo(Routes.viewSchedule);
   }
-  void navigate(int index)
-  {
-    print("call navigate");
-    switch (index) {
-      case 0: _navigationService.navigateTo(Routes.adminMainScreen);break;
-      case 1:_navigationService.navigateTo(Routes.adminMainScreen);break;
-      case 2:_navigationService.navigateTo(Routes.adminMainScreen);break;
-      case 3:_navigationService.navigateTo(Routes.adminMainScreen);break;
-      case 4:_navigationService.navigateTo(Routes.adminMainScreen);break;
-      default:_navigationService.navigateTo(Routes.adminMainScreen);break;
-    }
-  }
-  
 }

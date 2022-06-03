@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:helbage/shared/color.dart';
 import 'package:helbage/view/admin/Schedule/SingleScheduleViewModel.dart';
 import 'package:stacked/stacked.dart';
 
 class SingleScheduleView extends StatefulWidget {
   dynamic value;
+
   SingleScheduleView({Key? key, required this.value}) : super(key: key);
   @override
   State<SingleScheduleView> createState() => _SingleScheduleView();
@@ -13,65 +15,76 @@ class _SingleScheduleView extends State<SingleScheduleView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SingleScheduleViewModel>.nonReactive(
-      viewModelBuilder: ()=>SingleScheduleViewModel(), 
-      builder: (context,model,child)=>Scaffold(
-        appBar:AppBar(
-        leading:IconButton(onPressed:(() => model.quit()),icon:Icon(Icons.arrow_back)),
-        title:Text(widget.value.pathName),
-        actions: [
-          IconButton(onPressed: (){model.delete(widget.value);}, icon: Icon(Icons.delete)),
-          IconButton(onPressed: (){model.edit(widget.value);}, icon: Icon(Icons.edit))
-        ],),
-        body: 
-        Container(
-          
-          child:Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            //upper part(Path Info)
-            Row(children: [
-              Image.asset('assets/images/cover.png',
+        viewModelBuilder: () => SingleScheduleViewModel(),
+        builder: (context, model, child) => Scaffold(
+            appBar: AppBar(
+              backgroundColor: logoColor,
+              // leading:IconButton(onPressed:(() => model.quit()),icon:Icon(Icons.arrow_back)),
+              title: Text(widget.value.pathName),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      model.delete(widget.value);
+                    },
+                    icon: Icon(Icons.delete)),
+                IconButton(
+                    onPressed: () {
+                      model.edit(widget.value);
+                    },
+                    icon: Icon(Icons.edit))
+              ],
+            ),
+            body: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  //upper part(Path Info)
+                  Row(
+                    children: [
+                      Image.asset('assets/images/cover.png',
                           width: MediaQuery.of(context).size.height / 4,
                           height: MediaQuery.of(context).size.height / 4),
-              Expanded(child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.all(5),
-                    child:Text(widget.value.pathName+" (Vehicle: "+widget.value.getPath().vehicle+")"),),
-                  Container(
-                    margin: EdgeInsets.all(5),
-                    child:Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                          Text(widget.value.getPath().startLocation),
-                          Icon(Icons.arrow_forward_outlined),
-                          Text(widget.value.getPath().endLocation),                          
-                        ],)),
-                  
-                  
+                      Expanded(
+                          child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(5),
+                            child: Text(widget.value.pathName +
+                                " (Vehicle: " +
+                                widget.value.getPath().vehicle +
+                                ")"),
+                          ),
+                          Container(
+                              margin: EdgeInsets.all(5),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(widget.value.getPath().startLocation),
+                                  Icon(Icons.arrow_forward_outlined),
+                                  Text(widget.value.getPath().endLocation),
+                                ],
+                              )),
+                        ],
+                      )),
+                    ],
+                  ),
+
+                  //End of upper part
+
+                  //Bottom Part (Locations)
+                  SingleChildScrollView(
+                      child: Container(
+                          margin: EdgeInsets.all(40),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: buildPathList(
+                                widget.value.getPath().location_List,
+                                widget.value.getPath().duration_List),
+                          )))
                 ],
-              )),
-            ],),
-
-            //End of upper part
-
-            
-            //Bottom Part (Locations)
-            SingleChildScrollView(
-              child:
-              Container(
-              margin:EdgeInsets.all(40),
-              child:Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: buildPathList(widget.value.getPath().location_List,widget.value.getPath().duration_List),
-            )))
-            
-          ],
-
-          ),
-        
-      ))
-      );
+              ),
+            )));
   }
 }
 

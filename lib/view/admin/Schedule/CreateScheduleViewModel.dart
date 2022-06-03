@@ -8,6 +8,7 @@ import 'package:helbage/services/FirebaseServices/auth_service.dart';
 import 'package:helbage/services/FirebaseServices/storage_service.dart';
 import 'package:helbage/shared/textInputForm.dart';
 import 'package:helbage/shared/validation.dart';
+import 'package:helbage/view/admin/Schedule/VehicleDialog.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -63,9 +64,14 @@ class CreateScheduleViewModel extends BaseViewModel {
     );*/
     notifyListeners();
   }
-  Future<bool> create(state,city,_formkey,_timeField) async
-  {
+
+  Future<bool> create(state, city, _formkey, _timeField, platno) async {
     if (!_formkey.currentState!.validate()) {
+      if (platno == null) {
+        _dialogService.showDialog(title: "Vehicle is not assigned");
+      }
+      ;
+
       return false;
     } else {
       List<String> createLocationList = new List.empty(growable: true);
@@ -74,40 +80,46 @@ class CreateScheduleViewModel extends BaseViewModel {
         createLocationList.add(element[0].text);
         createDurationList.add(element[1].text);
       });
+      int index = 0;
 
-    MalaysiaState s=MalaysiaState.Johor;
-    
-    pathModel newPath=new pathModel.fromInput(
-      startTimeString: _timeField.text, 
-      locationList: createLocationList, 
-      durationList: createDurationList);
-    scheduleModel schedule=new scheduleModel(s, newPath, city);
-    
-    bool successInsert=await stor.insert(schedule.pathName, 'schedule/'+schedule.state+"/Path",schedule.getPath().toFirestore());
-    if(!successInsert)
-    {
-      _dialogService.showDialog(
+      MalaysiaState.values.forEach((element) {
+        if (element.name == state) {
+          index = element.index;
+          print(state);
+        }
+      });
+      MalaysiaState s = MalaysiaState.values.elementAt(index);
+      pathModel newPath = new pathModel.fromInput(
+          startTimeString: _timeField.text,
+          locationList: createLocationList,
+          durationList: createDurationList,
+          vehicle: platno);
+
+      scheduleModel schedule = new scheduleModel(s, newPath, city);
+      print(schedule.state);
+      bool successInsert = await stor.insert(
+          schedule.pathName,
+          'schedule/' + schedule.state + "/Path",
+          schedule.getPath().toFirestore());
+      if (!successInsert) {
+        _dialogService.showDialog(
             title: "Personal Information Error",
             description: "Error happen in registration, try again later",
             dialogPlatform: DialogPlatform.Material);
-            return false;
-    }
-      
-     _navigationService.navigateTo(Routes.viewSchedule);
-    return true;     
-    }
-    
-    
+        return false;
+      }
 
+      _navigationService.back();
+      return true;
+    }
   }
 
   void quit() {
     _navigationService.navigateTo(Routes.viewSchedule);
   }
-  void deleteLastRow()
-  {
-    if(InputList.length>2)
-    {
+
+  void deleteLastRow() {
+    if (InputList.length > 2) {
       ControllerList.removeLast();
       InputList.removeLast();
       notifyListeners();

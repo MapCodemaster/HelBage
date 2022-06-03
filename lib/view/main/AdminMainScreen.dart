@@ -60,9 +60,7 @@ class AdminMainScreen extends StatelessWidget {
       case 0:
         return UserSignUp();
       case 1:
-        return ViewSchedule(
-          showAdd: true,
-        );
+        return ViewSchedule();
       case 2:
         return UserLogin();
       case 3:

@@ -1,5 +1,6 @@
 import 'package:helbage/app/route.locator.dart';
 import 'package:helbage/app/route.router.dart';
+import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -16,15 +17,12 @@ class SingleScheduleViewModel extends BaseViewModel {
     String previouspath = _navigationService.previousRoute;
     bool isDelete = await stor.delete(
         "schedule/" + schedule.state + "/Path", schedule.pathName);
-    
-    _navigationService.pushNamedAndRemoveUntil(previouspath);
+
+    _navigationService.back();
+    notifyListeners();
   }
-  void edit(schedule)
-  {
-    _navigationService.navigateTo(Routes.editScheduleView,arguments: schedule);
-  }
-  void quit()
-  {
-    _navigationService.navigateTo(Routes.viewSchedule);
+
+  void edit(schedule) {
+    _navigationService.navigateToView(EditScheduleView(schedule: schedule));
   }
 }

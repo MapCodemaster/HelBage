@@ -31,9 +31,9 @@ class Routes {
   static const String forgetPassword = '/forget-password';
   static const String userSignUp = '/user-sign-up';
   static const String createSchedule = '/create-schedule';
-  static const String singleScheduleView='/single-schedule-view';
-  static const String viewSchedule='/view-schedule';
-  static const String editScheduleView='/edit-schedule-view';
+  static const String singleScheduleView = '/single-schedule-view';
+  static const String viewSchedule = '/view-schedule';
+  static const String editScheduleView = '/edit-schedule-view';
   static const all = <String>{
     homeScreen,
     userLogin,
@@ -110,8 +110,9 @@ class StackedRouter extends RouterBase {
     },
     SingleScheduleView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) =>
-            SingleScheduleView(value: data.arguments as scheduleModel),
+        builder: (context) => SingleScheduleView(
+          value: data.arguments as scheduleModel,
+        ),
         settings: data,
       );
     },
@@ -123,7 +124,8 @@ class StackedRouter extends RouterBase {
     },
     EditScheduleView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) =>  EditScheduleView(schedule: data.arguments as scheduleModel),
+        builder: (context) =>
+            EditScheduleView(schedule: data.arguments as scheduleModel),
         settings: data,
       );
     },
