@@ -12,5 +12,6 @@ abstract class storage_service {
       String collection);
   Future<QuerySnapshot<Map<String, dynamic>>> readCollectionAsFuture(
       String collection);
+
   Future<void> newsSetup(String url);
 }

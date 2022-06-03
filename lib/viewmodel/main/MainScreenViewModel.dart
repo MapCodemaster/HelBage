@@ -1,3 +1,5 @@
 import 'package:stacked/stacked.dart';
 
-class MainScreenViewModel extends IndexTrackingViewModel {}
+class MainScreenViewModel extends IndexTrackingViewModel {
+
+}

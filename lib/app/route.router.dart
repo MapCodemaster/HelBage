@@ -7,6 +7,12 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+import 'package:helbage/model/pathModel.dart';
+import 'package:helbage/model/scheduleModel.dart';
+import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
+import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
+import 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
+import 'package:helbage/view/admin/Schedule/ViewSchedule.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -26,6 +32,10 @@ class Routes {
   static const String forgetPassword = '/forget-password';
   static const String userSignUp = '/user-sign-up';
   static const String newsList = '/news-list';
+  static const String createSchedule = '/create-schedule';
+  static const String singleScheduleView = '/single-schedule-view';
+  static const String viewSchedule = '/view-schedule';
+  static const String editScheduleView = '/edit-schedule-view';
   static const all = <String>{
     homeScreen,
     userLogin,
