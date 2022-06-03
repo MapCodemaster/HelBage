@@ -13,7 +13,8 @@ import 'package:helbage/viewmodel/main/MainScreenViewModel.dart';
 import 'package:stacked/stacked.dart';
 
 class AdminMainScreen extends StatelessWidget {
-  const AdminMainScreen({Key? key}) : super(key: key);
+  final initial;
+  const AdminMainScreen({Key? key, this.initial}) : super(key: key);
   Widget build(BuildContext context) {
     return ViewModelBuilder<MainScreenViewModel>.reactive(
       builder: (context, viewModel, child) => WillPopScope(

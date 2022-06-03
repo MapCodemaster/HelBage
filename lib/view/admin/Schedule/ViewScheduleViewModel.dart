@@ -38,65 +38,37 @@ class viewScheduleViewModel extends BaseViewModel {
   viewScheduleViewModel() {
     status = false;
 
-    setScheduleList("Johor");
+    setScheduleList();
   }
 
-  void setScheduleList(String state) {
-    var listener = stor
-        .readCollectionAsStream("schedule/" + state + "/Path")
-        .listen((event) {});
-    listener.onData((event) {
-      event.docs.forEach((element) {
-        try {
-          scheduleList[element.id] = new scheduleModel(
-              MalaysiaState.Johor,
-              new pathModel.fromFireStore(
-                  startTimeString: element['StartTime'],
-                  locationList: element['locationList'],
-                  durationList: element['durationList'],
-                  vehicle: element['vehicle'],
-                  endTimeString: element['EndTime']),
-              element.id);
-        } catch (e) {}
-      });
+  void setScheduleList() {
+    MalaysiaState.values.forEach((element) {
+      String state = element.name;
+      print(state);
+      int index = 0;
+
+      MalaysiaState s = MalaysiaState.values.elementAt(index);
+      var db = stor.readCollectionAsStream("schedule/" + state + "/Path");
+
+      if (db.length != 0) {
+        var listener = db.listen((event) {});
+        listener.onData((event) {
+          event.docs.forEach((element) {
+            try {
+              scheduleList[element.id] = new scheduleModel(
+                  s,
+                  new pathModel.fromFireStore(
+                      startTimeString: element['StartTime'],
+                      locationList: element['locationList'],
+                      durationList: element['durationList'],
+                      vehicle: element['vehicle'],
+                      endTimeString: element['EndTime']),
+                  element.id);
+            } catch (e) {}
+          });
+        });
+      }
     });
-
-    // listener.onData((event) {
-    //   // scheduleList.clear();
-
-    //   event.docs.forEach((element) {
-    //     print("yes");
-    //     print("id: " + element.id);
-    //     stor.readCollectionAsStream(element.id + "/Path").forEach((element) {
-    //       element.docs.forEach((element) {
-    //         try {
-    //           scheduleList[element.id] = new scheduleModel(
-    //               MalaysiaState.Johor,
-    //               new pathModel.fromFireStore(
-    //                   startTimeString: element['StartTime'],
-    //                   locationList: element['locationList'],
-    //                   durationList: element['durationList'],
-    //                   vehicle: element['vehicle'],
-    //                   endTimeString: element['EndTime']),
-    //               element.id);
-    //         } catch (e) {}
-    //       });
-    //     });
-    //   });
-    // });
-    // event.docs.forEach((element) {
-    //   try {
-    //     scheduleList[element.id] = new scheduleModel(
-    //         MalaysiaState.Johor,
-    //         new pathModel.fromFireStore(
-    //             startTimeString: element['StartTime'],
-    //             locationList: element['locationList'],
-    //             durationList: element['durationList'],
-    //             vehicle: element['vehicle'],
-    //             endTimeString: element['EndTime']),
-    //         element.id);
-    //   } catch (e) {}
-    // });
 
     status = true;
     notifyListeners();

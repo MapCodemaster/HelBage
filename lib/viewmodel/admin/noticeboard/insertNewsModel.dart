@@ -29,13 +29,13 @@ class insertNewsViewModel extends BaseViewModel {
       return false;
     } else {
       storageService.newsSetup(Url.text);
-      NavigateToNews();
+
       return true;
     }
   }
 
   void NavigateToNews() {
     // _navigationService.navigateTo(Routes.News);
-    _navigationService.navigateToView(NewsList());
+    _navigationService.back();
   }
 }

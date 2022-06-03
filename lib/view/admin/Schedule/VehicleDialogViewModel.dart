@@ -30,32 +30,43 @@ class VehicleDialogViewModel extends BaseViewModel {
     DialogResponse? response = await _dialogService.showConfirmationDialog(
         title: "Are you sure to delete this vehicel");
     if (response!.confirmed) {
-      await _storageService.delete("vehicle", _platno);
+      bool yes = await _storageService.delete(
+        _platno,
+        "vehicle",
+      );
     }
   }
 
-  void addVehicle(TextEditingController _platno) async {
+  Future<void> addVehicle(TextEditingController _platno) async {
     bool validity = true;
     vList.forEach((element) {
       if (element.platNo == _platno.text) {
         validity = false;
       }
     });
+
     if (!validity) {
       _dialogService.showDialog(
           title: "Duplicated Plat Number",
           description:
               "The plat number added already existed in the system. Please try with other plat number.");
     } else {
-      var data = {"platNo": _platno.text};
+      if (_platno.text.length != 0) {
+        var data = {"platNo": _platno.text};
 
-      await _storageService
-          .insert(_platno.text, "vehicle", data)
-          .whenComplete(() {
-        _snackBar.showSnackbar(
-          message: "Added Successfully",
-        );
-      });
+        await _storageService
+            .insert(_platno.text, "vehicle", data)
+            .whenComplete(() {
+          _snackBar.showSnackbar(
+            message: "Added Successfully",
+          );
+        });
+      } else {
+        _dialogService.showDialog(
+            title: "Empty input",
+            description: "The plat number cannot be empty");
+      }
+      ;
     }
   }
 

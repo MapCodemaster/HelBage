@@ -35,6 +35,7 @@ class EditNewsScreenViewModel extends StreamViewModel<NewsModel> {
     NewsModel passedObject = datapassing.passAsNewsModel();
 
     await storageService.delete(passedObject.documentID, "news");
+
     navigate.pushNamedAndRemoveUntil(Routes.adminMainScreen);
   }
 }

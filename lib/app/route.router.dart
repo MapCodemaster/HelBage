@@ -7,15 +7,14 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
-import 'package:helbage/model/pathModel.dart';
-import 'package:helbage/model/scheduleModel.dart';
-import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
-import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
-import 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
-import 'package:helbage/view/admin/Schedule/ViewSchedule.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import '../model/scheduleModel.dart';
+import '../view/admin/Schedule/CreateSchedule.dart';
+import '../view/admin/Schedule/EditScheduleView.dart';
+import '../view/admin/Schedule/SingleScheduleView.dart';
+import '../view/admin/Schedule/ViewSchedule.dart';
 import '../view/admin/noticeboard/newsList.dart';
 import '../view/authentication/ForgetPassword.dart';
 import '../view/authentication/UserLogin.dart';
@@ -33,8 +32,8 @@ class Routes {
   static const String userSignUp = '/user-sign-up';
   static const String newsList = '/news-list';
   static const String createSchedule = '/create-schedule';
-  static const String singleScheduleView = '/single-schedule-view';
   static const String viewSchedule = '/view-schedule';
+  static const String singleScheduleView = '/single-schedule-view';
   static const String editScheduleView = '/edit-schedule-view';
   static const all = <String>{
     homeScreen,
@@ -44,6 +43,10 @@ class Routes {
     forgetPassword,
     userSignUp,
     newsList,
+    createSchedule,
+    viewSchedule,
+    singleScheduleView,
+    editScheduleView,
   };
 }
 
@@ -58,6 +61,10 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.forgetPassword, page: ForgetPassword),
     RouteDef(Routes.userSignUp, page: UserSignUp),
     RouteDef(Routes.newsList, page: NewsList),
+    RouteDef(Routes.createSchedule, page: CreateSchedule),
+    RouteDef(Routes.viewSchedule, page: ViewSchedule),
+    RouteDef(Routes.singleScheduleView, page: SingleScheduleView),
+    RouteDef(Routes.editScheduleView, page: EditScheduleView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -81,8 +88,14 @@ class StackedRouter extends RouterBase {
       );
     },
     AdminMainScreen: (data) {
+      var args = data.getArgs<AdminMainScreenArguments>(
+        orElse: () => AdminMainScreenArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const AdminMainScreen(),
+        builder: (context) => AdminMainScreen(
+          key: args.key,
+          initial: args.initial,
+        ),
         settings: data,
       );
     },
@@ -104,5 +117,62 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    CreateSchedule: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const CreateSchedule(),
+        settings: data,
+      );
+    },
+    ViewSchedule: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ViewSchedule(),
+        settings: data,
+      );
+    },
+    SingleScheduleView: (data) {
+      var args = data.getArgs<SingleScheduleViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SingleScheduleView(
+          key: args.key,
+          value: args.value,
+        ),
+        settings: data,
+      );
+    },
+    EditScheduleView: (data) {
+      var args = data.getArgs<EditScheduleViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => EditScheduleView(
+          key: args.key,
+          schedule: args.schedule,
+        ),
+        settings: data,
+      );
+    },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// AdminMainScreen arguments holder class
+class AdminMainScreenArguments {
+  final Key? key;
+  final dynamic initial;
+  AdminMainScreenArguments({this.key, this.initial});
+}
+
+/// SingleScheduleView arguments holder class
+class SingleScheduleViewArguments {
+  final Key? key;
+  final dynamic value;
+  SingleScheduleViewArguments({this.key, required this.value});
+}
+
+/// EditScheduleView arguments holder class
+class EditScheduleViewArguments {
+  final Key? key;
+  final scheduleModel schedule;
+  EditScheduleViewArguments({this.key, required this.schedule});
 }

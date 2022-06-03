@@ -49,14 +49,16 @@ class _NewsListState extends State<NewsList> {
                 child: ListView.builder(
                     itemCount: model.data?.length,
                     itemBuilder: ((context, index) {
-                      return LinkPreview(
-                          link: model.data![index].url,
-                          date: DateFormat('yyyy-MM-dd kk:mm')
-                              .format(model.data![index].dt)
-                              .toString(),
-                          onTap: () {
-                            model.navigateToNewsEdit(model.data![index]);
-                          });
+                      return InkWell(
+                        child: LinkPreview(
+                            link: model.data![index].url,
+                            date: DateFormat('yyyy-MM-dd kk:mm')
+                                .format(model.data![index].dt)
+                                .toString(),
+                            onTap: () {
+                              model.navigateToNewsEdit(model.data![index]);
+                            }),
+                      );
                     })),
               ),
             );
