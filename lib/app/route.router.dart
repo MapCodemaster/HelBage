@@ -7,6 +7,12 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+import 'package:helbage/model/pathModel.dart';
+import 'package:helbage/model/scheduleModel.dart';
+import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
+import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
+import 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
+import 'package:helbage/view/admin/Schedule/ViewSchedule.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -24,6 +30,10 @@ class Routes {
   static const String adminMainScreen = '/admin-main-screen';
   static const String forgetPassword = '/forget-password';
   static const String userSignUp = '/user-sign-up';
+  static const String createSchedule = '/create-schedule';
+  static const String singleScheduleView = '/single-schedule-view';
+  static const String viewSchedule = '/view-schedule';
+  static const String editScheduleView = '/edit-schedule-view';
   static const all = <String>{
     homeScreen,
     userLogin,
@@ -31,6 +41,10 @@ class Routes {
     adminMainScreen,
     forgetPassword,
     userSignUp,
+    createSchedule,
+    singleScheduleView,
+    viewSchedule,
+    editScheduleView
   };
 }
 
@@ -44,6 +58,10 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.adminMainScreen, page: AdminMainScreen),
     RouteDef(Routes.forgetPassword, page: ForgetPassword),
     RouteDef(Routes.userSignUp, page: UserSignUp),
+    RouteDef(Routes.singleScheduleView, page: SingleScheduleView),
+    RouteDef(Routes.createSchedule, page: CreateSchedule),
+    RouteDef(Routes.viewSchedule, page: ViewSchedule),
+    RouteDef(Routes.editScheduleView, page: EditScheduleView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -81,6 +99,33 @@ class StackedRouter extends RouterBase {
     UserSignUp: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const UserSignUp(),
+        settings: data,
+      );
+    },
+    CreateSchedule: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const CreateSchedule(),
+        settings: data,
+      );
+    },
+    SingleScheduleView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SingleScheduleView(
+          value: data.arguments as scheduleModel,
+        ),
+        settings: data,
+      );
+    },
+    ViewSchedule: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ViewSchedule(),
+        settings: data,
+      );
+    },
+    EditScheduleView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) =>
+            EditScheduleView(schedule: data.arguments as scheduleModel),
         settings: data,
       );
     },

@@ -6,6 +6,14 @@ class FirebaseStor implements storage_service {
   FirebaseFirestore db = FirebaseFirestore.instance;
   Future<bool> insert(String uid, String table, dynamic data) async {
     try {
+      if (await db
+          .collection(table)
+          .doc(uid)
+          .get()
+          .then((value) => value.exists)) {
+        throw Exception("Document Exist");
+      }
+
       db.collection(table).doc(uid).set(data);
       final docRef = db.collection(table).doc(uid);
       if (docRef == null) {
@@ -52,5 +60,19 @@ class FirebaseStor implements storage_service {
 
   Future<void> newsSetup(String url) async {
     db.collection("news").add({'url': url, 'datetime': DateTime.now()});
+  }
+
+  Future<bool> delete(String collection, String document) async {
+    try {
+      db
+          .collection(collection)
+          .doc(document)
+          .delete()
+          .then((value) => true)
+          .onError((error, stackTrace) => false);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
