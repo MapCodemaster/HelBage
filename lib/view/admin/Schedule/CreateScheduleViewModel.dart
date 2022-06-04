@@ -70,6 +70,7 @@ class CreateScheduleViewModel extends BaseViewModel {
 
   Future<bool> create(state, city, _formkey, _timeField, platno) async {
     if (!_formkey.currentState!.validate()) {
+      
       if (platno == null) {
         _dialogService.showDialog(title: "Vehicle is not assigned");
       }
@@ -88,7 +89,7 @@ class CreateScheduleViewModel extends BaseViewModel {
       MalaysiaState.values.forEach((element) {
         if (element.name == state) {
           index = element.index;
-          print(state);
+          
         }
       });
       MalaysiaState s = MalaysiaState.values.elementAt(index);
@@ -99,18 +100,19 @@ class CreateScheduleViewModel extends BaseViewModel {
           vehicle: platno);
 
       scheduleModel schedule = new scheduleModel(s, newPath, city);
-      print(schedule.state);
-      bool successInsert = await stor.insert(
-          schedule.pathName,
-          'schedule/' + schedule.state + "/Path",
-          schedule.getPath().toFirestore());
-      if (!successInsert) {
-        _dialogService.showDialog(
-            title: "Personal Information Error",
-            description: "Error happen in registration, try again later",
-            dialogPlatform: DialogPlatform.Material);
-        return false;
-      }
+      
+      stor.insertLevel2(collection: 'schedule', document: schedule.state, subCollection: 'Path', subColDoc: schedule.pathName, data: schedule.getPath().toFirestore());
+      // bool successInsert = await stor.insert(
+      //     schedule.pathName,
+      //     'schedule/' + schedule.state + "/Path",
+      //     schedule.getPath().toFirestore());
+      // if (!successInsert) {
+      //   _dialogService.showDialog(
+      //       title: "Personal Information Error",
+      //       description: "Error happen in registration, try again later",
+      //       dialogPlatform: DialogPlatform.Material);
+      //   return false;
+      // }
       notifyListeners();
       _navigationService.back();
 

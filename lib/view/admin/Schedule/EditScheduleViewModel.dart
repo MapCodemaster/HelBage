@@ -90,7 +90,7 @@ class EditScheduleViewModel extends BaseViewModel {
       MalaysiaState.values.forEach((element) {
         if (element.name == state) {
           index = element.index;
-          print(state);
+          
         }
       });
       MalaysiaState s = MalaysiaState.values.elementAt(index);
@@ -101,22 +101,23 @@ class EditScheduleViewModel extends BaseViewModel {
           durationList: createDurationList,
           vehicle: platno);
       scheduleModel schedule = new scheduleModel(s, newPath, city);
-
-      await stor.delete(
-        originalschedule.pathName,
-        "schedule/" + originalschedule.state + "/Path",
-      );
-      bool successInsert = await stor.insert(
-          schedule.pathName,
-          'schedule/' + schedule.state + "/Path",
-          schedule.getPath().toFirestore());
-      if (!successInsert) {
-        _dialogService.showDialog(
-            title: "Personal Information Error",
-            description: "Error happen in registration, try again later",
-            dialogPlatform: DialogPlatform.Material);
-        return false;
-      }
+      await stor.delete("schedule/"+originalschedule.state+"/Path", originalschedule.pathName);
+      await stor.insertLevel2(collection: "schedule", document: schedule.state, subCollection: "Path", subColDoc: schedule.pathName, data: schedule.getPath().toFirestore());
+      // await stor.delete(
+      //   originalschedule.pathName,
+      //   "schedule/" + originalschedule.state + "/Path",
+      // );
+      // bool successInsert = await stor.insert(
+      //     schedule.pathName,
+      //     'schedule/' + schedule.state + "/Path",
+      //     schedule.getPath().toFirestore());
+      // if (!successInsert) {
+      //   _dialogService.showDialog(
+      //       title: "Personal Information Error",
+      //       description: "Error happen in registration, try again later",
+      //       dialogPlatform: DialogPlatform.Material);
+      //   return false;
+      // }
 
       notifyListeners();
       _navigationService.popRepeated(2);

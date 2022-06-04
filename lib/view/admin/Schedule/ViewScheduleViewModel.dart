@@ -14,29 +14,13 @@ class viewScheduleViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
-  String negeri = "Johor";
+  String negeri = "";
   Map<String, scheduleModel> scheduleList = new Map();
   bool status = false;
-  /*
-  Stream<Map<String,scheduleModel>> get stream => fetchNews();
-  Stream<Map<String,scheduleModel>> fetchNews() {
-    stor.readDocumentAsStream("schedule/Johor/Path","Johor").map((event) {
-      scheduleList[event.id]=new scheduleModel(
-          MalaysiaState.Johor,
-          new pathModel.fromFireStore(
-            startTimeString:event['StartTime'],
-            locationList: event['location'],
-            vehicle:event['vehicle'],
-            endTimeString: event['EndTime']
-
-            ));
-    });
-
-    return scheduleList;
-  }
-  */
   viewScheduleViewModel() {
-    fetchSchedule();
+    status=true;
+    notifyListeners();
+    //fetchSchedule();
   }
   void setNegeri(String state) {
     negeri = state;
@@ -49,14 +33,14 @@ class viewScheduleViewModel extends BaseViewModel {
   }
 
   void setScheduleList(String state) async {
-    print("State:" + state);
+    
     var db = await stor.readCollectionAsStream("schedule/" + state + "/Path");
     int index = 0;
 
     MalaysiaState.values.forEach((element) {
       if (element.name == state) {
         index = element.index;
-        print(state);
+        
       }
     });
     MalaysiaState s = MalaysiaState.values.elementAt(index);
@@ -76,7 +60,7 @@ class viewScheduleViewModel extends BaseViewModel {
                 element.id);
           } catch (e) {}
         });
-        print(scheduleList.length);
+        
       });
     }
     await Future.delayed(Duration(seconds: 2));
