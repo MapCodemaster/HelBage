@@ -10,6 +10,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../services/FirebaseServices/DataPassingService.dart';
 import '../services/FirebaseServices/FileStorage.dart';
 import '../services/FirebaseServices/FirebaseAuth.dart';
 import '../services/FirebaseServices/FirebaseFileStorage.dart';
@@ -32,4 +33,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton<storage_service>(() => FirebaseStor());
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton<FileStorage>(() => FirebaseFileStorage());
+  locator.registerSingleton(DataPassingService());
 }

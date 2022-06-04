@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:helbage/shared/styles.dart';
+
 class TextinputForm extends StatelessWidget {
-  double widthRatio=5;
+  double widthRatio = 5;
   String placeholder = "placeholder";
   Color borderColor = Colors.black;
   Color backgroundColor = Colors.white;
   TextEditingController? controller = null;
   dynamic validator = null;
   TextInputType? inputype;
-TextinputForm(
+  bool readonly;
+  TextinputForm(
       this.placeholder, this.borderColor, this.backgroundColor, this.controller,
-      {this.validator, this.inputype,this.widthRatio=5});
+      {this.validator,
+      this.inputype,
+      this.widthRatio = 5,
+      required this.readonly});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,6 +23,7 @@ TextinputForm(
         width: MediaQuery.of(context).size.width -
             MediaQuery.of(context).size.width / widthRatio,
         child: TextFormField(
+          readOnly: readonly,
           keyboardType: inputype,
           controller: controller,
           validator: validator,

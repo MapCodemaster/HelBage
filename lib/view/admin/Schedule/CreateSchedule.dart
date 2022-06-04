@@ -65,6 +65,7 @@ class _CreateSchedule extends State<CreateSchedule> {
                             _cityField,
                             validator: validate.validateForEmpty,
                             inputype: TextInputType.text,
+                            readonly: false,
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width -

@@ -21,7 +21,7 @@ class EditScheduleView extends StatefulWidget {
 
 class _EditScheduleView extends State<EditScheduleView> {
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  String state = "Johor";
+  String? state;
   String? time;
   late String vehicle;
   final timeFormat = DateFormat("HH:mm");
@@ -99,6 +99,7 @@ class _EditScheduleView extends State<EditScheduleView> {
                               _cityField,
                               validator: validate.validateForEmpty,
                               inputype: TextInputType.text,
+                              readonly: false,
                             ),
                             TextinputForm(
                               "Vehicle",
@@ -107,6 +108,7 @@ class _EditScheduleView extends State<EditScheduleView> {
                               _vehicleField,
                               validator: validate.validateForEmpty,
                               inputype: TextInputType.text,
+                              readonly: true,
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width -
@@ -159,7 +161,7 @@ class _EditScheduleView extends State<EditScheduleView> {
                                               radius: 0),
                                         ),
                                         platno == null
-                                            ? Text(vehicle + " is selected")
+                                            ? Center()
                                             : Text(platno + " is selected")
                                       ],
                                     )

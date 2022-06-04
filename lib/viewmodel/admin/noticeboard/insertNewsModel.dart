@@ -6,6 +6,8 @@ import 'package:helbage/services/FirebaseServices/FirebaseAuth.dart';
 import 'package:helbage/services/FirebaseServices/FirebaseStorage.dart';
 import 'package:helbage/services/FirebaseServices/auth_service.dart';
 import 'package:helbage/services/FirebaseServices/storage_service.dart';
+import 'package:helbage/view/admin/noticeboard/insertNews.dart';
+import 'package:helbage/view/admin/noticeboard/newsList.dart';
 import 'package:helbage/view/resident/noticeboard/news.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -27,12 +29,13 @@ class insertNewsViewModel extends BaseViewModel {
       return false;
     } else {
       storageService.newsSetup(Url.text);
-      NavigateToNews();
+
       return true;
     }
   }
 
   void NavigateToNews() {
     // _navigationService.navigateTo(Routes.News);
+    _navigationService.back();
   }
 }

@@ -17,27 +17,13 @@ class _NoticeBoardState extends State<NoticeBoard> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: logoColor,
-          centerTitle: true,
-          title: Text("Notice Board"),
-          bottom: TabBar(indicatorColor: Colors.white, tabs: [
-            Tab(
-              text: "News",
-            ),
-            Tab(
-              text: "Law",
-            ),
-            Tab(
-              text: "Regulation",
-            ),
-          ]),
-        ),
-        body: TabBarView(
-          children: [News(), News(), News()],
-        ),
-      ),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: logoColor,
+            centerTitle: true,
+            title: Text("Notice Board"),
+          ),
+          body: News()),
     );
   }
 }

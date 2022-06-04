@@ -25,12 +25,25 @@ class FirebaseStor implements storage_service {
     return true;
   }
 
-  Future<bool> update(String uid, String table, dynamic data) async {
+  Future<bool> update(String docid, String table, dynamic data) async {
     try {
       db
           .collection(table)
-          .doc(uid)
+          .doc(docid)
           .update(data)
+          .onError((error, stackTrace) => {throw Exception()});
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
+  Future<bool> delete(String docid, String table) async {
+    try {
+      db
+          .collection(table)
+          .doc(docid)
+          .delete()
           .onError((error, stackTrace) => {throw Exception()});
     } catch (e) {
       return false;
@@ -60,19 +73,5 @@ class FirebaseStor implements storage_service {
 
   Future<void> newsSetup(String url) async {
     db.collection("news").add({'url': url, 'datetime': DateTime.now()});
-  }
-
-  Future<bool> delete(String collection, String document) async {
-    try {
-      db
-          .collection(collection)
-          .doc(document)
-          .delete()
-          .then((value) => true)
-          .onError((error, stackTrace) => false);
-      return true;
-    } catch (e) {
-      return false;
-    }
   }
 }

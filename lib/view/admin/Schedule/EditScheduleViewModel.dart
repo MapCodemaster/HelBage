@@ -8,6 +8,7 @@ import 'package:helbage/services/FirebaseServices/auth_service.dart';
 import 'package:helbage/services/FirebaseServices/storage_service.dart';
 import 'package:helbage/shared/textInputForm.dart';
 import 'package:helbage/shared/validation.dart';
+import 'package:helbage/view/main/AdminMainScreen.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -29,10 +30,6 @@ class EditScheduleViewModel extends BaseViewModel {
     }
   }
 
-  void quit() {
-    _navigationService.navigateTo(Routes.viewSchedule);
-  }
-
   void addNewRow(location, duration) {
     ControllerList.add([
       TextEditingController(text: location),
@@ -48,6 +45,7 @@ class EditScheduleViewModel extends BaseViewModel {
         validator: validate.validateForEmpty,
         inputype: TextInputType.text,
         widthRatio: 1.5,
+        readonly: false,
       ),
       TextinputForm(
         "Duration",
@@ -57,6 +55,7 @@ class EditScheduleViewModel extends BaseViewModel {
         validator: validate.validateNumOnly,
         inputype: TextInputType.text,
         widthRatio: 1.5,
+        readonly: false,
       ),
     ]));
 
@@ -76,7 +75,7 @@ class EditScheduleViewModel extends BaseViewModel {
       if (platno == null) {
         _dialogService.showDialog(title: "Vehicle is not assigned");
       }
-      ;
+
       return false;
     } else {
       List<String> createLocationList = new List.empty(growable: true);
@@ -103,8 +102,10 @@ class EditScheduleViewModel extends BaseViewModel {
           vehicle: platno);
       scheduleModel schedule = new scheduleModel(s, newPath, city);
 
-      await stor.delete("schedule/" + originalschedule.state + "/Path",
-          originalschedule.pathName);
+      await stor.delete(
+        originalschedule.pathName,
+        "schedule/" + originalschedule.state + "/Path",
+      );
       bool successInsert = await stor.insert(
           schedule.pathName,
           'schedule/' + schedule.state + "/Path",
@@ -117,8 +118,8 @@ class EditScheduleViewModel extends BaseViewModel {
         return false;
       }
 
-      _navigationService.popRepeated(2);
       notifyListeners();
+      _navigationService.popRepeated(2);
       return true;
     }
   }

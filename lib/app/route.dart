@@ -1,9 +1,11 @@
+import 'package:helbage/services/FirebaseServices/DataPassingService.dart';
 import 'package:helbage/services/FirebaseServices/FileStorage.dart';
 import 'package:helbage/services/FirebaseServices/FirebaseAuth.dart';
 import 'package:helbage/services/FirebaseServices/FirebaseFileStorage.dart';
 import 'package:helbage/services/FirebaseServices/FirebaseStorage.dart';
 import 'package:helbage/services/FirebaseServices/auth_service.dart';
 import 'package:helbage/services/FirebaseServices/storage_service.dart';
+import 'package:helbage/view/admin/noticeboard/newsList.dart';
 import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
 import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
 import 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
@@ -24,10 +26,9 @@ import 'package:helbage/view/authentication/UserLogin.dart';
   MaterialRoute(page: AdminMainScreen),
   MaterialRoute(page: ForgetPassword),
   MaterialRoute(page: UserSignUp),
+  MaterialRoute(page: NewsList),
   MaterialRoute(page: CreateSchedule),
-  MaterialRoute(page: SingleScheduleView),
-  MaterialRoute(page: ViewSchedule),
-  MaterialRoute(page: EditScheduleView),
+  MaterialRoute(page: EditScheduleView)
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),
@@ -35,6 +36,7 @@ import 'package:helbage/view/authentication/UserLogin.dart';
   LazySingleton(classType: FirebaseAuthService, asType: AuthService),
   LazySingleton(classType: FirebaseStor, asType: storage_service),
   LazySingleton(classType: BottomSheetService),
-  LazySingleton(classType: FirebaseFileStorage, asType: FileStorage)
+  LazySingleton(classType: FirebaseFileStorage, asType: FileStorage),
+  Singleton(classType: DataPassingService)
 ])
 class AppSetup {}

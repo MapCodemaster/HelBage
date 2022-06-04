@@ -9,62 +9,6 @@ import 'package:helbage/view/authentication/UserSignUp.dart';
 import 'package:helbage/viewmodel/admin/noticeboard/insertNewsModel.dart';
 import 'package:stacked/stacked.dart';
 
-class TextFieldWidget extends StatefulWidget {
-  final String label;
-  final String text;
-  final ValueChanged<String> onChanged;
-  final int maxLines;
-
-  const TextFieldWidget({
-    Key? key,
-    required this.label,
-    required this.onChanged,
-    required this.text,
-    this.maxLines = 1,
-  }) : super(key: key);
-
-  @override
-  _TextFieldWidgetState createState() => _TextFieldWidgetState();
-}
-
-class _TextFieldWidgetState extends State<TextFieldWidget> {
-  late final TextEditingController controller;
-  @override
-  void initState() {
-    super.initState();
-
-    controller = TextEditingController(text: widget.text);
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            widget.label,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: controller,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            maxLines: widget.maxLines,
-          ),
-        ],
-      );
-}
-
 class ButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback onClicked;
@@ -103,11 +47,17 @@ class _EditNewsPageState extends State<EditNewsPage> {
     return ViewModelBuilder<insertNewsViewModel>.nonReactive(
         viewModelBuilder: () => insertNewsViewModel(),
         builder: (context, model, child) => Scaffold(
-              appBar: buildAppBar(context),
+              appBar: AppBar(
+                elevation: 0,
+                backgroundColor: logoColor,
+                centerTitle: true,
+                title: Text("Insert Url"),
+              ),
               body: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 physics: const BouncingScrollPhysics(),
                 children: [
+                  SizedBox(height: 30),
                   TextinputForm(
                     "Url",
                     Colors.black,
@@ -115,6 +65,7 @@ class _EditNewsPageState extends State<EditNewsPage> {
                     UrlField,
                     validator: validate.validateForEmpty,
                     inputype: TextInputType.text,
+                    readonly: false,
                   ),
                   const SizedBox(height: 25),
                   Center(
@@ -143,21 +94,5 @@ class _EditNewsPageState extends State<EditNewsPage> {
                 ],
               ),
             ));
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    const icon = CupertinoIcons.moon_stars;
-
-    return AppBar(
-      leading: const BackButton(),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      actions: [
-        IconButton(
-          icon: const Icon(icon),
-          onPressed: () {},
-        )
-      ],
-    );
   }
 }

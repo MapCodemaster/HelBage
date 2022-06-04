@@ -14,7 +14,7 @@ class viewScheduleViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
-
+  String negeri = "Johor";
   Map<String, scheduleModel> scheduleList = new Map();
   bool status = false;
   /*
@@ -36,70 +36,53 @@ class viewScheduleViewModel extends BaseViewModel {
   }
   */
   viewScheduleViewModel() {
-    status = false;
-
-    setScheduleList("Johor");
+    fetchSchedule();
+  }
+  void setNegeri(String state) {
+    negeri = state;
   }
 
-  void setScheduleList(String state) {
-    var listener = stor
-        .readCollectionAsStream("schedule/" + state + "/Path")
-        .listen((event) {});
-    listener.onData((event) {
-      event.docs.forEach((element) {
-        try {
-          scheduleList[element.id] = new scheduleModel(
-              MalaysiaState.Johor,
-              new pathModel.fromFireStore(
-                  startTimeString: element['StartTime'],
-                  locationList: element['locationList'],
-                  durationList: element['durationList'],
-                  vehicle: element['vehicle'],
-                  endTimeString: element['EndTime']),
-              element.id);
-        } catch (e) {}
-      });
+  void fetchSchedule() {
+    status = false;
+    scheduleList.clear();
+    setScheduleList(this.negeri.toString());
+  }
+
+  void setScheduleList(String state) async {
+    print("State:" + state);
+    var db = await stor.readCollectionAsStream("schedule/" + state + "/Path");
+    int index = 0;
+
+    MalaysiaState.values.forEach((element) {
+      if (element.name == state) {
+        index = element.index;
+        print(state);
+      }
     });
-
-    // listener.onData((event) {
-    //   // scheduleList.clear();
-
-    //   event.docs.forEach((element) {
-    //     print("yes");
-    //     print("id: " + element.id);
-    //     stor.readCollectionAsStream(element.id + "/Path").forEach((element) {
-    //       element.docs.forEach((element) {
-    //         try {
-    //           scheduleList[element.id] = new scheduleModel(
-    //               MalaysiaState.Johor,
-    //               new pathModel.fromFireStore(
-    //                   startTimeString: element['StartTime'],
-    //                   locationList: element['locationList'],
-    //                   durationList: element['durationList'],
-    //                   vehicle: element['vehicle'],
-    //                   endTimeString: element['EndTime']),
-    //               element.id);
-    //         } catch (e) {}
-    //       });
-    //     });
-    //   });
-    // });
-    // event.docs.forEach((element) {
-    //   try {
-    //     scheduleList[element.id] = new scheduleModel(
-    //         MalaysiaState.Johor,
-    //         new pathModel.fromFireStore(
-    //             startTimeString: element['StartTime'],
-    //             locationList: element['locationList'],
-    //             durationList: element['durationList'],
-    //             vehicle: element['vehicle'],
-    //             endTimeString: element['EndTime']),
-    //         element.id);
-    //   } catch (e) {}
-    // });
-
+    MalaysiaState s = MalaysiaState.values.elementAt(index);
+    if (db.length != 0) {
+      var listener = db.listen((event) {});
+      listener.onData((event) {
+        event.docs.forEach((element) {
+          try {
+            scheduleList[element.id] = new scheduleModel(
+                s,
+                new pathModel.fromFireStore(
+                    startTimeString: element['StartTime'],
+                    locationList: element['locationList'],
+                    durationList: element['durationList'],
+                    vehicle: element['vehicle'],
+                    endTimeString: element['EndTime']),
+                element.id);
+          } catch (e) {}
+        });
+        print(scheduleList.length);
+      });
+    }
+    await Future.delayed(Duration(seconds: 2));
     status = true;
     notifyListeners();
+
     //listener.cancel();
   }
 
@@ -130,22 +113,22 @@ class viewScheduleViewModel extends BaseViewModel {
 
 
   }*/
+
   bool getStatus() {
     return status;
   }
 
-  void checkPrint(scheduleItem) {
+  void checkPrint(scheduleItem, isAdmin) {
     // _navigationService.navigateTo(Routes.singleScheduleView,
     //     arguments: scheduleItem);
     // //pass to router.router.dart
-    _navigationService.navigateToView(SingleScheduleView(value: scheduleItem));
+    _navigationService.navigateToView(SingleScheduleView(
+      value: scheduleItem,
+      isAdmin: isAdmin,
+    ));
   }
 
   void addSchedule() {
     _navigationService.navigateTo(Routes.createSchedule);
-  }
-
-  void quit() {
-    _navigationService.navigateTo(Routes.viewSchedule);
   }
 }

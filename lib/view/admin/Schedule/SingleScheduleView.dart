@@ -5,8 +5,9 @@ import 'package:stacked/stacked.dart';
 
 class SingleScheduleView extends StatefulWidget {
   dynamic value;
-
-  SingleScheduleView({Key? key, required this.value}) : super(key: key);
+  final isAdmin;
+  SingleScheduleView({Key? key, required this.value, required this.isAdmin})
+      : super(key: key);
   @override
   State<SingleScheduleView> createState() => _SingleScheduleView();
 }
@@ -17,23 +18,27 @@ class _SingleScheduleView extends State<SingleScheduleView> {
     return ViewModelBuilder<SingleScheduleViewModel>.nonReactive(
         viewModelBuilder: () => SingleScheduleViewModel(),
         builder: (context, model, child) => Scaffold(
-            appBar: AppBar(
-              backgroundColor: logoColor,
-              // leading:IconButton(onPressed:(() => model.quit()),icon:Icon(Icons.arrow_back)),
-              title: Text(widget.value.pathName),
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      model.delete(widget.value);
-                    },
-                    icon: Icon(Icons.delete)),
-                IconButton(
-                    onPressed: () {
-                      model.edit(widget.value);
-                    },
-                    icon: Icon(Icons.edit))
-              ],
-            ),
+            appBar: widget.isAdmin == null || widget.isAdmin == true
+                ? AppBar(
+                    backgroundColor: logoColor,
+                    title: Text(widget.value.pathName),
+                    actions: [
+                      IconButton(
+                          onPressed: () {
+                            model.delete(widget.value);
+                          },
+                          icon: Icon(Icons.delete)),
+                      IconButton(
+                          onPressed: () {
+                            model.edit(widget.value);
+                          },
+                          icon: Icon(Icons.edit))
+                    ],
+                  )
+                : AppBar(
+                    backgroundColor: logoColor,
+                    title: Text(widget.value.pathName),
+                  ),
             body: Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
