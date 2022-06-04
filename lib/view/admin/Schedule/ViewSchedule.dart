@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helbage/model/scheduleModel.dart';
 import 'package:helbage/shared/color.dart';
+import 'package:helbage/shared/stateDropDownButtonField.dart';
 import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
 import 'package:helbage/view/admin/Schedule/ViewScheduleViewModel.dart';
 import 'package:helbage/view/authentication/UserLogin.dart';
@@ -10,38 +11,97 @@ import 'package:helbage/view/resident/noticeboard/noticeboard.dart';
 import 'package:stacked/stacked.dart';
 
 class ViewSchedule extends StatefulWidget {
-  const ViewSchedule({Key? key}) : super(key: key);
+  final isAdmin;
+  const ViewSchedule({Key? key, required this.isAdmin}) : super(key: key);
 
   @override
   State<ViewSchedule> createState() => _viewSchedule();
 }
 
 class _viewSchedule extends State<ViewSchedule> {
-  int index = 2;
+  String? state;
+  String defaultState = "Johor";
+  bool _loading = false;
   @override
+  void initState() {
+    state = null;
+  }
+
   Widget build(BuildContext context) {
     return ViewModelBuilder<viewScheduleViewModel>.reactive(
         viewModelBuilder: () => viewScheduleViewModel(),
-        builder: (context, model, child) => Scaffold(
-              appBar: AppBar(
-                leading: Container(),
-                title: Center(child: Text("Schedule")),
-                backgroundColor: logoColor,
-                actions: [
-                  IconButton(
-                      onPressed: () {
-                        model.addSchedule();
-                      },
-                      icon: Icon(Icons.add)),
-                ],
-              ),
-              body:
-                  SingleChildScrollView(child: buildBody(model.status, model)),
-            ));
+        builder: (context, model, child) {
+          return Scaffold(
+            appBar: widget.isAdmin == true
+                ? AppBar(
+                    leading: Container(),
+                    title: Center(child: Text("Schedule")),
+                    backgroundColor: logoColor,
+                    actions: [
+                      IconButton(
+                          onPressed: () {
+                            model.addSchedule();
+                          },
+                          icon: Icon(Icons.add)),
+                    ],
+                  )
+                : AppBar(
+                    leading: Container(),
+                    title: Center(child: Text("Schedule")),
+                    backgroundColor: logoColor,
+                  ),
+            body: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        width: 200,
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                        child: getStateDropDownEnum(
+                            onChangeValue: (dynamic value) {
+                              setState(() {
+                                state = value;
+                                model.negeri = state!;
+                                model.fetchSchedule();
+                              });
+                              print("view:" + state!);
+                              print(model.negeri);
+                            },
+                            value: state)),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _loading = true;
+                          });
+                          model.fetchSchedule();
+                          setState(() {
+                            _loading = false;
+                          });
+                        },
+                        icon: Icon(Icons.refresh))
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                state == null
+                    ? Center()
+                    : _loading
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Expanded(
+                            child:
+                                buildBody(model.status, model, widget.isAdmin)),
+              ],
+            ),
+          );
+        });
   }
 }
 
-Widget buildBody(schedule, model) {
+Widget buildBody(schedule, model, isAdmin) {
   if (!schedule) {
     return Center(
       child: CircularProgressIndicator(),
@@ -52,17 +112,18 @@ Widget buildBody(schedule, model) {
           margin: EdgeInsets.only(top: 10),
           child: Center(child: Text("No schedule in database")));
     }
-    model.scheduleList.forEach((key, value) {});
-    return buildSchedule(model.scheduleList, model);
+
+    return SingleChildScrollView(
+        child: buildSchedule(model.scheduleList, model, isAdmin));
   }
 }
 
-Widget buildSchedule(list, model) {
+Widget buildSchedule(list, model, isAdmin) {
   List<Widget> scheduleList = new List.empty(growable: true);
   list.forEach((key, element) => {
         scheduleList.add(InkWell(
             onTap: () {
-              model.checkPrint(element);
+              model.checkPrint(element, isAdmin);
             },
             child: Container(
               margin: EdgeInsets.all(10),
@@ -80,25 +141,31 @@ Widget buildSchedule(list, model) {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InkWell(
-                      child: Container(
-                        margin: EdgeInsets.all(5),
-                        child: Text("State: " + element.state),
+                    Expanded(
+                      child: InkWell(
+                        child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Text("State: " + element.state),
+                        ),
                       ),
                     ),
-                    Container(
-                        margin: EdgeInsets.all(5),
-                        child: Text("Path: " + element.pathName)),
-                    Container(
-                        margin: EdgeInsets.all(5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(element.getPath().startLocation),
-                            Icon(Icons.arrow_forward_outlined),
-                            Text(element.getPath().endLocation),
-                          ],
-                        ))
+                    Expanded(
+                      child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Text("Path: " + element.pathName)),
+                    ),
+                    Expanded(
+                      child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(element.getPath().startLocation),
+                              Icon(Icons.arrow_forward_outlined),
+                              Text(element.getPath().endLocation),
+                            ],
+                          )),
+                    )
                   ]),
             )))
       });

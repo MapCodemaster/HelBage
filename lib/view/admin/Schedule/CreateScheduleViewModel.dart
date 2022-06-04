@@ -9,6 +9,7 @@ import 'package:helbage/services/FirebaseServices/storage_service.dart';
 import 'package:helbage/shared/textInputForm.dart';
 import 'package:helbage/shared/validation.dart';
 import 'package:helbage/view/admin/Schedule/VehicleDialog.dart';
+import 'package:helbage/view/main/AdminMainScreen.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -40,6 +41,7 @@ class CreateScheduleViewModel extends BaseViewModel {
         validator: validate.validateForEmpty,
         inputype: TextInputType.text,
         widthRatio: 1.5,
+        readonly: false,
       ),
       TextinputForm(
         "Duration",
@@ -49,6 +51,7 @@ class CreateScheduleViewModel extends BaseViewModel {
         validator: validate.validateNumOnly,
         inputype: TextInputType.text,
         widthRatio: 1.5,
+        readonly: false,
       ),
     ]));
     /*ControllerList.add(TextEditingController());
@@ -108,14 +111,11 @@ class CreateScheduleViewModel extends BaseViewModel {
             dialogPlatform: DialogPlatform.Material);
         return false;
       }
-
+      notifyListeners();
       _navigationService.back();
+
       return true;
     }
-  }
-
-  void quit() {
-    _navigationService.navigateTo(Routes.viewSchedule);
   }
 
   void deleteLastRow() {

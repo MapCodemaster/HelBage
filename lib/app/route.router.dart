@@ -7,14 +7,13 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
 import '../model/scheduleModel.dart';
 import '../view/admin/Schedule/CreateSchedule.dart';
 import '../view/admin/Schedule/EditScheduleView.dart';
-import '../view/admin/Schedule/SingleScheduleView.dart';
-import '../view/admin/Schedule/ViewSchedule.dart';
 import '../view/admin/noticeboard/newsList.dart';
 import '../view/authentication/ForgetPassword.dart';
 import '../view/authentication/UserLogin.dart';
@@ -32,8 +31,6 @@ class Routes {
   static const String userSignUp = '/user-sign-up';
   static const String newsList = '/news-list';
   static const String createSchedule = '/create-schedule';
-  static const String viewSchedule = '/view-schedule';
-  static const String singleScheduleView = '/single-schedule-view';
   static const String editScheduleView = '/edit-schedule-view';
   static const all = <String>{
     homeScreen,
@@ -44,8 +41,6 @@ class Routes {
     userSignUp,
     newsList,
     createSchedule,
-    viewSchedule,
-    singleScheduleView,
     editScheduleView,
   };
 }
@@ -62,8 +57,6 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.userSignUp, page: UserSignUp),
     RouteDef(Routes.newsList, page: NewsList),
     RouteDef(Routes.createSchedule, page: CreateSchedule),
-    RouteDef(Routes.viewSchedule, page: ViewSchedule),
-    RouteDef(Routes.singleScheduleView, page: SingleScheduleView),
     RouteDef(Routes.editScheduleView, page: EditScheduleView),
   ];
   @override
@@ -123,22 +116,6 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    ViewSchedule: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const ViewSchedule(),
-        settings: data,
-      );
-    },
-    SingleScheduleView: (data) {
-      var args = data.getArgs<SingleScheduleViewArguments>(nullOk: false);
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => SingleScheduleView(
-          key: args.key,
-          value: args.value,
-        ),
-        settings: data,
-      );
-    },
     EditScheduleView: (data) {
       var args = data.getArgs<EditScheduleViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
@@ -161,13 +138,6 @@ class AdminMainScreenArguments {
   final Key? key;
   final dynamic initial;
   AdminMainScreenArguments({this.key, this.initial});
-}
-
-/// SingleScheduleView arguments holder class
-class SingleScheduleViewArguments {
-  final Key? key;
-  final dynamic value;
-  SingleScheduleViewArguments({this.key, required this.value});
 }
 
 /// EditScheduleView arguments holder class

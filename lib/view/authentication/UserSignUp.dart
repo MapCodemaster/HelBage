@@ -61,6 +61,7 @@ class _UserSignUp extends State<UserSignUp> {
                               _emailField,
                               validator: validate.validateEmail,
                               inputype: TextInputType.emailAddress,
+                              readonly: false,
                             ),
                             TextinputForm(
                               "Password",
@@ -69,6 +70,7 @@ class _UserSignUp extends State<UserSignUp> {
                               _passwordField,
                               validator: validate.validatePassword,
                               inputype: TextInputType.visiblePassword,
+                              readonly: false,
                             ),
                             TextinputForm(
                               "Name",
@@ -77,6 +79,7 @@ class _UserSignUp extends State<UserSignUp> {
                               _nameField,
                               validator: validate.validateForEmpty,
                               inputype: TextInputType.name,
+                              readonly: false,
                             ),
                             Container(
                                 padding: EdgeInsets.only(top: 10),
@@ -113,6 +116,7 @@ class _UserSignUp extends State<UserSignUp> {
                               _phoneField,
                               validator: validate.validatePhoneNo,
                               inputype: TextInputType.phone,
+                              readonly: false,
                             ),
                             TextinputForm(
                               "Address",
@@ -121,6 +125,7 @@ class _UserSignUp extends State<UserSignUp> {
                               _addressField,
                               validator: validate.validateForEmpty,
                               inputype: TextInputType.streetAddress,
+                              readonly: false,
                             ),
                             TextinputForm(
                               "City",
@@ -129,6 +134,7 @@ class _UserSignUp extends State<UserSignUp> {
                               _cityField,
                               validator: validate.validateForEmpty,
                               inputype: TextInputType.text,
+                              readonly: false,
                             ),
                             Container(
                                 padding: EdgeInsets.only(top: 10),
@@ -145,6 +151,7 @@ class _UserSignUp extends State<UserSignUp> {
                               _postcodeField,
                               validator: validate.validatePostcode,
                               inputype: TextInputType.numberWithOptions(),
+                              readonly: false,
                             ),
                             TextinputForm(
                               "Home No (Start with 0x- or 0xx-)",
@@ -153,6 +160,7 @@ class _UserSignUp extends State<UserSignUp> {
                               _homeField,
                               validator: validate.validateHomeNo,
                               inputype: TextInputType.phone,
+                              readonly: false,
                             ),
                             SizedBox(
                               height: 20,
@@ -195,5 +203,3 @@ class _UserSignUp extends State<UserSignUp> {
                         )))));
   }
 }
-
-

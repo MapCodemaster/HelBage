@@ -16,7 +16,9 @@ class SingleScheduleViewModel extends BaseViewModel {
   Future<void> delete(schedule) async {
     String previouspath = _navigationService.previousRoute;
     bool isDelete = await stor.delete(
-        "schedule/" + schedule.state + "/Path", schedule.pathName);
+      schedule.pathName,
+      "schedule/" + schedule.state + "/Path",
+    );
 
     _navigationService.back();
     notifyListeners();

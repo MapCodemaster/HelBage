@@ -63,7 +63,9 @@ class ResidentMainScreen extends StatelessWidget {
       case 0:
         return NoticeBoard();
       case 1:
-        return ViewSchedule();
+        return ViewSchedule(
+          isAdmin: false,
+        );
 
       case 2:
         return Center(child: Text("empty"));

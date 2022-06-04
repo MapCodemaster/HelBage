@@ -17,43 +17,43 @@ class AdminMainScreen extends StatelessWidget {
   const AdminMainScreen({Key? key, this.initial}) : super(key: key);
   Widget build(BuildContext context) {
     return ViewModelBuilder<MainScreenViewModel>.reactive(
-      builder: (context, viewModel, child) => WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-          body: getViewForIndex(viewModel.currentIndex),
-          bottomNavigationBar: Theme(
-            data: Theme.of(context).copyWith(
-                // sets the background color of the `BottomNavigationBar`
-                canvasColor: logoColor,
-                // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Colors.white,
-                textTheme: Theme.of(context)
-                    .textTheme
-                    .copyWith(caption: new TextStyle(color: Colors.yellow))),
-            child: BottomNavigationBar(
-              fixedColor: Colors.yellow,
-              type: BottomNavigationBarType.shifting,
-              currentIndex: viewModel.currentIndex,
-              onTap: viewModel.setIndex,
-              items: [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.newspaper), label: "Noticeboard"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.calendar_month), label: "Schedule"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.fmd_good), label: "Collection\nPoint"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.recycling),
-                    label: "Recycling\nGuidelines"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.more_horiz_rounded), label: "More"),
-              ],
+        viewModelBuilder: () => MainScreenViewModel(),
+        builder: (context, viewModel, child) {
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+              body: getViewForIndex(viewModel.currentIndex),
+              bottomNavigationBar: Theme(
+                data: Theme.of(context).copyWith(
+                    // sets the background color of the `BottomNavigationBar`
+                    canvasColor: logoColor,
+                    // sets the active color of the `BottomNavigationBar` if `Brightness` is light
+                    primaryColor: Colors.white,
+                    textTheme: Theme.of(context).textTheme.copyWith(
+                        caption: new TextStyle(color: Colors.yellow))),
+                child: BottomNavigationBar(
+                  fixedColor: Colors.yellow,
+                  type: BottomNavigationBarType.shifting,
+                  currentIndex: viewModel.currentIndex,
+                  onTap: viewModel.setIndex,
+                  items: [
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.newspaper), label: "Noticeboard"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.calendar_month), label: "Schedule"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.fmd_good), label: "Collection\nPoint"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.recycling),
+                        label: "Recycling\nGuidelines"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.more_horiz_rounded), label: "More"),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
-      viewModelBuilder: () => MainScreenViewModel(),
-    );
+          );
+        });
   }
 
   Widget getViewForIndex(int index) {
@@ -61,7 +61,9 @@ class AdminMainScreen extends StatelessWidget {
       case 0:
         return NewsList();
       case 1:
-        return ViewSchedule();
+        return ViewSchedule(
+          isAdmin: true,
+        );
       case 2:
         return UserLogin();
       case 3:

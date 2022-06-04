@@ -9,7 +9,6 @@ import 'package:helbage/view/authentication/UserSignUp.dart';
 import 'package:helbage/viewmodel/admin/noticeboard/insertNewsModel.dart';
 import 'package:stacked/stacked.dart';
 
-
 class ButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback onClicked;
@@ -49,11 +48,11 @@ class _EditNewsPageState extends State<EditNewsPage> {
         viewModelBuilder: () => insertNewsViewModel(),
         builder: (context, model, child) => Scaffold(
               appBar: AppBar(
-                      elevation: 0,
-                      backgroundColor: logoColor,
-                      centerTitle: true,
-                      title: Text("Insert Url"),
-                    ),
+                elevation: 0,
+                backgroundColor: logoColor,
+                centerTitle: true,
+                title: Text("Insert Url"),
+              ),
               body: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 physics: const BouncingScrollPhysics(),
@@ -66,6 +65,7 @@ class _EditNewsPageState extends State<EditNewsPage> {
                     UrlField,
                     validator: validate.validateForEmpty,
                     inputype: TextInputType.text,
+                    readonly: false,
                   ),
                   const SizedBox(height: 25),
                   Center(
@@ -95,5 +95,4 @@ class _EditNewsPageState extends State<EditNewsPage> {
               ),
             ));
   }
-
 }
