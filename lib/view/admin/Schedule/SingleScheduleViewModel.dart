@@ -17,10 +17,11 @@ class SingleScheduleViewModel extends BaseViewModel {
     bool isDelete = await stor.delete(
         "schedule/" + schedule.state + "/Path", schedule.pathName);
     
-    _navigationService.pushNamedAndRemoveUntil(previouspath);
+    _navigationService.navigateTo(Routes.adminMainScreen);
   }
   void edit(schedule)
   {
+    
     _navigationService.navigateTo(Routes.editScheduleView,arguments: schedule);
   }
   void quit()

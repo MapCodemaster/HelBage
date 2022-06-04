@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helbage/shared/color.dart';
 import 'package:helbage/view/admin/Schedule/SingleScheduleViewModel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -15,7 +16,7 @@ class _SingleScheduleView extends State<SingleScheduleView> {
     return ViewModelBuilder<SingleScheduleViewModel>.nonReactive(
       viewModelBuilder: ()=>SingleScheduleViewModel(), 
       builder: (context,model,child)=>Scaffold(
-        appBar:AppBar(
+        appBar:AppBar(backgroundColor: logoColor,
         leading:IconButton(onPressed:(() => model.quit()),icon:Icon(Icons.arrow_back)),
         title:Text(widget.value.pathName),
         actions: [

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:helbage/model/scheduleModel.dart';
 import 'package:helbage/shared/color.dart';
+import 'package:helbage/shared/dropdownbuttonfield.dart';
+import 'package:helbage/shared/stateDropDownButtonField.dart';
 import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
 import 'package:helbage/view/admin/Schedule/ViewScheduleViewModel.dart';
 import 'package:helbage/view/authentication/UserLogin.dart';
@@ -25,54 +27,18 @@ class _viewSchedule extends State<ViewSchedule>
       viewModelBuilder: ()=>viewScheduleViewModel(), 
       builder: (context,model,child)=>Scaffold(
           appBar: AppBar(
-            leading: Container(),
+            leading: IconButton(icon: Icon(Icons.arrow_back),onPressed: model.toMain,),
             title:Center(child: Text("Schedule")),
             backgroundColor: logoColor,
             actions: [
+              
               IconButton(onPressed: (){model.addSchedule();}, icon: Icon(Icons.add)),
+              PopupMenuButton(itemBuilder: (BuildContext context) {
+                return getStateListPop();},onSelected: (vale){model.ChangeBody(vale);},),
             ],
           ),
+
           body:SingleChildScrollView(child: buildBody(model.status,model)),
-          /*bottomNavigationBar: Theme(
-            data: Theme.of(context).copyWith(
-                // sets the background color of the `BottomNavigationBar`
-                canvasColor: logoColor,
-                // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-                primaryColor: Colors.white,
-                textTheme: Theme.of(context)
-                    .textTheme
-                    .copyWith(caption: new TextStyle(color: Colors.yellow))),
-            child: BottomNavigationBar(
-            backgroundColor: logoColor,
-            currentIndex: index,
-            onTap:(value)
-            {
-              print(value);
-              print(index);
-              if(value!=index)
-              {
-                model.navigate(index);
-              }
-            },
-          items: [
-                BottomNavigationBarItem(
-                  
-                    icon: Icon(Icons.newspaper), label: "Noticeboard"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.calendar_month), label: "Schedule"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.fmd_good), label: "Collection\nPoint"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.recycling),
-                    label: "Recycling\nGuidelines"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications), label: "Notification"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.more_horiz_rounded), label: "More"),
-              ],),
-          
-        ),*/
-      
       ));
   }
 }
@@ -81,12 +47,12 @@ Widget buildBody(schedule, model) {
   if (!schedule) {
     return Container(
         margin: EdgeInsets.only(top: 10),
-        child: Center(child: Text("loading")));
+        child: Center(child: Text("loading schedule for "+model.state)));
   } else {
     if (model.scheduleList.isEmpty) {
       return Container(
           margin: EdgeInsets.only(top: 10),
-          child: Center(child: Text("No schedule in database")));
+          child: Center(child: Text("No schedule in database for "+model.state)));
     }
     model.scheduleList.forEach((key, value) {});
     return buildSchedule(model.scheduleList, model);

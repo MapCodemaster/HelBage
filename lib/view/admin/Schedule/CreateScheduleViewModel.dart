@@ -74,25 +74,14 @@ class CreateScheduleViewModel extends BaseViewModel {
         createLocationList.add(element[0].text);
         createDurationList.add(element[1].text);
       });
-
-    MalaysiaState s=MalaysiaState.Johor;
-    
     pathModel newPath=new pathModel.fromInput(
       startTimeString: _timeField.text, 
       locationList: createLocationList, 
       durationList: createDurationList);
-    scheduleModel schedule=new scheduleModel(s, newPath, city);
-    
-    bool successInsert=await stor.insert(schedule.pathName, 'schedule/'+schedule.state+"/Path",schedule.getPath().toFirestore());
-    if(!successInsert)
-    {
-      _dialogService.showDialog(
-            title: "Personal Information Error",
-            description: "Error happen in registration, try again later",
-            dialogPlatform: DialogPlatform.Material);
-            return false;
-    }
-      
+    scheduleModel schedule=new scheduleModel(getState(state),newPath, city);
+
+    await stor.insertLevel2(collection: "schedule", document: schedule.state, subCollection: "Path", subColDoc: schedule.pathName, data: schedule.getPath().toFirestore());
+
      _navigationService.navigateTo(Routes.viewSchedule);
     return true;     
     }
@@ -111,6 +100,26 @@ class CreateScheduleViewModel extends BaseViewModel {
       ControllerList.removeLast();
       InputList.removeLast();
       notifyListeners();
+    }
+  }
+  MalaysiaState getState(String state)
+  {
+   
+    switch (state)
+    {
+      case  "Johor": return MalaysiaState.Johor;
+      case  "Kedah": return MalaysiaState.Kedah;
+      case  "Pahang": return MalaysiaState.Pahang;
+      case  "Kelatan": return MalaysiaState.Kelantan;
+      case  "Kuala Lumpur": return MalaysiaState.Kuala_Lumpur;
+      case  "Malacca": return MalaysiaState.Malacca;
+      case  "Negeri Sembilan": return MalaysiaState.Negeri_Sembilan;
+      case  "Perak": return MalaysiaState.Perak;
+      case  "Perlis": return MalaysiaState.Perlis;
+      case  "Sabah": return MalaysiaState.Sabah;
+      case  "Sarawak": return MalaysiaState.Sarawak;
+      case  "Selangor": return MalaysiaState.Selangor;
+      default: return MalaysiaState.Johor;
     }
   }
 }

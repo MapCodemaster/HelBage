@@ -1,22 +1,18 @@
+import 'package:helbage/model/constant/State.dart';
 import 'package:helbage/model/pathModel.dart';
 
-import 'constant/State.dart';
 class scheduleModel
 {
-  MalaysiaState _s;
+  MalaysiaState _state;
   String _pathName;
   String get pathName=>_pathName;
   pathModel _p;
-  String get state=>_s.getString();
-  scheduleModel(this._s,this._p,this._pathName)
-  {
-   
-
-  }
+  String get state=>_state.getString();
+  scheduleModel(this._state,this._p,this._pathName);
   pathModel getPath()
   {
     return _p;
   }
-  
+
   
 }

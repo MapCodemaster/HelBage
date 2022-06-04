@@ -69,6 +69,12 @@ class FirebaseStor implements storage_service {
     }
     
   }
+  Future<void> insertLevel2({required collection, required document, required subCollection,required subColDoc,required data}) async {
+   
+   
+      db.collection(collection).doc(document).collection('Path').doc(subColDoc).set(data);
+      
+  }
 
   
 }

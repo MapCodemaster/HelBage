@@ -31,6 +31,8 @@ class _EditScheduleView extends State<EditScheduleView>
   @override
   Widget build(BuildContext context)
   {
+    
+    state=widget.schedule.state;
     _cityField=TextEditingController(text:widget.schedule.pathName);
     _timeField=TextEditingController(text: widget.schedule.getPath().getStartTime().toString());
     _timeField.value=TextEditingValue(text: widget.schedule.getPath().getStartTime().toString());
