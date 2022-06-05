@@ -65,8 +65,7 @@ class _viewSchedule extends State<ViewSchedule> {
                                 model.negeri = state!;
                                 model.fetchSchedule();
                               });
-                              print("view:" + state!);
-                              print(model.negeri);
+                              
                             },
                             value: state)),
                     IconButton(

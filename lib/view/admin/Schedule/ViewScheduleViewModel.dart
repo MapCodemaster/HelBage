@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:helbage/app/route.locator.dart';
 import 'package:helbage/app/route.router.dart';
 import 'package:helbage/model/constant/State.dart';
@@ -14,6 +17,9 @@ class viewScheduleViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
+  var listener;
+  //Stream<QuerySnapshot<Map<String, dynamic>>>? listener;
+
   String negeri = "";
   Map<String, scheduleModel> scheduleList = new Map();
   bool status = false;
@@ -35,19 +41,13 @@ class viewScheduleViewModel extends BaseViewModel {
   void setScheduleList(String state) async {
     
     var db = await stor.readCollectionAsStream("schedule/" + state + "/Path");
-    int index = 0;
-
-    MalaysiaState.values.forEach((element) {
-      if (element.name == state) {
-        index = element.index;
-        
-      }
-    });
-    MalaysiaState s = MalaysiaState.values.elementAt(index);
+    
+    MalaysiaState s = getState(state);
     if (db.length != 0) {
-      var listener = db.listen((event) {});
+      listener = db.listen((event) {});
       listener.onData((event) {
         event.docs.forEach((element) {
+          
           try {
             scheduleList[element.id] = new scheduleModel(
                 s,
@@ -60,44 +60,15 @@ class viewScheduleViewModel extends BaseViewModel {
                 element.id);
           } catch (e) {}
         });
-        
+       notifyListeners(); 
       });
     }
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     status = true;
     notifyListeners();
 
     //listener.cancel();
   }
-
-  //cancel update listner
-
-  /*void getData()
-  {
-
-    //update data when change
-
-    var listener=stor.readDocumentAsStream("schedule/Johor/Path","Johor")
-    .listen((event) {});
-    listener.onData((event){
-        scheduleList[event.id]=new scheduleModel(
-          MalaysiaState.Johor,
-          new pathModel.fromFireStore(
-            startTimeString:event['StartTime'],
-            locationList: event['location'],
-            vehicle:event['vehicle'],
-            endTimeString: event['EndTime']),event.id);
-       status=true;
-       notifyListeners();
-       listener.cancel();
-       print(scheduleList);});
-     //cancel update listner
-
-
-
-
-  }*/
-
   bool getStatus() {
     return status;
   }
@@ -114,5 +85,32 @@ class viewScheduleViewModel extends BaseViewModel {
 
   void addSchedule() {
     _navigationService.navigateTo(Routes.createSchedule);
+  }
+
+  @override
+  void dispose()
+  {
+    print("Widget Dispose");
+    listener?.cancel();
+  }
+  MalaysiaState getState(String state)
+  {
+   
+    switch (state)
+    {
+      case  "Johor": return MalaysiaState.Johor;
+      case  "Kedah": return MalaysiaState.Kedah;
+      case  "Pahang": return MalaysiaState.Pahang;
+      case  "Kelatan": return MalaysiaState.Kelantan;
+      case  "Kuala Lumpur": return MalaysiaState.Kuala_Lumpur;
+      case  "Malacca": return MalaysiaState.Malacca;
+      case  "Negeri Sembilan": return MalaysiaState.Negeri_Sembilan;
+      case  "Perak": return MalaysiaState.Perak;
+      case  "Perlis": return MalaysiaState.Perlis;
+      case  "Sabah": return MalaysiaState.Sabah;
+      case  "Sarawak": return MalaysiaState.Sarawak;
+      case  "Selangor": return MalaysiaState.Selangor;
+      default: return MalaysiaState.Johor;
+    }
   }
 }

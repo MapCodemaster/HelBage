@@ -28,9 +28,15 @@ class _CreateSchedule extends State<CreateSchedule> {
   var platno;
   @override
   Widget build(BuildContext context) {
+
     return ViewModelBuilder<CreateScheduleViewModel>.reactive(
         viewModelBuilder: () => CreateScheduleViewModel(),
-        builder: (context, model, child) => Scaffold(
+        builder: (context, model, child){ 
+          if(!model.setup){
+          addNewRow(model);
+          addNewRow(model);
+          model.setup=true;}
+        return Scaffold(
             appBar: AppBar(
               backgroundColor: logoColor,
               // leading:Container(child:IconButton(icon:Icon(Icons.arrow_back),onPressed: (){model.quit();})),
@@ -137,7 +143,11 @@ class _CreateSchedule extends State<CreateSchedule> {
                         ),
                       ),
                       TextButton(
-                          onPressed: () => {model.addNewRow()},
+                          onPressed: () => {
+                            addNewRow(model),
+                            //model.addNewRow()
+                            
+                          },
                           child: Text("Add New Row")),
                       TextButton(
                           onPressed: () => {model.deleteLastRow()},
@@ -148,6 +158,35 @@ class _CreateSchedule extends State<CreateSchedule> {
                                     _timeField, platno)
                               },
                           child: Text("Create")),
-                    ]))))));
+                    ])))));}
+                    );
   }
+addNewRow(model)
+{
+  model.ControllerList.add([TextEditingController(), TextEditingController()]);
+    model.InputList.add(
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      TextinputForm(
+        "Location",
+        Colors.black,
+        Colors.white,
+        model.ControllerList.last[0],
+        validator: validate.validateForEmpty,
+        inputype: TextInputType.text,
+        widthRatio: 1.5,
+        readonly: false,
+      ),
+      TextinputForm(
+        "Duration",
+        Colors.black,
+        Colors.white,
+        model.ControllerList.last[1],
+        validator: validate.validateNumOnly,
+        inputype: TextInputType.text,
+        widthRatio: 1.5,
+        readonly: false,
+      ),
+    ]));
+    model.notifyListeners();
+}
 }

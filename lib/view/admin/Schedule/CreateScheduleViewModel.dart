@@ -18,55 +18,55 @@ class CreateScheduleViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
-
+  bool setup=false;
   List<Row> InputList = new List.empty(growable: true);
 
   List<List<TextEditingController>> ControllerList = List.empty(growable: true);
 
   Validation validate = Validation();
   CreateScheduleViewModel() {
-    addNewRow();
-    addNewRow();
+    
+    
   }
 
-  void addNewRow() {
-    ControllerList.add([TextEditingController(), TextEditingController()]);
-    InputList.add(
-        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-      TextinputForm(
-        "Location",
-        Colors.black,
-        Colors.white,
-        ControllerList.last[0],
-        validator: validate.validateForEmpty,
-        inputype: TextInputType.text,
-        widthRatio: 1.5,
-        readonly: false,
-      ),
-      TextinputForm(
-        "Duration",
-        Colors.black,
-        Colors.white,
-        ControllerList.last[1],
-        validator: validate.validateNumOnly,
-        inputype: TextInputType.text,
-        widthRatio: 1.5,
-        readonly: false,
-      ),
-    ]));
-    /*ControllerList.add(TextEditingController());
-    InputList.add(
-      TextinputForm(
-                "City",
-                Colors.black,
-                Colors.white,
-                ControllerList.last,
-                validator: validate.validateForEmpty,
-                inputype: TextInputType.text,
-              )
-    );*/
-    notifyListeners();
-  }
+  // void addNewRow() {
+  //   ControllerList.add([TextEditingController(), TextEditingController()]);
+  //   InputList.add(
+  //       Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+  //     TextinputForm(
+  //       "Location",
+  //       Colors.black,
+  //       Colors.white,
+  //       ControllerList.last[0],
+  //       validator: validate.validateForEmpty,
+  //       inputype: TextInputType.text,
+  //       widthRatio: 1.5,
+  //       readonly: false,
+  //     ),
+  //     TextinputForm(
+  //       "Duration",
+  //       Colors.black,
+  //       Colors.white,
+  //       ControllerList.last[1],
+  //       validator: validate.validateNumOnly,
+  //       inputype: TextInputType.text,
+  //       widthRatio: 1.5,
+  //       readonly: false,
+  //     ),
+  //   ]));
+  //   /*ControllerList.add(TextEditingController());
+  //   InputList.add(
+  //     TextinputForm(
+  //               "City",
+  //               Colors.black,
+  //               Colors.white,
+  //               ControllerList.last,
+  //               validator: validate.validateForEmpty,
+  //               inputype: TextInputType.text,
+  //             )
+  //   );*/
+  //   notifyListeners();
+  // }
 
   Future<bool> create(state, city, _formkey, _timeField, platno) async {
     if (!_formkey.currentState!.validate()) {
@@ -92,7 +92,8 @@ class CreateScheduleViewModel extends BaseViewModel {
           
         }
       });
-      MalaysiaState s = MalaysiaState.values.elementAt(index);
+      MalaysiaState s =getState(state);
+      print(s.name);
       pathModel newPath = new pathModel.fromInput(
           startTimeString: _timeField.text,
           locationList: createLocationList,
@@ -125,6 +126,26 @@ class CreateScheduleViewModel extends BaseViewModel {
       ControllerList.removeLast();
       InputList.removeLast();
       notifyListeners();
+    }
+  }
+  MalaysiaState getState(String state)
+  {
+   
+    switch (state)
+    {
+      case  "Johor": return MalaysiaState.Johor;
+      case  "Kedah": return MalaysiaState.Kedah;
+      case  "Pahang": return MalaysiaState.Pahang;
+      case  "Kelatan": return MalaysiaState.Kelantan;
+      case  "Kuala Lumpur": return MalaysiaState.Kuala_Lumpur;
+      case  "Malacca": return MalaysiaState.Malacca;
+      case  "Negeri Sembilan": return MalaysiaState.Negeri_Sembilan;
+      case  "Perak": return MalaysiaState.Perak;
+      case  "Perlis": return MalaysiaState.Perlis;
+      case  "Sabah": return MalaysiaState.Sabah;
+      case  "Sarawak": return MalaysiaState.Sarawak;
+      case  "Selangor": return MalaysiaState.Selangor;
+      default: return MalaysiaState.Johor;
     }
   }
 }
