@@ -44,20 +44,22 @@ class _EditScheduleView extends State<EditScheduleView> {
     int initialHour = int.parse(startTime.split(':')[0]);
     int initialMinute = int.parse(startTime.split(':')[1]);
     return ViewModelBuilder<EditScheduleViewModel>.reactive(
-        viewModelBuilder: () =>
-            EditScheduleViewModel(oriLocationList: widget.schedule.getPath().locationList,oriDurationList:widget.schedule.getPath().durationList,originalschedule: widget.schedule),
+        viewModelBuilder: () => EditScheduleViewModel(
+            oriLocationList: widget.schedule.getPath().locationList,
+            oriDurationList: widget.schedule.getPath().durationList,
+            originalschedule: widget.schedule),
         builder: (context, model, child) {
           if (widget.schedule.getPath().vehicle == null) {
             vehicle == "";
           } else {
             vehicle = widget.schedule.getPath().vehicle!;
           }
-          if(!model.setup)
-          {
+          if (!model.setup) {
             for (int i = 0; i < model.oriLocationList.length; i++) {
-            addNewRow(model.oriLocationList[i], model.oriDurationList[i],model);
+              addNewRow(
+                  model.oriLocationList[i], model.oriDurationList[i], model);
             }
-            model.setup=true;
+            model.setup = true;
           }
           return Scaffold(
               appBar: AppBar(
@@ -72,8 +74,12 @@ class _EditScheduleView extends State<EditScheduleView> {
                   actions: [
                     IconButton(
                       onPressed: () {
-                        model.create(state, _cityField.text, _formkey,
-                            _timeField, platno == null ? vehicle : platno);
+                        model.create(
+                            state ?? widget.schedule.state,
+                            _cityField.text,
+                            _formkey,
+                            _timeField,
+                            platno == null ? vehicle : platno);
                       },
                       icon: Icon(Icons.save),
                     )
@@ -107,7 +113,6 @@ class _EditScheduleView extends State<EditScheduleView> {
                               inputype: TextInputType.text,
                               readonly: false,
                             ),
-                            
                             Container(
                               width: MediaQuery.of(context).size.width -
                                   MediaQuery.of(context).size.width / 5,
@@ -186,16 +191,16 @@ class _EditScheduleView extends State<EditScheduleView> {
                           ),
                         ),
                         TextButton(
-                            onPressed: () => {addNewRow("", 0,model)},
+                            onPressed: () => {addNewRow("", 0, model)},
                             child: Text("Add New Row")),
                         TextButton(
                             onPressed: () => {model.deleteLastRow()},
                             child: Text("Delete Last Row")),
                       ])))));
         });
-  
   }
-  void addNewRow(location, duration,model) {
+
+  void addNewRow(location, duration, model) {
     model.ControllerList.add([
       TextEditingController(text: location),
       TextEditingController(text: duration.toString())
