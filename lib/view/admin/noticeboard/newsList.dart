@@ -24,9 +24,9 @@ class _NewsListState extends State<NewsList> {
         viewModelBuilder: (() => NewsListViewModel()),
         builder: (context, model, child) {
           if (model.dataReady) {
-            model.data!.sort(
-              (b, a) => a.dt.compareTo(b.dt),
-            );
+            // model.data!.sort(
+            //   (b, a) => a.dt.compareTo(b.dt),
+            // );
 
             return Scaffold(
               appBar: AppBar(
@@ -50,14 +50,17 @@ class _NewsListState extends State<NewsList> {
                     itemCount: model.data?.length,
                     itemBuilder: ((context, index) {
                       return InkWell(
+                        onLongPress: (){model.navigateToNewsEdit(model.data![index]);},
                         child: LinkPreview(
                             link: model.data![index].url,
                             date: DateFormat('yyyy-MM-dd kk:mm')
                                 .format(model.data![index].dt)
                                 .toString(),
+                      
                             onTap: () {
                               model.navigateToNewsEdit(model.data![index]);
-                            }),
+                            }
+                            ),
                       );
                     })),
               ),

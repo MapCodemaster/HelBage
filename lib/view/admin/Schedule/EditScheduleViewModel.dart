@@ -19,48 +19,51 @@ class EditScheduleViewModel extends BaseViewModel {
   scheduleModel originalschedule;
   List<Row> InputList = new List.empty(growable: true);
   List<List<TextEditingController>> ControllerList = List.empty(growable: true);
-
+  List oriLocationList;
+  List oriDurationList;
   Validation validate = Validation();
-
-  EditScheduleViewModel({required this.originalschedule}) {
-    List locationList = originalschedule.getPath().location_List;
-    List durationList = originalschedule.getPath().durationList;
-    for (int i = 0; i < locationList.length; i++) {
-      addNewRow(locationList[i], durationList[i]);
-    }
+  bool setup=false;
+  
+  EditScheduleViewModel({required this.oriLocationList,required this.oriDurationList,required this.originalschedule}) {
+    print(originalschedule.state);
+    //oriLocationList = originalschedule.getPath().location_List;
+    //oriDurationList = originalschedule.getPath().durationList;
+    // for (int i = 0; i < locationList.length; i++) {
+    //   addNewRow(locationList[i], durationList[i]);
+    // }
   }
 
-  void addNewRow(location, duration) {
-    ControllerList.add([
-      TextEditingController(text: location),
-      TextEditingController(text: duration.toString())
-    ]);
-    InputList.add(
-        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-      TextinputForm(
-        "Location",
-        Colors.black,
-        Colors.white,
-        ControllerList.last[0],
-        validator: validate.validateForEmpty,
-        inputype: TextInputType.text,
-        widthRatio: 1.5,
-        readonly: false,
-      ),
-      TextinputForm(
-        "Duration",
-        Colors.black,
-        Colors.white,
-        ControllerList.last[1],
-        validator: validate.validateNumOnly,
-        inputype: TextInputType.text,
-        widthRatio: 1.5,
-        readonly: false,
-      ),
-    ]));
+  // void addNewRow(location, duration) {
+  //   ControllerList.add([
+  //     TextEditingController(text: location),
+  //     TextEditingController(text: duration.toString())
+  //   ]);
+  //   InputList.add(
+  //       Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+  //     TextinputForm(
+  //       "Location",
+  //       Colors.black,
+  //       Colors.white,
+  //       ControllerList.last[0],
+  //       validator: validate.validateForEmpty,
+  //       inputype: TextInputType.text,
+  //       widthRatio: 1.5,
+  //       readonly: false,
+  //     ),
+  //     TextinputForm(
+  //       "Duration",
+  //       Colors.black,
+  //       Colors.white,
+  //       ControllerList.last[1],
+  //       validator: validate.validateNumOnly,
+  //       inputype: TextInputType.text,
+  //       widthRatio: 1.5,
+  //       readonly: false,
+  //     ),
+  //   ]));
 
-    notifyListeners();
-  }
+  //   notifyListeners();
+  // }
 
   void deleteLastRow() {
     if (InputList.length > 2) {
@@ -85,15 +88,8 @@ class EditScheduleViewModel extends BaseViewModel {
         createDurationList.add(element[1].text);
       });
 
-      int index = 0;
-
-      MalaysiaState.values.forEach((element) {
-        if (element.name == state) {
-          index = element.index;
-          print(state);
-        }
-      });
-      MalaysiaState s = MalaysiaState.values.elementAt(index);
+      
+      MalaysiaState s = getState(state);
 
       pathModel newPath = new pathModel.fromInput(
           startTimeString: _timeField.text,
@@ -101,26 +97,47 @@ class EditScheduleViewModel extends BaseViewModel {
           durationList: createDurationList,
           vehicle: platno);
       scheduleModel schedule = new scheduleModel(s, newPath, city);
-
-      await stor.delete(
-        originalschedule.pathName,
-        "schedule/" + originalschedule.state + "/Path",
-      );
-      bool successInsert = await stor.insert(
-          schedule.pathName,
-          'schedule/' + schedule.state + "/Path",
-          schedule.getPath().toFirestore());
-      if (!successInsert) {
-        _dialogService.showDialog(
-            title: "Personal Information Error",
-            description: "Error happen in registration, try again later",
-            dialogPlatform: DialogPlatform.Material);
-        return false;
-      }
+      await stor.delete(originalschedule.pathName,"schedule/"+originalschedule.state+"/Path", );
+      await stor.insertLevel2(collection: "schedule", document: schedule.state, subCollection: "Path", subColDoc: schedule.pathName, data: schedule.getPath().toFirestore());
+      // await stor.delete(
+      //   originalschedule.pathName,
+      //   "schedule/" + originalschedule.state + "/Path",
+      // );
+      // bool successInsert = await stor.insert(
+      //     schedule.pathName,
+      //     'schedule/' + schedule.state + "/Path",
+      //     schedule.getPath().toFirestore());
+      // if (!successInsert) {
+      //   _dialogService.showDialog(
+      //       title: "Personal Information Error",
+      //       description: "Error happen in registration, try again later",
+      //       dialogPlatform: DialogPlatform.Material);
+      //   return false;
+      // }
 
       notifyListeners();
       _navigationService.popRepeated(2);
       return true;
+    }
+  }
+   MalaysiaState getState(String state)
+  {
+   
+    switch (state)
+    {
+      case  "Johor": return MalaysiaState.Johor;
+      case  "Kedah": return MalaysiaState.Kedah;
+      case  "Pahang": return MalaysiaState.Pahang;
+      case  "Kelatan": return MalaysiaState.Kelantan;
+      case  "Kuala Lumpur": return MalaysiaState.Kuala_Lumpur;
+      case  "Malacca": return MalaysiaState.Malacca;
+      case  "Negeri Sembilan": return MalaysiaState.Negeri_Sembilan;
+      case  "Perak": return MalaysiaState.Perak;
+      case  "Perlis": return MalaysiaState.Perlis;
+      case  "Sabah": return MalaysiaState.Sabah;
+      case  "Sarawak": return MalaysiaState.Sarawak;
+      case  "Selangor": return MalaysiaState.Selangor;
+      default: return MalaysiaState.Johor;
     }
   }
 }

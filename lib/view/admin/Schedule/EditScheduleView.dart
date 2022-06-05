@@ -44,15 +44,23 @@ class _EditScheduleView extends State<EditScheduleView> {
     int initialHour = int.parse(startTime.split(':')[0]);
     int initialMinute = int.parse(startTime.split(':')[1]);
     return ViewModelBuilder<EditScheduleViewModel>.reactive(
-        viewModelBuilder: () =>
-            EditScheduleViewModel(originalschedule: widget.schedule),
+        viewModelBuilder: () => EditScheduleViewModel(
+            oriLocationList: widget.schedule.getPath().locationList,
+            oriDurationList: widget.schedule.getPath().durationList,
+            originalschedule: widget.schedule),
         builder: (context, model, child) {
           if (widget.schedule.getPath().vehicle == null) {
             vehicle == "";
           } else {
             vehicle = widget.schedule.getPath().vehicle!;
           }
-
+          if (!model.setup) {
+            for (int i = 0; i < model.oriLocationList.length; i++) {
+              addNewRow(
+                  model.oriLocationList[i], model.oriDurationList[i], model);
+            }
+            model.setup = true;
+          }
           return Scaffold(
               appBar: AppBar(
                   backgroundColor: logoColor,
@@ -66,8 +74,12 @@ class _EditScheduleView extends State<EditScheduleView> {
                   actions: [
                     IconButton(
                       onPressed: () {
-                        model.create(state, _cityField.text, _formkey,
-                            _timeField, platno == null ? vehicle : platno);
+                        model.create(
+                            state ?? widget.schedule.state,
+                            _cityField.text,
+                            _formkey,
+                            _timeField,
+                            platno == null ? vehicle : platno);
                       },
                       icon: Icon(Icons.save),
                     )
@@ -100,15 +112,6 @@ class _EditScheduleView extends State<EditScheduleView> {
                               validator: validate.validateForEmpty,
                               inputype: TextInputType.text,
                               readonly: false,
-                            ),
-                            TextinputForm(
-                              "Vehicle",
-                              Colors.black,
-                              Colors.white,
-                              _vehicleField,
-                              validator: validate.validateForEmpty,
-                              inputype: TextInputType.text,
-                              readonly: true,
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width -
@@ -188,12 +191,44 @@ class _EditScheduleView extends State<EditScheduleView> {
                           ),
                         ),
                         TextButton(
-                            onPressed: () => {model.addNewRow("", 0)},
+                            onPressed: () => {addNewRow("", 0, model)},
                             child: Text("Add New Row")),
                         TextButton(
                             onPressed: () => {model.deleteLastRow()},
                             child: Text("Delete Last Row")),
                       ])))));
         });
+  }
+
+  void addNewRow(location, duration, model) {
+    model.ControllerList.add([
+      TextEditingController(text: location),
+      TextEditingController(text: duration.toString())
+    ]);
+    model.InputList.add(
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      TextinputForm(
+        "Location",
+        Colors.black,
+        Colors.white,
+        model.ControllerList.last[0],
+        validator: validate.validateForEmpty,
+        inputype: TextInputType.text,
+        widthRatio: 1.5,
+        readonly: false,
+      ),
+      TextinputForm(
+        "Duration",
+        Colors.black,
+        Colors.white,
+        model.ControllerList.last[1],
+        validator: validate.validateNumOnly,
+        inputype: TextInputType.text,
+        widthRatio: 1.5,
+        readonly: false,
+      ),
+    ]));
+
+    model.notifyListeners();
   }
 }
