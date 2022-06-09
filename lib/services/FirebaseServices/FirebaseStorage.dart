@@ -70,12 +70,22 @@ class FirebaseStor implements storage_service {
       String collection) {
     return db.collection(collection).snapshots();
   }
-  Future<void> insertLevel2({required collection, required document, required subCollection,required subColDoc,required data}) async {
-   
-   
-      db.collection(collection).doc(document).collection('Path').doc(subColDoc).set(data);
-      
+
+  Future<void> insertLevel2(
+      {required collection,
+      required document,
+      required subCollection,
+      required subColDoc,
+      required data}) async {
+    //('schedule/Johor/Path').doc(data)
+    db
+        .collection(collection)
+        .doc(document)
+        .collection('Path')
+        .doc(subColDoc)
+        .set(data);
   }
+
   Future<void> newsSetup(String url) async {
     db.collection("news").add({'url': url, 'datetime': DateTime.now()});
   }
