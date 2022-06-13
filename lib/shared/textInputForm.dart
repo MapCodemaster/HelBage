@@ -10,12 +10,14 @@ class TextinputForm extends StatelessWidget {
   dynamic validator = null;
   TextInputType? inputype;
   bool readonly;
+  int? maxLines;
   TextinputForm(
       this.placeholder, this.borderColor, this.backgroundColor, this.controller,
       {this.validator,
       this.inputype,
       this.widthRatio = 5,
-      required this.readonly});
+      required this.readonly,
+      this.maxLines});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,11 +25,14 @@ class TextinputForm extends StatelessWidget {
         width: MediaQuery.of(context).size.width -
             MediaQuery.of(context).size.width / widthRatio,
         child: TextFormField(
+          maxLines: maxLines,
           readOnly: readonly,
           keyboardType: inputype,
           controller: controller,
           validator: validator,
           decoration: InputDecoration(
+              labelStyle:
+                  TextStyle(color: Colors.black, fontFamily: 'AvenirLight'),
               labelText: this.placeholder,
               fillColor: backgroundColor,
               filled: true,

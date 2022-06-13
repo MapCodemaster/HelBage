@@ -25,6 +25,16 @@ class FirebaseStor implements storage_service {
     return true;
   }
 
+  Future<bool> add(String table, dynamic data) async {
+    try {
+      db.collection(table).add(data);
+    } catch (e) {
+      print(e);
+      return false;
+    }
+    return true;
+  }
+
   Future<bool> update(String docid, String table, dynamic data) async {
     try {
       db

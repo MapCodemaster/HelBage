@@ -28,7 +28,7 @@ class VehicleDialogViewModel extends BaseViewModel {
 
   void deleteVehicle(String _platno) async {
     DialogResponse? response = await _dialogService.showConfirmationDialog(
-        title: "Are you sure to delete this vehicel");
+        title: "Are you sure to delete this vehicle?");
     if (response!.confirmed) {
       bool yes = await _storageService.delete(
         _platno,

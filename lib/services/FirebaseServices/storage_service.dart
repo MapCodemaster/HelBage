@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class storage_service {
   Future<bool> insert(String uid, String table, dynamic data);
+  Future<bool> add(String table, dynamic data);
   Future<bool> update(String docid, String table, dynamic data);
   Future<bool> delete(String docid, String table);
   Future<DocumentSnapshot<Map<String, dynamic>>> read(
@@ -12,6 +13,11 @@ abstract class storage_service {
       String collection);
   Future<QuerySnapshot<Map<String, dynamic>>> readCollectionAsFuture(
       String collection);
-  Future<void> insertLevel2({required collection, required document, required subCollection,required subColDoc,required data});
+  Future<void> insertLevel2(
+      {required collection,
+      required document,
+      required subCollection,
+      required subColDoc,
+      required data});
   Future<void> newsSetup(String url);
 }

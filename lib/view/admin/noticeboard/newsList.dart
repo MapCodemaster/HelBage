@@ -39,7 +39,7 @@ class _NewsListState extends State<NewsList> {
               ),
               floatingActionButton: FloatingActionButton(
                 child: Icon(Icons.add),
-                backgroundColor: Colors.blue,
+                backgroundColor: logoColor,
                 onPressed: () {
                   model.navigateToNewsInsert();
                 },
@@ -50,17 +50,17 @@ class _NewsListState extends State<NewsList> {
                     itemCount: model.data?.length,
                     itemBuilder: ((context, index) {
                       return InkWell(
-                        onLongPress: (){model.navigateToNewsEdit(model.data![index]);},
+                        onLongPress: () {
+                          model.navigateToNewsEdit(model.data![index]);
+                        },
                         child: LinkPreview(
                             link: model.data![index].url,
                             date: DateFormat('yyyy-MM-dd kk:mm')
                                 .format(model.data![index].dt)
                                 .toString(),
-                      
                             onTap: () {
                               model.navigateToNewsEdit(model.data![index]);
-                            }
-                            ),
+                            }),
                       );
                     })),
               ),

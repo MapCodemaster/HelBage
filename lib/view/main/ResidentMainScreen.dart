@@ -9,6 +9,7 @@ import 'package:helbage/view/authentication/UserLogin.dart';
 
 import 'package:helbage/view/authentication/UserSignUp.dart';
 import 'package:helbage/view/main/MoreScreen.dart';
+import 'package:helbage/view/resident/CollectionPoint/CollectionPointScreen.dart';
 import 'package:helbage/view/resident/noticeboard/noticeboard.dart';
 import 'package:helbage/viewmodel/main/MainScreenViewModel.dart';
 import 'package:stacked/stacked.dart';
@@ -68,7 +69,7 @@ class ResidentMainScreen extends StatelessWidget {
         );
 
       case 2:
-        return Center(child: Text("empty"));
+        return CollectionPointScreen();
       case 3:
         return UserLogin();
       case 4:
