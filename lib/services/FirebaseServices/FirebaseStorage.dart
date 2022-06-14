@@ -79,6 +79,10 @@ class FirebaseStor implements storage_service {
       String collection) {
     return db.collection(collection).snapshots();
   }
+  Stream<QuerySnapshot<Map<String, dynamic>>> readCollectionAsStreamArrayCondition(
+      String collection,String field,String item) {
+    return db.collection(collection).where(field,arrayContains:item).snapshots();
+  }
 
   Future<void> insertLevel2(
       {required collection,

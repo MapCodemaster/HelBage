@@ -13,6 +13,8 @@ abstract class storage_service {
       String collection);
   Future<QuerySnapshot<Map<String, dynamic>>> readCollectionAsFuture(
       String collection);
+      Stream<QuerySnapshot<Map<String, dynamic>>> readCollectionAsStreamArrayCondition(
+      String collection,String field,String item);
   Future<void> insertLevel2(
       {required collection,
       required document,
