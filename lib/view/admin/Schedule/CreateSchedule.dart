@@ -1,13 +1,6 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:flutter/material.dart';
-import 'package:helbage/model/constant/State.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/shared/stateDropDownButtonField.dart';
-import 'package:helbage/shared/textInputForm.dart';
-import 'package:helbage/shared/validation.dart';
-import 'package:helbage/view/admin/Schedule/CreateScheduleViewModel.dart';
-import 'package:helbage/view/admin/Schedule/VehicleDialog.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/admin/Schedule/_schedule.dart';
 import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 

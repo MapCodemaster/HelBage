@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:helbage/shared/styles.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/view/authentication/UserLogin.dart';
-import 'package:helbage/viewmodel/main/HomeScreenViewModel.dart';
-import 'package:stacked/stacked.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/home/_home.dart';
 
+import 'package:stacked/stacked.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

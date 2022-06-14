@@ -1,12 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:helbage/app/route.locator.dart';
-import 'package:helbage/app/route.router.dart';
-import 'package:helbage/model/newsModel.dart';
-import 'package:helbage/services/FirebaseServices/DataPassingService.dart';
-import 'package:helbage/services/FirebaseServices/storage_service.dart';
-
-import 'package:url_launcher/url_launcher.dart';
+import 'package:helbage/app/_route.dart';
+import 'package:helbage/model/_model.dart';
+import 'package:helbage/services/FirebaseServices/_services.dart';
+import 'package:helbage/shared/_shared.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 

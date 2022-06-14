@@ -1,17 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/shared/stateDropDownButtonField.dart';
-import 'package:helbage/shared/textInputForm.dart';
-import 'package:helbage/shared/validation.dart';
-import 'package:helbage/view/admin/CollectionPoint/editCollectionPointViewModel.dart';
-import 'package:stacked/stacked.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:another_flushbar/flushbar_helper.dart';
-import 'package:another_flushbar/flushbar_route.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/admin/CollectionPoint/_admin_Collection_Point.dart';
+import 'package:stacked/stacked.dart';
 
 class EditCollectionPointScreen extends StatefulWidget {
   const EditCollectionPointScreen({Key? key}) : super(key: key);

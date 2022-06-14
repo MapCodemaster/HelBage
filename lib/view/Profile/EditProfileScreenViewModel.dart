@@ -1,14 +1,11 @@
 import 'dart:io';
 
-import 'package:helbage/model/userModel.dart';
-import 'package:helbage/services/FirebaseServices/FileStorage.dart';
-import 'package:helbage/services/FirebaseServices/FirebaseFileStorage.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:helbage/app/_route.dart';
+import 'package:helbage/model/_model.dart';
+import 'package:helbage/services/FirebaseServices/_services.dart';
+import 'package:helbage/shared/_shared.dart';
 import 'package:stacked/stacked.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:helbage/app/route.locator.dart';
-import 'package:helbage/services/FirebaseServices/auth_service.dart';
-import 'package:helbage/services/FirebaseServices/storage_service.dart';
+
 import 'package:stacked_services/stacked_services.dart';
 
 class EditProfileScreenViewModel extends StreamViewModel<UserModel> {

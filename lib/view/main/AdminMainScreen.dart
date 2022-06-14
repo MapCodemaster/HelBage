@@ -1,16 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:helbage/shared/styles.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/view/admin/CollectionPoint/collectionListScreen.dart';
-import 'package:helbage/view/admin/Schedule/ViewSchedule.dart';
-import 'package:helbage/view/admin/noticeboard/newsList.dart';
-import 'package:helbage/view/authentication/UserLogin.dart';
-
-import 'package:helbage/view/authentication/UserSignUp.dart';
-import 'package:helbage/view/main/MoreScreen.dart';
-import 'package:helbage/viewmodel/main/MainScreenViewModel.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/admin/CollectionPoint/_admin_Collection_Point.dart';
+import 'package:helbage/view/admin/Schedule/_schedule.dart';
+import 'package:helbage/view/admin/noticeboard/_noticeboard.dart';
+import 'package:helbage/view/authentication/_authentication.dart';
+import 'package:helbage/view/main/_main.dart';
 import 'package:stacked/stacked.dart';
 
 class AdminMainScreen extends StatelessWidget {

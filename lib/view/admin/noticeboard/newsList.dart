@@ -1,13 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:helbage/model/newsModel.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/view/resident/noticeboard/linkpreview.dart';
-import 'package:helbage/viewmodel/admin/noticeboard/newsListViewModel.dart';
-import 'package:helbage/viewmodel/resident/noticeboard/newsViewModel.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/admin/noticeboard/_noticeboard.dart';
+import 'package:helbage/view/resident/noticeboard/_resident_Noticeboard.dart';
 import 'package:stacked/stacked.dart';
+
 import 'package:intl/intl.dart';
 
 class NewsList extends StatefulWidget {

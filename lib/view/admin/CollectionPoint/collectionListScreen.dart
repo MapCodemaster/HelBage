@@ -1,13 +1,8 @@
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
-import 'package:helbage/model/collectionPointModel.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/view/admin/CollectionPoint/collectionListViewModel.dart';
-import 'package:helbage/view/admin/CollectionPoint/createCollectionPointScreen.dart';
-import 'package:helbage/view/admin/CollectionPoint/filterDialog.dart';
+import 'package:helbage/model/_model.dart';
+import 'package:helbage/shared/_shared.dart';
+
+import 'package:helbage/view/admin/CollectionPoint/_admin_Collection_Point.dart';
 import 'package:stacked/stacked.dart';
 
 class CollectionList extends StatefulWidget {
@@ -57,7 +52,6 @@ class _CollectionListState extends State<CollectionList> {
                                 option: _option,
                               );
                             });
-                        print(_option);
 
                         setState(() {});
                       },
@@ -76,33 +70,36 @@ class _CollectionListState extends State<CollectionList> {
                       child:
                           Text("There is no bulky waste collection points yet"),
                     )
-                  : SingleChildScrollView(
-                      child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: list!.length,
-                          itemBuilder: ((context, index) {
-                            return InkWell(
-                              onTap: () {
-                                model.NavigateToEditPoint(list![index]);
-                              },
-                              child: Card(
-                                child: ListTile(
-                                  subtitle: Text(list![index].address),
-                                  title: Text(list![index].title),
-                                  trailing: IconButton(
-                                      onPressed: () {
-                                        model.deletePoint(list![index].id);
-                                      },
-                                      icon: Icon(Icons.delete)),
-                                ),
-                              ),
-                            );
-                          })),
-                    )),
+                  : SingleChildScrollView(child: pointList(model)),
             );
           }
         });
+  }
+
+  Padding pointList(CollectionPointListViewModel model) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: list!.length,
+          itemBuilder: ((context, index) {
+            return InkWell(
+              onTap: () {
+                model.NavigateToEditPoint(list![index]);
+              },
+              child: Card(
+                child: ListTile(
+                  subtitle: Text(list![index].address),
+                  title: Text(list![index].title),
+                  trailing: IconButton(
+                      onPressed: () {
+                        model.deletePoint(list![index].id);
+                      },
+                      icon: Icon(Icons.delete)),
+                ),
+              ),
+            );
+          })),
+    );
   }
 }

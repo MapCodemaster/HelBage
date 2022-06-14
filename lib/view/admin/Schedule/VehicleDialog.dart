@@ -1,10 +1,8 @@
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/shared/inputFields.dart';
-import 'package:helbage/view/admin/Schedule/VehicleDialogViewModel.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/admin/Schedule/_schedule.dart';
+
 import 'package:stacked/stacked.dart';
 
 class VehicleDialog extends StatefulWidget {

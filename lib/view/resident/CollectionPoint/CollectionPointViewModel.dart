@@ -1,8 +1,7 @@
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
-import 'package:helbage/app/route.locator.dart';
+import 'package:helbage/app/_route.dart';
 import 'package:helbage/model/collectionPointModel.dart';
-import 'package:helbage/services/FirebaseServices/DataPassingService.dart';
-import 'package:helbage/services/FirebaseServices/storage_service.dart';
+import 'package:helbage/services/FirebaseServices/_services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 

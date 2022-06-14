@@ -1,14 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:helbage/app/route.locator.dart';
-import 'package:helbage/app/route.router.dart';
-import 'package:helbage/model/constant/State.dart';
-import 'package:helbage/model/pathModel.dart';
-import 'package:helbage/model/scheduleModel.dart';
-import 'package:helbage/services/FirebaseServices/auth_service.dart';
-import 'package:helbage/services/FirebaseServices/storage_service.dart';
-import 'package:helbage/shared/textInputForm.dart';
-import 'package:helbage/shared/validation.dart';
-import 'package:helbage/view/main/AdminMainScreen.dart';
+import 'package:helbage/app/_route.dart';
+import 'package:helbage/constant/_constant.dart';
+import 'package:helbage/model/_model.dart';
+import 'package:helbage/services/FirebaseServices/_services.dart';
+import 'package:helbage/shared/_shared.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -22,9 +16,12 @@ class EditScheduleViewModel extends BaseViewModel {
   List oriLocationList;
   List oriDurationList;
   Validation validate = Validation();
-  bool setup=false;
-  
-  EditScheduleViewModel({required this.oriLocationList,required this.oriDurationList,required this.originalschedule}) {
+  bool setup = false;
+
+  EditScheduleViewModel(
+      {required this.oriLocationList,
+      required this.oriDurationList,
+      required this.originalschedule}) {
     print(originalschedule.state);
     //oriLocationList = originalschedule.getPath().location_List;
     //oriDurationList = originalschedule.getPath().durationList;
@@ -88,7 +85,6 @@ class EditScheduleViewModel extends BaseViewModel {
         createDurationList.add(element[1].text);
       });
 
-      
       MalaysiaState s = getState(state);
 
       pathModel newPath = new pathModel.fromInput(
@@ -97,8 +93,16 @@ class EditScheduleViewModel extends BaseViewModel {
           durationList: createDurationList,
           vehicle: platno);
       scheduleModel schedule = new scheduleModel(s, newPath, city);
-      await stor.delete(originalschedule.pathName,"schedule/"+originalschedule.state+"/Path", );
-      await stor.insertLevel2(collection: "schedule", document: schedule.state, subCollection: "Path", subColDoc: schedule.pathName, data: schedule.getPath().toFirestore());
+      await stor.delete(
+        originalschedule.pathName,
+        "schedule/" + originalschedule.state + "/Path",
+      );
+      await stor.insertLevel2(
+          collection: "schedule",
+          document: schedule.state,
+          subCollection: "Path",
+          subColDoc: schedule.pathName,
+          data: schedule.getPath().toFirestore());
       // await stor.delete(
       //   originalschedule.pathName,
       //   "schedule/" + originalschedule.state + "/Path",
@@ -120,24 +124,35 @@ class EditScheduleViewModel extends BaseViewModel {
       return true;
     }
   }
-   MalaysiaState getState(String state)
-  {
-   
-    switch (state)
-    {
-      case  "Johor": return MalaysiaState.Johor;
-      case  "Kedah": return MalaysiaState.Kedah;
-      case  "Pahang": return MalaysiaState.Pahang;
-      case  "Kelatan": return MalaysiaState.Kelantan;
-      case  "Kuala Lumpur": return MalaysiaState.Kuala_Lumpur;
-      case  "Malacca": return MalaysiaState.Malacca;
-      case  "Negeri Sembilan": return MalaysiaState.Negeri_Sembilan;
-      case  "Perak": return MalaysiaState.Perak;
-      case  "Perlis": return MalaysiaState.Perlis;
-      case  "Sabah": return MalaysiaState.Sabah;
-      case  "Sarawak": return MalaysiaState.Sarawak;
-      case  "Selangor": return MalaysiaState.Selangor;
-      default: return MalaysiaState.Johor;
+
+  MalaysiaState getState(String state) {
+    switch (state) {
+      case "Johor":
+        return MalaysiaState.Johor;
+      case "Kedah":
+        return MalaysiaState.Kedah;
+      case "Pahang":
+        return MalaysiaState.Pahang;
+      case "Kelatan":
+        return MalaysiaState.Kelantan;
+      case "Kuala Lumpur":
+        return MalaysiaState.Kuala_Lumpur;
+      case "Malacca":
+        return MalaysiaState.Malacca;
+      case "Negeri Sembilan":
+        return MalaysiaState.Negeri_Sembilan;
+      case "Perak":
+        return MalaysiaState.Perak;
+      case "Perlis":
+        return MalaysiaState.Perlis;
+      case "Sabah":
+        return MalaysiaState.Sabah;
+      case "Sarawak":
+        return MalaysiaState.Sarawak;
+      case "Selangor":
+        return MalaysiaState.Selangor;
+      default:
+        return MalaysiaState.Johor;
     }
   }
 }

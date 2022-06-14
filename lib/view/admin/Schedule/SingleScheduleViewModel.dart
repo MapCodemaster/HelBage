@@ -1,11 +1,10 @@
-import 'package:helbage/app/route.locator.dart';
-import 'package:helbage/app/route.router.dart';
-import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
+import 'package:helbage/app/_route.dart';
+
+import 'package:helbage/services/FirebaseServices/_services.dart';
+import 'package:helbage/view/admin/Schedule/_schedule.dart';
+
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-
-import '../../../services/FirebaseServices/auth_service.dart';
-import '../../../services/FirebaseServices/storage_service.dart';
 
 class SingleScheduleViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();

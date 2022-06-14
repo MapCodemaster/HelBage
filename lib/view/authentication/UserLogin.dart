@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:helbage/shared/styles.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/shared/inputFields.dart';
-import 'package:helbage/viewmodel/authentication/LoginViewModel.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/authentication/LoginViewModel.dart';
 import 'package:stacked/stacked.dart';
-import 'package:helbage/shared/validation.dart';
 
 class UserLogin extends StatefulWidget {
   const UserLogin({Key? key}) : super(key: key);

@@ -1,13 +1,7 @@
 import 'dart:io';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/Profile/_profile.dart';
 
-import 'package:flutter/material.dart';
-import 'package:helbage/model/userModel.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/shared/dropdownbuttonfield.dart';
-import 'package:helbage/shared/validation.dart';
-import 'package:helbage/viewmodel/Profile/EditProfileScreenViewModel.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stacked/stacked.dart';
 

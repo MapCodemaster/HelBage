@@ -1,5 +1,4 @@
-import 'package:helbage/model/collectionPointModel.dart';
-import 'package:helbage/model/newsModel.dart';
+import 'package:helbage/model/_model.dart';
 
 class DataPassingService {
   dynamic object;

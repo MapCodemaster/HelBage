@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:helbage/app/route.locator.dart';
-import 'package:helbage/services/FirebaseServices/FirebaseAuth.dart';
-import 'package:helbage/view/main/ResidentMainScreen.dart';
+import 'package:helbage/app/_route.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/services/FirebaseServices/_services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:helbage/app/route.router.dart';
-import 'package:helbage/app/route.locator.dart';
 
 class ForgetPasswordViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();

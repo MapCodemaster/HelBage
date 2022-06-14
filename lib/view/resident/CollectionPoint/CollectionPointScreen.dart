@@ -1,13 +1,10 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:helbage/model/collectionPointModel.dart';
 import 'package:helbage/shared/color.dart';
-import 'package:helbage/view/admin/CollectionPoint/collectionListViewModel.dart';
-import 'package:helbage/view/admin/CollectionPoint/filterDialog.dart';
-import 'package:helbage/view/resident/CollectionPoint/CollectionPointViewModel.dart';
+import 'package:helbage/view/admin/CollectionPoint/_admin_Collection_Point.dart';
+import 'package:helbage/view/resident/CollectionPoint/_resident_Collection_Point.dart';
 import 'package:stacked/stacked.dart';
 
 class CollectionPointScreen extends StatefulWidget {

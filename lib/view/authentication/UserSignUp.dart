@@ -1,14 +1,8 @@
 // ignore_for_file: prefer_final_fields
-
+import 'package:helbage/shared/_shared.dart';
 import 'package:flutter/material.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/shared/dropdownbuttonfield.dart';
-import 'package:helbage/shared/styles.dart';
-import 'package:helbage/shared/textInputForm.dart';
-import 'package:helbage/shared/validation.dart';
 import 'package:stacked/stacked.dart';
-import 'package:helbage/viewmodel/authentication/SignUpViewModel.dart';
-import 'package:helbage/shared/color.dart';
+import 'package:helbage/view/authentication/SignUpViewModel.dart';
 
 class UserSignUp extends StatefulWidget {
   const UserSignUp({Key? key}) : super(key: key);

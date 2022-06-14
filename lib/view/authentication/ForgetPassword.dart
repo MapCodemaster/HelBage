@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/shared/styles.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/shared/inputFields.dart';
-import 'package:helbage/viewmodel/authentication/ForgetPasswordViewMode.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/authentication/_authentication.dart';
 import 'package:stacked/stacked.dart';
-import 'package:helbage/shared/validation.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);

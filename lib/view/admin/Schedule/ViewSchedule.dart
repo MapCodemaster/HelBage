@@ -1,13 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:helbage/model/scheduleModel.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/shared/stateDropDownButtonField.dart';
-import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
-import 'package:helbage/view/admin/Schedule/ViewScheduleViewModel.dart';
-import 'package:helbage/view/authentication/UserLogin.dart';
-import 'package:helbage/view/main/MoreScreen.dart';
-import 'package:helbage/view/resident/noticeboard/noticeboard.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/admin/Schedule/_schedule.dart';
+
 import 'package:stacked/stacked.dart';
 
 class ViewSchedule extends StatefulWidget {
@@ -65,7 +58,6 @@ class _viewSchedule extends State<ViewSchedule> {
                                 model.negeri = state!;
                                 model.fetchSchedule();
                               });
-                              
                             },
                             value: state)),
                     IconButton(

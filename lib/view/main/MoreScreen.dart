@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/view/main/AccountBodyScreen.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/main/_main.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({Key? key}) : super(key: key);

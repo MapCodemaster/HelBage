@@ -1,10 +1,4 @@
-import 'package:helbage/services/FirebaseServices/DataPassingService.dart';
-import 'package:helbage/services/FirebaseServices/FileStorage.dart';
-import 'package:helbage/services/FirebaseServices/FirebaseAuth.dart';
-import 'package:helbage/services/FirebaseServices/FirebaseFileStorage.dart';
-import 'package:helbage/services/FirebaseServices/FirebaseStorage.dart';
-import 'package:helbage/services/FirebaseServices/auth_service.dart';
-import 'package:helbage/services/FirebaseServices/storage_service.dart';
+import 'package:helbage/services/FirebaseServices/_services.dart';
 import 'package:helbage/view/admin/noticeboard/newsList.dart';
 import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
 import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';

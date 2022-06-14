@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/view/main/AccountBodyInfoPart.dart';
-
-import 'package:helbage/viewmodel/main/AccountBodyScreenViewModel.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/main/_main.dart';
 import 'package:stacked/stacked.dart';
 
 class AccountBodyScreen extends StatefulWidget {

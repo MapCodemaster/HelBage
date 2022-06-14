@@ -1,14 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:helbage/model/userModel.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/shared/dropdownbuttonfield.dart';
-import 'package:helbage/shared/validation.dart';
-import 'package:helbage/viewmodel/Profile/EditProfileScreenViewModel.dart';
-import 'package:helbage/viewmodel/admin/noticeboard/editNewsScreenViewModel.dart';
-import 'package:image_cropper/image_cropper.dart';
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/admin/noticeboard/_noticeboard.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stacked/stacked.dart';
 
@@ -26,7 +19,7 @@ class _EditNewsScreenState extends State<EditNewsScreen> {
   bool _loading = false;
 
   Widget build(BuildContext context) {
-    return ViewModelBuilder<EditNewsScreenViewModel>.reactive(
+    var viewModelBuilder2 = ViewModelBuilder<EditNewsScreenViewModel>.reactive(
         viewModelBuilder: () => EditNewsScreenViewModel(),
         builder: (context, model, child) {
           if (!model.dataReady) {
@@ -191,5 +184,6 @@ class _EditNewsScreenState extends State<EditNewsScreen> {
             );
           }
         });
+    return viewModelBuilder2;
   }
 }

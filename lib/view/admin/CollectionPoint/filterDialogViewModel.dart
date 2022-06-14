@@ -1,4 +1,4 @@
-import 'package:helbage/app/route.locator.dart';
+import 'package:helbage/app/_route.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 

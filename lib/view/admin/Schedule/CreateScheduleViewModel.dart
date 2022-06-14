@@ -1,15 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:helbage/app/route.locator.dart';
-import 'package:helbage/app/route.router.dart';
-import 'package:helbage/model/constant/State.dart';
-import 'package:helbage/model/pathModel.dart';
-import 'package:helbage/model/scheduleModel.dart';
-import 'package:helbage/services/FirebaseServices/auth_service.dart';
-import 'package:helbage/services/FirebaseServices/storage_service.dart';
-import 'package:helbage/shared/textInputForm.dart';
-import 'package:helbage/shared/validation.dart';
-import 'package:helbage/view/admin/Schedule/VehicleDialog.dart';
-import 'package:helbage/view/main/AdminMainScreen.dart';
+import 'package:helbage/app/_route.dart';
+import 'package:helbage/constant/_constant.dart';
+import 'package:helbage/model/_model.dart';
+import 'package:helbage/services/FirebaseServices/_services.dart';
+import 'package:helbage/shared/_shared.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 

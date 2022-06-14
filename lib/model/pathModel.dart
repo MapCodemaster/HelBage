@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'time.dart';
+import 'package:helbage/model/_model.dart';
 
 class pathModel {
   Time? _startTime;

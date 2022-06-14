@@ -1,10 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:helbage/model/userModel.dart';
-import 'package:helbage/shared/buttons.dart';
-import 'package:helbage/shared/color.dart';
-import 'package:helbage/viewmodel/main/AccountBodyInfoPartViewModel.dart';
-
+import 'package:helbage/shared/_shared.dart';
+import 'package:helbage/view/main/_main.dart';
 import 'package:stacked/stacked.dart';
 
 class AccountBodyInfoPart extends StatefulWidget {
