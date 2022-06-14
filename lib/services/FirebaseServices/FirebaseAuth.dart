@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:helbage/services/FirebaseServices/auth_service.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 class FirebaseAuthService implements AuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -20,29 +20,24 @@ class FirebaseAuthService implements AuthService {
     }
   }
 
-  Future signUp(String email,String password)async{
-  try
-  {
-    dynamic result=await FirebaseAuth.instance.createUserWithEmailAndPassword(email:email,password:password);
-    print("Displaying create result");
-    print(result);
-    return true;
-  }on FirebaseAuthException catch(e)
-  {
-    if (e.code=='weak-password'){
-      return ('The password provided is too weak');
+  Future signUp(String email, String password) async {
+    try {
+      dynamic result = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      print("Displaying create result");
+      print(result);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        return ('The password provided is too weak');
+      } else if (e.code == 'email-already-in-use') {
+        return ('The account already exists for that email.');
+      }
+    } catch (e) {
+      //other exception
+      return e.toString();
     }
-    else if(e.code=='email-already-in-use')
-    {
-      return ('The account already exists for that email.');
-    }
-    
-  }catch(e)
-  {
-    //other exception
-    return e.toString();
   }
-}
 
   Future<void> resetPassword(String email) async {
     await _auth.sendPasswordResetEmail(email: email.trim());
@@ -56,10 +51,8 @@ class FirebaseAuthService implements AuthService {
       return false;
     }
   }
-  void deleteAccount()
-  {
-      _auth.currentUser!.delete();
-    
-    
+
+  void deleteAccount() {
+    _auth.currentUser!.delete();
   }
 }

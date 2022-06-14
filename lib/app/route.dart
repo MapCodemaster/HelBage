@@ -2,8 +2,7 @@ import 'package:helbage/services/FirebaseServices/_services.dart';
 import 'package:helbage/view/admin/noticeboard/newsList.dart';
 import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
 import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
-import 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
-import 'package:helbage/view/admin/Schedule/ViewSchedule.dart';
+
 import 'package:helbage/view/authentication/ForgetPassword.dart';
 import 'package:helbage/view/authentication/UserSignUp.dart';
 import 'package:helbage/view/home/HomeScreen.dart';

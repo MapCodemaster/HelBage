@@ -7,20 +7,14 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
+import 'package:helbage/model/_model.dart';
+import 'package:helbage/view/admin/Schedule/_schedule.dart';
+import 'package:helbage/view/admin/noticeboard/_noticeboard.dart';
+import 'package:helbage/view/authentication/_authentication.dart';
+import 'package:helbage/view/home/_home.dart';
+import 'package:helbage/view/main/_main.dart';
 
-import '../model/scheduleModel.dart';
-import '../view/admin/Schedule/CreateSchedule.dart';
-import '../view/admin/Schedule/EditScheduleView.dart';
-import '../view/admin/noticeboard/newsList.dart';
-import '../view/authentication/ForgetPassword.dart';
-import '../view/authentication/UserLogin.dart';
-import '../view/authentication/UserSignUp.dart';
-import '../view/home/HomeScreen.dart';
-import '../view/main/AdminMainScreen.dart';
-import '../view/main/ResidentMainScreen.dart';
+import 'package:stacked/stacked.dart';
 
 class Routes {
   static const String homeScreen = '/';

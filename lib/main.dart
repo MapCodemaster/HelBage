@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:helbage/app/_route.dart';
 import 'package:helbage/view/home/HomeScreen.dart';

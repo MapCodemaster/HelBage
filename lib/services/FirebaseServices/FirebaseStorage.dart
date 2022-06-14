@@ -1,4 +1,3 @@
-import 'package:helbage/model/userModel.dart';
 import 'package:helbage/services/FirebaseServices/storage_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
