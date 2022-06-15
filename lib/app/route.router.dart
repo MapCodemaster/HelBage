@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:helbage/model/_model.dart';
+import 'package:helbage/view/admin/Guideline/AddGuidelineView.dart';
 import 'package:helbage/view/admin/Schedule/_schedule.dart';
 import 'package:helbage/view/admin/noticeboard/_noticeboard.dart';
 import 'package:helbage/view/authentication/_authentication.dart';
@@ -26,6 +27,8 @@ class Routes {
   static const String newsList = '/news-list';
   static const String createSchedule = '/create-schedule';
   static const String editScheduleView = '/edit-schedule-view';
+  static const String addGuidelineView = '/add-guideline-view';
+
   static const all = <String>{
     homeScreen,
     userLogin,
@@ -36,6 +39,7 @@ class Routes {
     newsList,
     createSchedule,
     editScheduleView,
+    addGuidelineView,
   };
 }
 
@@ -52,6 +56,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.newsList, page: NewsList),
     RouteDef(Routes.createSchedule, page: CreateSchedule),
     RouteDef(Routes.editScheduleView, page: EditScheduleView),
+    RouteDef(Routes.addGuidelineView, page: AddGuidelineView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -117,6 +122,12 @@ class StackedRouter extends RouterBase {
           key: args.key,
           schedule: args.schedule,
         ),
+        settings: data,
+      );
+    },
+    AddGuidelineView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const AddGuidelineView(),
         settings: data,
       );
     },

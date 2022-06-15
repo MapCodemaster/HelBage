@@ -1,4 +1,5 @@
 import 'package:helbage/services/FirebaseServices/_services.dart';
+import 'package:helbage/view/admin/Guideline/AddGuidelineView.dart';
 import 'package:helbage/view/admin/noticeboard/newsList.dart';
 import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
 import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
@@ -21,7 +22,8 @@ import 'package:helbage/view/authentication/UserLogin.dart';
   MaterialRoute(page: UserSignUp),
   MaterialRoute(page: NewsList),
   MaterialRoute(page: CreateSchedule),
-  MaterialRoute(page: EditScheduleView)
+  MaterialRoute(page: EditScheduleView),
+  MaterialRoute(page: AddGuidelineView),
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: DialogService),
