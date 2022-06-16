@@ -9,6 +9,8 @@ class ViewGuidelineView extends StatefulWidget {
 }
 
 class _ViewGuidelineViewState extends State<ViewGuidelineView> {
+  String? tag;
+  bool _loading=false;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ViewGuidelineViewModel>.reactive(
@@ -28,11 +30,18 @@ class _ViewGuidelineViewState extends State<ViewGuidelineView> {
                 onSelected: (vale){model.getGuideline(vale);},)
                 ],
           ),
-        body:Container(
+        body:Column(children: [
+            model.tag == null? Center(): _loading? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Expanded(
+                            child:
+                                buildBody(model.status, model)),
+        ],)
           
         )
-      ));
-    
+      );
+  
   }
 }
 
@@ -53,4 +62,71 @@ List<PopupMenuItem> getGuidelinetag(tag,{size=15.0})
         );
   });
   return tagMenu;
+}
+Widget buildBody(tag, model) {
+  if (!tag) {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  } else {
+    if (model.guidelineList.isEmpty) {
+      return Container(
+          margin: EdgeInsets.only(top: 10),
+          child: Center(child: Text("No guideline in database")));
+    }
+
+    return SingleChildScrollView(
+        child: buildSchedule(model.guidelineList, model));
+  }
+}
+
+Widget buildSchedule(list, model) {
+  List<Widget> guidelineList = new List.empty(growable: true);
+  list.forEach((element) => {
+        guidelineList.add(InkWell(
+            onTap: () {
+              model.viewGuideline(element);
+            },
+            child: Container(
+              margin: EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
+              width: 300,
+              height: 120,
+              decoration: BoxDecoration(
+
+                  // Red border with the width is equal to 5
+                  border: Border.all(
+                width: 1,
+                color: Colors.black,
+              )),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Text("Title: " + element.title),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Text("Author: " + element.author)),
+                    ),
+                    Expanded(
+                      child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                            ],
+                          )),
+                    )
+                  ]),
+            )))
+      });
+  return Center(child: Column(children: guidelineList));
 }
