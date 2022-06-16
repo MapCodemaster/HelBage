@@ -39,33 +39,25 @@ class AddGuidelineViewModel extends BaseViewModel
       Map convertMap=Map.castFrom(tagData);
       
       guideline.tag.forEach((element) {
-        tagData["$element"]=0;
+        if(tagData["$element"]!=null)
+        {
+          tagData["$element"]=tagData["$element"]+1;
+        }
+        else{
+          tagData["$element"]=1;
+        }
+        
       });
       stor.updateSingleField('guidelinetag', 'summary', 'tag', tagData);
       
       });
       listener.add(guidelineTagListener);
-      
-      
-      // stor.readDocumentAsStream("guidelinetag", "summary").listen((event){}).onData((data) {
-      //   if(data['status'])
-      //   {
-      //           stor.updateSingleField('guidelinetag', 'summary', 'status', false);
-      //           data.get('tag');
-
-      //   }
-      // });
-      // stor.readDocumentAsStream("guidelinetag", "summary").listen((event) { 
-
-      // }).onData((data) {
-
-      //  });
 
     }catch(e)
     {
       print(e.toString());
     }
-    
+    _navigationService.back();
     return true;
     }
   }
