@@ -1,4 +1,6 @@
 import 'package:helbage/model/guideLineModel.dart';
+import 'package:helbage/view/admin/Guideline/AddGuidelineView.dart';
+import 'package:helbage/view/admin/Guideline/SingleGuidelineView.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:helbage/model/tagModel.dart';
@@ -24,18 +26,19 @@ class ViewGuidelineViewModel extends BaseViewModel
   //read tag from firestore
   void getTag() async
   {
+    tagList.clear();
     var db = await stor.readDocumentAsStream("guidelinetag", "summary");
-    print(db);
-    //db.map((event){print((event.data()).toString());});
     try{
     tagListener=db.listen((event) { });
-     tagListener.onData((data){
-      
-      print(data.get('tag'));
-      data.get('tag').keys.toList().forEach((item)
-      {
-        tagList.add(new tagModel(name:item));
-      });
+    tagListener.onData((data){
+    tagList.clear();
+    guidelineList.clear();
+    getGuideline(tag);
+    notifyListeners();
+    data.get('tag').keys.toList().forEach((item)
+    {
+      tagList.add(new tagModel(name:item));
+    });
     });
     }catch(e)
     {
@@ -46,17 +49,19 @@ class ViewGuidelineViewModel extends BaseViewModel
   //trigger after tag selected
   void getGuideline(value) async
   {
+
     status=false;
     notifyListeners();
     guidelineList.clear();
+
     tag=value.toString();
     var db=await stor.readCollectionAsStreamArrayCondition('guideline','tag',value.toString());
-    db.listen((event) { }).
+    db.listen((event) { 
+      guidelineList.clear();
+      notifyListeners();}).
     onData((data) {
-    
      data.docs.forEach((element) {
       List<tagModel> tagList=guidelineModel.dynamicTagTotagModel(element['tag']);
-      print(element.id);
       guidelineList.add(
         new guidelineModel.fromFireStore(
         docid: element.id,
@@ -68,7 +73,8 @@ class ViewGuidelineViewModel extends BaseViewModel
       );
       }
         );//End For each
-        status = true;notifyListeners();
+        status = true;
+        notifyListeners();
         }
       
         );
@@ -79,14 +85,15 @@ class ViewGuidelineViewModel extends BaseViewModel
   @override
   void dispose()
   {
-    tagListener.cancel();
+    //tagListener.cancel();
   }
   void addGuideline()
   {
-    _navigationService.navigateTo(Routes.addGuidelineView);
+    //_navigationService.navigateTo(Routes.addGuidelineView);
+    _navigationService.navigateWithTransition(AddGuidelineView(),transitionStyle: Transition.zoom);
   }
-  void viewGuideline()
+  void viewGuideline(element)
   {
-
+    _navigationService.navigateToView(SingleGuidelineView(guideline: element));
   }
 }
