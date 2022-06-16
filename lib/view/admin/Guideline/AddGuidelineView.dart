@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:helbage/shared/_shared.dart';
 import 'package:helbage/view/admin/Guideline/AddGuidelineViewModel.dart';
 import 'package:stacked/stacked.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class AddGuidelineView extends StatefulWidget {
   const AddGuidelineView({Key? key}) : super(key: key);
