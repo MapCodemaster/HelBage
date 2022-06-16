@@ -33,7 +33,22 @@ class FirebaseStor implements storage_service {
     }
     return true;
   }
-
+  Future<bool> updateSingleField(String collection,String document,String field,dynamic data) async {
+    Map<String,dynamic> tempMap=
+    {
+      field:data
+    };
+    
+    try {
+      db.collection(collection).doc(document).update(
+        tempMap
+      );
+    } catch (e) {
+      print(e);
+      return false;
+    }
+    return true;
+  }
   Future<bool> update(String docid, String table, dynamic data) async {
     try {
       db
