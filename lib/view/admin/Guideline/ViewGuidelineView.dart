@@ -30,9 +30,9 @@ class _ViewGuidelineViewState extends State<ViewGuidelineView> {
             model.addGuideline();
             },
             icon: Icon(Icons.add)),
-            PopupMenuButton(itemBuilder: (BuildContext context) {
-                return getGuidelinetag(model.tagList);},
-                onSelected: (vale){model.getGuideline(vale);},)
+            // PopupMenuButton(itemBuilder: (BuildContext context) {
+            //     return getGuidelinetag(model.tagList);},
+            //     onSelected: (vale){model.getGuideline(vale);},)
                 ],
           ),
           body:buildBody(model.status, model),
