@@ -1,6 +1,9 @@
 import 'package:helbage/shared/_shared.dart';
 import 'package:helbage/view/admin/Guideline/ViewGuidelineViewModel.dart';
 import 'package:stacked/stacked.dart';
+import 'dart:math';
+
+List<Color?> randColor=[Colors.amber[200],Colors.blue[100],Colors.tealAccent[200],Colors.purple[200],Colors.pink[100]];
 class ViewGuidelineView extends StatefulWidget {
   const ViewGuidelineView({Key? key}) : super(key: key);
 
@@ -17,7 +20,9 @@ class _ViewGuidelineViewState extends State<ViewGuidelineView> {
       viewModelBuilder: ()=>ViewGuidelineViewModel(), 
       builder: (context,model,child)=>Scaffold(
         appBar: AppBar(
+          backgroundColor: logoColor,
           title:Text("Guidelines"),
+          leading: model.selected==true?IconButton(onPressed: (){model.clearSelected();}, icon: Icon(Icons.arrow_back)):Container(),
           actions: [
             IconButton(
             onPressed: () 
@@ -30,14 +35,23 @@ class _ViewGuidelineViewState extends State<ViewGuidelineView> {
                 onSelected: (vale){model.getGuideline(vale);},)
                 ],
           ),
-        body:Column(children: [
-            model.tag == null? Center(): _loading? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : Expanded(
-                            child:
-                                buildBody(model.status, model)),
-        ],)
+          body:buildBody(model.status, model),
+          // model.tag==null? 
+          // Wrap(
+          //   spacing: 10.0,
+          //   alignment: WrapAlignment.center,
+          //   children: getGuidelinetagWidget(model)):
+          // Expanded(
+          //   child:
+          //       buildBody(model.status, model)),
+        // body:Column(children: [
+        //     model.tag == null? Center(): _loading? Center(
+        //                     child: CircularProgressIndicator(),
+        //                   )
+        //                 : Expanded(
+        //                     child:
+        //                         buildBody(model.status, model)),
+        // ],)
           
         )
       );
@@ -63,8 +77,52 @@ List<PopupMenuItem> getGuidelinetag(tag,{size=15.0})
   });
   return tagMenu;
 }
-Widget buildBody(tag, model) {
-  if (!tag) {
+List<Widget> getGuidelinetagWidget(model,{size=15.0,widthSize=20.0,heightSize=20.0,radius=50.0})
+{
+  List<Widget> tagContainer=new List.empty(growable: true);
+  model.tagList.forEach((element)
+  {
+    Color? c=randColor[new Random().nextInt(randColor.length)];
+    if(c==null)
+    {
+      c=Colors.purple[200];
+    }
+    tagContainer.add(
+      ElevatedButton(
+    onPressed: (){model.getGuideline(element.toString());model.selected=true;},
+    child: Text(
+      element.toString()+"("+element.quantity.toString()+")",
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: size,color: Colors.black),
+    ),
+    style: ElevatedButton.styleFrom(
+        primary: c,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(radius == null ? 50 : radius))),
+  ));
+      // txtButton(
+      //   element.toString()+"("+element.quantity.toString()+")", 
+      //   (){model.getGuideline(element.toString());},
+      //   c!,
+      //   widthSize,
+      //   heightSize,
+      //   TextStyle(fontSize: size)));
+  });
+
+  return tagContainer;
+}
+Widget buildBody(status, model) {
+  if(!model.selected)
+  {
+    return Center(
+      heightFactor: 1.0,
+      child: Wrap(
+            
+            spacing: 10.0,
+            alignment: WrapAlignment.center,
+            children: getGuidelinetagWidget(model)));
+  }
+  if (!status) {
     return Center(
       child: CircularProgressIndicator(),
     );

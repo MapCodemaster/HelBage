@@ -13,10 +13,12 @@ class ViewGuidelineViewModel extends BaseViewModel
   final _dialogService = locator<DialogService>();
   final stor = locator<storage_service>();
   List<tagModel> tagList=new List.empty(growable: true);
+  Map<String,int> tagMap=new Map();
   List<guidelineModel> guidelineList=new List.empty(growable: true);
   var tagListener;
   bool status=false;
   String? tag;
+  bool selected=false;
   ViewGuidelineViewModel()
   {
     status=true;
@@ -35,16 +37,20 @@ class ViewGuidelineViewModel extends BaseViewModel
     guidelineList.clear();
     getGuideline(tag);
     notifyListeners();
+    //tagMap=data.get('tag');
     data.get('tag').keys.toList().forEach((item)
     {
-      tagList.add(new tagModel(name:item));
+      //tagList.add(new tagModel(name:item));
+
+      tagList.add(new tagModel.withQuantity(name:item,quantity: data.get('tag')[item]));
     });
+    sortTagList();
     });
     }catch(e)
     {
       print(e.toString());
     }    
-
+    
   }
   //trigger after tag selected
   void getGuideline(value) async
@@ -95,5 +101,27 @@ class ViewGuidelineViewModel extends BaseViewModel
   void viewGuideline(element)
   {
     _navigationService.navigateToView(SingleGuidelineView(guideline: element));
+  }
+  void clearSelected()
+  {
+    selected=false;
+    notifyListeners();
+  }
+  void sortTagList() async
+  {
+    if(tagList.length!=0)
+    {
+      tagList.sort((a,b){ 
+        if(a.quantity!>b.quantity!)
+        {
+        
+          return 0;}
+        else
+        {
+          return 1;
+        }
+        }
+        );
+    }
   }
 }
