@@ -39,6 +39,7 @@ class _SingleGuidelineViewState extends State<SingleGuidelineView> {
               GuidelineWidget(10.0,listToSingleString(widget.guideline.tag),FontWeight.bold,15.0,logoColor),
               GuidelineWidget(10.0,"Author : " +widget.guideline.author,FontWeight.normal,15.0),
               Container(
+              width:MediaQuery.of(context).size.width,
               margin: EdgeInsets.all(10),
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(border: Border.all(width: 1)),
@@ -48,6 +49,7 @@ class _SingleGuidelineViewState extends State<SingleGuidelineView> {
                       
                       fontWeight: FontWeight.normal, 
                       fontSize: 15,))),
+              Container(child: Center(child: Text("END OF CONTENT")),)        
               
                     ],)
           
