@@ -1,11 +1,14 @@
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:another_flushbar/flushbar.dart';
+import 'package:helbage/model/collectionPointModel.dart';
 import 'package:helbage/shared/_shared.dart';
 import 'package:helbage/view/admin/CollectionPoint/_admin_Collection_Point.dart';
 import 'package:stacked/stacked.dart';
 
 class EditCollectionPointScreen extends StatefulWidget {
-  const EditCollectionPointScreen({Key? key}) : super(key: key);
+  final CollectionPointModel collectionPoint;
+  const EditCollectionPointScreen({Key? key, required this.collectionPoint})
+      : super(key: key);
 
   @override
   State<EditCollectionPointScreen> createState() =>
@@ -15,13 +18,24 @@ class EditCollectionPointScreen extends StatefulWidget {
 class _EditCollectionPointScreenState extends State<EditCollectionPointScreen> {
   @override
   Validation _validation = new Validation();
-  TextEditingController _title = new TextEditingController();
-  TextEditingController _address = new TextEditingController();
+  static TextEditingController _title = new TextEditingController();
+  static TextEditingController _address = new TextEditingController();
   GeoPoint? pickLocation;
   String? state;
   bool? _wasButtonClicked;
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   bool _loading = false;
+  ValueNotifier<bool> zoomNotifierActivation = ValueNotifier(false);
+  late NavigatorState _navigator;
+
+  @override
+  void initState() {
+    _title.value = _title.value.copyWith(text: widget.collectionPoint.title);
+    _address.value =
+        _address.value.copyWith(text: widget.collectionPoint.address);
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return ViewModelBuilder<EditCollectionPointViewModel>.reactive(
         viewModelBuilder: () => EditCollectionPointViewModel(),
@@ -31,8 +45,10 @@ class _EditCollectionPointScreenState extends State<EditCollectionPointScreen> {
               child: CircularProgressIndicator(),
             );
           } else {
-            _title.text = model.data!.title.toString();
-            _address.text = model.data!.address.toString();
+            // _title.value =
+            //     _title.value.copyWith(text: model.data!.title.toString());
+            // _address.value =
+            //     _address.value.copyWith(text: model.data!.address.toString());
             String? state = model.data!.state;
             MapController controller = MapController(
                 initMapWithUserPosition: false,
@@ -45,32 +61,78 @@ class _EditCollectionPointScreenState extends State<EditCollectionPointScreen> {
                   latitude: model.data!.location.latitude,
                   longitude: model.data!.location.longitude)
             ];
+            Widget zoom() {
+              return Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      MediaQuery.of(context).size.width * 0.75, 100, 0, 0),
+                  child: Column(
+                    children: [
+                      ValueListenableBuilder<bool>(
+                        valueListenable: zoomNotifierActivation,
+                        builder: (ctx, isVisible, child) {
+                          return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(10),
+                              ),
+                              onPressed: () async {
+                                await controller.zoomIn();
+                              },
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.black,
+                              ));
+                        },
+                      ),
+                      ValueListenableBuilder<bool>(
+                        valueListenable: zoomNotifierActivation,
+                        builder: (ctx, isVisible, child) {
+                          return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.white,
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(10),
+                              ),
+                              onPressed: () async {
+                                await controller.zoomOut();
+                              },
+                              child: Icon(
+                                Icons.remove,
+                                color: Colors.black,
+                              ));
+                        },
+                      ),
+                    ],
+                  ));
+            }
 
             Widget Map() {
               return SizedBox(
-                height: MediaQuery.of(context).size.height / 2 / 2,
+                height: 200,
                 child: OSMFlutter(
                   staticPoints: [
                     StaticPositionGeoPoint(
                         model.data!.title,
                         MarkerIcon(
-                          iconWidget: Container(
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Icons.delete,
-                                  size: 100,
-                                  color: Colors.green,
-                                ),
-                                Text(
+                          iconWidget: Column(
+                            children: [
+                              Icon(
+                                Icons.delete,
+                                size: 90,
+                                color: Colors.green,
+                              ),
+                              Expanded(
+                                child: Text(
                                   model.data!.title,
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 70,
+                                      fontSize: 50,
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                         collectionpoints)
@@ -105,7 +167,7 @@ class _EditCollectionPointScreenState extends State<EditCollectionPointScreen> {
                   mapIsLoading: Center(
                     child: CircularProgressIndicator(),
                   ),
-                  showDefaultInfoWindow: false,
+                  showDefaultInfoWindow: true,
                   controller: controller,
                   trackMyPosition: false,
                   initZoom: 12,
@@ -163,7 +225,7 @@ class _EditCollectionPointScreenState extends State<EditCollectionPointScreen> {
                       setState(() {
                         _loading = true;
                       });
-                      model
+                      await model
                           .editCollectionPoint(
                         _title.text,
                         _address.text,
@@ -174,13 +236,12 @@ class _EditCollectionPointScreenState extends State<EditCollectionPointScreen> {
                                 longitude: model.data!.location.longitude),
                       )
                           .whenComplete(
-                        () {
-                          setState(() {
-                            _loading = false;
-                            controller.goToLocation(GeoPoint(
-                                latitude: model.data!.location.latitude,
-                                longitude: model.data!.location.longitude));
-                          });
+                        () async {
+                          _loading = false;
+                          await controller.goToLocation(GeoPoint(
+                              latitude: model.data!.location.latitude,
+                              longitude: model.data!.location.longitude));
+                          setState(() {});
                         },
                       );
                     }
@@ -198,15 +259,21 @@ class _EditCollectionPointScreenState extends State<EditCollectionPointScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Map(),
+                              Stack(
+                                children: [Map(), zoom()],
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
-                              TextinputForm("Title of map marker label",
-                                  Colors.blue, Colors.white, _title,
-                                  validator: _validation.validateForEmpty,
-                                  inputype: TextInputType.text,
-                                  readonly: false),
+                              TextinputForm(
+                                "Title of map marker label",
+                                Colors.blue,
+                                Colors.white,
+                                _title,
+                                validator: _validation.validateForEmpty,
+                                inputype: TextInputType.text,
+                                readonly: false,
+                              ),
                               SizedBox(
                                 height: 10,
                               ),
@@ -233,20 +300,7 @@ class _EditCollectionPointScreenState extends State<EditCollectionPointScreen> {
                                 children: [
                                   txtButton("Pick a location", () async {
                                     pickLocation =
-                                        await showSimplePickerLocation(
-                                            titleWidget: Text(
-                                              "Bulky waste collection point",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color: logoColor,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 24),
-                                            ),
-                                            initZoom: 12,
-                                            context: context,
-                                            isDismissible: true,
-                                            textConfirmPicker: "pick",
-                                            initCurrentUserPosition: true);
+                                        await locationPicker(context, model);
                                     setState(() {});
                                   },
                                       Colors.green,
@@ -312,5 +366,24 @@ class _EditCollectionPointScreenState extends State<EditCollectionPointScreen> {
             );
           }
         });
+  }
+
+  Future<GeoPoint?> locationPicker(
+      BuildContext context, EditCollectionPointViewModel model) {
+    return showSimplePickerLocation(
+        titleWidget: Text(
+          "Bulky waste collection point",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              color: logoColor, fontWeight: FontWeight.bold, fontSize: 24),
+        ),
+        initZoom: 12,
+        context: context,
+        isDismissible: true,
+        textConfirmPicker: "pick",
+        initPosition: GeoPoint(
+            latitude: model.data!.location.latitude,
+            longitude: model.data!.location.longitude),
+        initCurrentUserPosition: false);
   }
 }

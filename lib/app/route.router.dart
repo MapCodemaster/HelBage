@@ -7,17 +7,22 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
-import 'package:helbage/model/_model.dart';
-import 'package:helbage/view/admin/Guideline/AddGuidelineView.dart';
-import 'package:helbage/view/admin/Guideline/EditGuidelineView.dart';
-import 'package:helbage/view/admin/Guideline/SingleGuidelineView.dart';
-import 'package:helbage/view/admin/Schedule/_schedule.dart';
-import 'package:helbage/view/admin/noticeboard/_noticeboard.dart';
-import 'package:helbage/view/authentication/_authentication.dart';
-import 'package:helbage/view/home/_home.dart';
-import 'package:helbage/view/main/_main.dart';
-
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
+
+import '../model/_model.dart';
+import '../model/guideLineModel.dart';
+import '../view/admin/Guideline/AddGuidelineView.dart';
+import '../view/admin/Guideline/SingleGuidelineView.dart';
+import '../view/admin/Schedule/CreateSchedule.dart';
+import '../view/admin/Schedule/EditScheduleView.dart';
+import '../view/admin/noticeboard/newsList.dart';
+import '../view/authentication/ForgetPassword.dart';
+import '../view/authentication/UserLogin.dart';
+import '../view/authentication/UserSignUp.dart';
+import '../view/home/HomeScreen.dart';
+import '../view/main/AdminMainScreen.dart';
+import '../view/main/ResidentMainScreen.dart';
 
 class Routes {
   static const String homeScreen = '/';
@@ -31,7 +36,6 @@ class Routes {
   static const String editScheduleView = '/edit-schedule-view';
   static const String addGuidelineView = '/add-guideline-view';
   static const String singleGuidelineView = '/single-guideline-view';
-  static const String editGuidelineView = '/edit-guideline-view';
   static const all = <String>{
     homeScreen,
     userLogin,
@@ -130,19 +134,19 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    SingleGuidelineView: (data) {
-      var args = data.getArgs<dynamic>(nullOk: false);
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => SingleGuidelineView(
-          key: args.key,
-          guideline:args.guideline,
-        ),
-        settings: data,
-      );
-    },
     AddGuidelineView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const AddGuidelineView(),
+        settings: data,
+      );
+    },
+    SingleGuidelineView: (data) {
+      var args = data.getArgs<SingleGuidelineViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SingleGuidelineView(
+          key: args.key,
+          guideline: args.guideline,
+        ),
         settings: data,
       );
     },
@@ -165,4 +169,11 @@ class EditScheduleViewArguments {
   final Key? key;
   final scheduleModel schedule;
   EditScheduleViewArguments({this.key, required this.schedule});
+}
+
+/// SingleGuidelineView arguments holder class
+class SingleGuidelineViewArguments {
+  final Key? key;
+  final guidelineModel guideline;
+  SingleGuidelineViewArguments({this.key, required this.guideline});
 }

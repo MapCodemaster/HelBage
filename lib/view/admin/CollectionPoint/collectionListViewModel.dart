@@ -37,7 +37,9 @@ class CollectionPointListViewModel
 
   void NavigateToEditPoint(CollectionPointModel point) {
     datapassing.assignToPointModel(point);
-    navigate.navigateToView(EditCollectionPointScreen());
+    navigate.navigateToView(EditCollectionPointScreen(
+      collectionPoint: point,
+    ));
   }
 
   void NavigateToCreatePoint() {

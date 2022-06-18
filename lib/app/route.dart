@@ -1,4 +1,5 @@
 import 'package:helbage/services/FirebaseServices/_services.dart';
+import 'package:helbage/view/admin/CollectionPoint/editCollectionPointScreen.dart';
 import 'package:helbage/view/admin/Guideline/AddGuidelineView.dart';
 import 'package:helbage/view/admin/Guideline/EditGuidelineView.dart';
 import 'package:helbage/view/admin/Guideline/SingleGuidelineView.dart';

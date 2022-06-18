@@ -12,6 +12,7 @@ class TextinputForm extends StatelessWidget {
   bool readonly;
   int? maxLines;
   int? minLines;
+  String? initialValue;
   TextinputForm(
       this.placeholder, this.borderColor, this.backgroundColor, this.controller,
       {this.validator,
@@ -19,7 +20,8 @@ class TextinputForm extends StatelessWidget {
       this.widthRatio = 5,
       required this.readonly,
       this.maxLines,
-      this.minLines});
+      this.minLines,
+      this.initialValue});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +29,7 @@ class TextinputForm extends StatelessWidget {
         width: MediaQuery.of(context).size.width -
             MediaQuery.of(context).size.width / widthRatio,
         child: TextFormField(
+          initialValue: initialValue,
           maxLines: maxLines,
           minLines: minLines,
           readOnly: readonly,

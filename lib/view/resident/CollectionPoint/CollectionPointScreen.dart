@@ -107,7 +107,7 @@ class _CollectionPointScreenState extends State<CollectionPointScreen> {
                       showDefaultInfoWindow: true,
                       controller: controller,
                       trackMyPosition: false,
-                      initZoom: 12,
+                      initZoom: 14,
                       minZoomLevel: 8,
                       maxZoomLevel: 18,
                       stepZoom: 1.0,
