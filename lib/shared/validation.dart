@@ -70,4 +70,10 @@ class Validation {
     }
     return null;
   }
+  String? validateTag(String? value) {
+    if (!value!.contains('#')) {
+      return "Provide at least one tag! e.g #plastic#guideline";
+    }
+    return null;
+  }
 }

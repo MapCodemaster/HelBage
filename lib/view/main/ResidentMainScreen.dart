@@ -3,6 +3,7 @@ import 'package:helbage/view/admin/Schedule/_schedule.dart';
 import 'package:helbage/view/authentication/_authentication.dart';
 import 'package:helbage/view/main/_main.dart';
 import 'package:helbage/view/resident/CollectionPoint/_resident_Collection_Point.dart';
+import 'package:helbage/view/resident/Guideline/ViewGuideline.dart';
 import 'package:helbage/view/resident/noticeboard/_resident_Noticeboard.dart';
 import 'package:stacked/stacked.dart';
 
@@ -39,8 +40,6 @@ class ResidentMainScreen extends StatelessWidget {
                     icon: Icon(Icons.recycling),
                     label: "Recycling\nGuidelines"),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications), label: "Notification"),
-                BottomNavigationBarItem(
                     icon: Icon(Icons.more_horiz_rounded), label: "More"),
               ],
             ),
@@ -59,13 +58,10 @@ class ResidentMainScreen extends StatelessWidget {
         return ViewSchedule(
           isAdmin: false,
         );
-
       case 2:
         return CollectionPointScreen();
       case 3:
-        return UserLogin();
-      case 4:
-        return UserLogin();
+        return ViewGuideline();
       default:
         return MoreScreen();
     }

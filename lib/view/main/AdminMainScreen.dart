@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helbage/shared/_shared.dart';
 import 'package:helbage/view/admin/CollectionPoint/_admin_Collection_Point.dart';
+import 'package:helbage/view/admin/Guideline/ViewGuidelineView.dart';
 import 'package:helbage/view/admin/Schedule/_schedule.dart';
 import 'package:helbage/view/admin/noticeboard/_noticeboard.dart';
 import 'package:helbage/view/authentication/_authentication.dart';
@@ -62,7 +63,7 @@ class AdminMainScreen extends StatelessWidget {
       case 2:
         return CollectionList();
       case 3:
-        return UserLogin();
+        return ViewGuidelineView();
 
       default:
         return MoreScreen();
