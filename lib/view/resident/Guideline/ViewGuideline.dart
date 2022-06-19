@@ -4,6 +4,7 @@ import 'package:helbage/shared/_shared.dart';
 import 'package:helbage/view/admin/Guideline/ViewGuidelineViewModel.dart';
 import 'package:helbage/view/resident/Guideline/ViewGuidelineModel.dart';
 import 'package:stacked/stacked.dart';
+
 class ViewGuideline extends StatefulWidget {
   const ViewGuideline({Key? key}) : super(key: key);
 
@@ -13,68 +14,74 @@ class ViewGuideline extends StatefulWidget {
 
 class _ViewGuidelineState extends State<ViewGuideline> {
   String? tag;
-  bool _loading=false;
+  bool _loading = false;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ViewGuidelineModel>.reactive(
-      viewModelBuilder: ()=>ViewGuidelineModel(), 
-      builder: (context,model,child)=>Scaffold(
-        appBar: AppBar(
-          title:Text("Guidelines"),
-          leading: model.selected==true?IconButton(onPressed: (){model.clearSelected();}, icon: Icon(Icons.arrow_back)):Container(),
-          ),
-          body:buildBody(model.status, model)
-          )
-      );
-  
+        viewModelBuilder: () => ViewGuidelineModel(),
+        builder: (context, model, child) => Scaffold(
+            appBar: AppBar(
+              backgroundColor: logoColor,
+              title: Text("Guidelines"),
+              leading: model.selected == true
+                  ? IconButton(
+                      onPressed: () {
+                        model.clearSelected();
+                      },
+                      icon: Icon(Icons.arrow_back))
+                  : Container(),
+            ),
+            body: buildBody(model.status, model)));
   }
 }
 
-List<Color?> randColor=[Colors.amber[200],Colors.blue[100],Colors.tealAccent[200],Colors.purple[200],Colors.pink[100]];
+List<Color?> randColor = [
+  Colors.amber[200],
+  Colors.blue[100],
+  Colors.tealAccent[200],
+  Colors.purple[200],
+  Colors.pink[100]
+];
 
-List<Widget> getGuidelinetagWidget(model,{size=15.0,widthSize=20.0,heightSize=20.0,radius=50.0})
-{
-  List<Widget> tagContainer=new List.empty(growable: true);
-  model.tagList.forEach((element)
-  {
-    Color? c=randColor[new Random().nextInt(randColor.length)];
-    if(c==null)
-    {
-      c=Colors.purple[200];
+List<Widget> getGuidelinetagWidget(model,
+    {size = 15.0, widthSize = 20.0, heightSize = 20.0, radius = 50.0}) {
+  List<Widget> tagContainer = new List.empty(growable: true);
+  model.tagList.forEach((element) {
+    Color? c = randColor[new Random().nextInt(randColor.length)];
+    if (c == null) {
+      c = Colors.purple[200];
     }
 
     tagContainer.add(
       Card(
-            child: InkWell(
-              onTap: (){model.getGuideline(element.toString());model.selected=true;},
-              splashColor: Colors.green,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment : CrossAxisAlignment.center,
-                  
-                 children: <Widget>[
-                  Padding(padding: EdgeInsets.all(30.0)),
-                  Text( element.toString()+"("+element.quantity.toString()+")",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: size, color: Colors.black),),
-                ] 
-                ),
-                ),
+        child: InkWell(
+          onTap: () {
+            model.getGuideline(element.toString());
+            model.selected = true;
+          },
+          splashColor: Colors.green,
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.all(30.0),
+              child: Text(
+                element.toString() + "(" + element.quantity.toString() + ")",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: size, color: Colors.black),
+              ),
             ),
           ),
-
-      );
+        ),
+      ),
+    );
   });
-
   return tagContainer;
 }
+
 Widget buildBody(status, model) {
-  if(!model.selected)
-  {
+  if (!model.selected) {
     return Center(
-      heightFactor: 1.0,
-      child: Wrap(
+        heightFactor: 1.0,
+        child: Wrap(
             spacing: 10.0,
             alignment: WrapAlignment.center,
             children: getGuidelinetagWidget(model)));
@@ -137,8 +144,7 @@ Widget buildGuideline(list, model) {
                           margin: EdgeInsets.all(5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                            ],
+                            children: [],
                           )),
                     )
                   ]),
