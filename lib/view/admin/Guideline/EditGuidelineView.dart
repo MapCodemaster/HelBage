@@ -29,7 +29,7 @@ class _EditGuidelineViewState extends State<EditGuidelineView> {
       viewModelBuilder: ()=>EditGuidelineViewModel() ,
       builder: (context,model,child)=>Scaffold(
         appBar: AppBar(
-          title: Text("Add New Guideline"),
+          title: Text("Edit Guideline"),
           backgroundColor: logoColor,
           ),
         body:SingleChildScrollView(
