@@ -39,10 +39,10 @@ void toSingleView()
   _navigationService.navigateToView(SingleGuidelineView(guideline: workingGuideline!));
 }
   //remove the tag at original guideline
-  void editTag(guideline,newGuideline) 
+  void editTag(guideline,newGuideline)  
   {
     var guidelineTagListener=stor.readDocumentAsStream("guidelinetag", "summary").listen((event){});
-    guidelineTagListener.onData((data) {
+    guidelineTagListener.onData((data) async {
     guidelineTagListener.cancel();
     var tagData=data.get('tag');
     guideline.tag.forEach((element) {
@@ -55,8 +55,9 @@ void toSingleView()
         tagData.remove("$element");
       }
       });
-      stor.updateSingleField('guidelinetag', 'summary', 'tag', tagData);
-     addTag(newGuideline);
+    await stor.updateSingleField('guidelinetag', 'summary', 'tag', tagData);
+    await Future.delayed(const Duration(seconds: 2));
+    addTag(newGuideline);
 
   });
   }
@@ -64,7 +65,6 @@ void toSingleView()
   {
     
     guideline.docid=id;
-    print(guideline.toFirestore().toString());
     await stor.update(id, 'guideline', guideline.toFirestore());
     editTag(oldGuideline,guideline);
     
@@ -75,7 +75,6 @@ void toSingleView()
     guidelineTagListener.onData((data) {
     guidelineTagListener.cancel();
     var tagData=data.get('tag');
-    Map convertMap=Map.castFrom(tagData);
     guideline.tag.forEach((element) {
         if(tagData["$element"]!=null)
         {
