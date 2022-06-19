@@ -40,7 +40,7 @@ class FirebaseStor implements storage_service {
     };
     
     try {
-      db.collection(collection).doc(document).update(
+      await db.collection(collection).doc(document).update(
         tempMap
       );
     } catch (e) {
