@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseStor implements storage_service {
   FirebaseFirestore db = FirebaseFirestore.instance;
+  static const pointCollection = 'points';
   Future<bool> insert(String uid, String table, dynamic data) async {
     try {
       if (await db
@@ -33,22 +34,20 @@ class FirebaseStor implements storage_service {
     }
     return true;
   }
-  Future<bool> updateSingleField(String collection,String document,String field,dynamic data) async {
-    Map<String,dynamic> tempMap=
-    {
-      field:data
-    };
-    
+
+  Future<bool> updateSingleField(
+      String collection, String document, String field, dynamic data) async {
+    Map<String, dynamic> tempMap = {field: data};
+
     try {
-      await db.collection(collection).doc(document).update(
-        tempMap
-      );
+      await db.collection(collection).doc(document).update(tempMap);
     } catch (e) {
       print(e);
       return false;
     }
     return true;
   }
+
   Future<bool> update(String docid, String table, dynamic data) async {
     try {
       db
@@ -94,9 +93,14 @@ class FirebaseStor implements storage_service {
       String collection) {
     return db.collection(collection).snapshots();
   }
-  Stream<QuerySnapshot<Map<String, dynamic>>> readCollectionAsStreamArrayCondition(
-      String collection,String field,String item) {
-    return db.collection(collection).where(field,arrayContains:item).snapshots();
+
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      readCollectionAsStreamArrayCondition(
+          String collection, String field, String item) {
+    return db
+        .collection(collection)
+        .where(field, arrayContains: item)
+        .snapshots();
   }
 
   Future<void> insertLevel2(
