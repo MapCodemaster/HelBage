@@ -71,8 +71,14 @@ class Validation {
     return null;
   }
   String? validateTag(String? value) {
+    final reg=RegExp(r'#');
     if (!value!.contains('#')) {
       return "Provide at least one tag! e.g #plastic#guideline";
+    }
+    if(reg.matchAsPrefix(value)==null||value.length<=1)
+    {
+      return "Provide at least one tag! e.g #plastic#guideline";
+
     }
     return null;
   }
