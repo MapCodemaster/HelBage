@@ -1,2 +1,2 @@
-export 'package:helbage/view/home/HomeScreenViewModel.dart';
-export 'package:helbage/view/home/HomeScreen.dart';
+export 'package:helbage/view/home/homeScreenViewModel.dart';
+export 'package:helbage/view/home/homeScreen.dart';

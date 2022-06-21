@@ -1,5 +1,5 @@
 import 'package:helbage/shared/_shared.dart';
-import 'package:helbage/view/admin/Guideline/ViewGuidelineViewModel.dart';
+import 'package:helbage/view/admin/Guideline/viewGuidelineViewModel.dart';
 import 'package:stacked/stacked.dart';
 import 'dart:math';
 

@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:helbage/shared/_shared.dart';
-import 'package:helbage/view/admin/Guideline/ViewGuidelineViewModel.dart';
-import 'package:helbage/view/resident/Guideline/ViewGuidelineModel.dart';
+import 'package:helbage/view/admin/Guideline/viewGuidelineViewModel.dart';
+import 'package:helbage/view/resident/Guideline/viewGuidelineModel.dart';
 import 'package:stacked/stacked.dart';
 
 class ViewGuideline extends StatefulWidget {

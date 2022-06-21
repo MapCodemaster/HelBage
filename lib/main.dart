@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helbage/app/_route.dart';
-import 'package:helbage/view/home/HomeScreen.dart';
+import 'package:helbage/view/home/homeScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:stacked_services/stacked_services.dart';

@@ -2,7 +2,7 @@
 import 'package:helbage/shared/_shared.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:helbage/view/authentication/SignUpViewModel.dart';
+import 'package:helbage/view/authentication/signUpViewModel.dart';
 
 class UserSignUp extends StatefulWidget {
   const UserSignUp({Key? key}) : super(key: key);

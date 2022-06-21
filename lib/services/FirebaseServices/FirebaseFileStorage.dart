@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 
-import 'package:helbage/services/FirebaseServices/FileStorage.dart';
+import 'package:helbage/services/FirebaseServices/fileStorage.dart';
 
 class FirebaseFileStorage implements FileStorage {
   Future uploadToStorage(File? file) async {

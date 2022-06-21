@@ -1,6 +1,6 @@
-export 'package:helbage/view/authentication/ForgetPassword.dart';
-export 'package:helbage/view/authentication/ForgetPasswordViewMode.dart';
-export 'package:helbage/view/authentication/UserLogin.dart';
-export 'package:helbage/view/authentication/LoginViewModel.dart';
-export 'package:helbage/view/authentication/UserSignUp.dart';
-export 'package:helbage/view/authentication/SignUpViewModel.dart';
+export 'package:helbage/view/authentication/forgetPassword.dart';
+export 'package:helbage/view/authentication/forgetPasswordViewMode.dart';
+export 'package:helbage/view/authentication/userLogin.dart';
+export 'package:helbage/view/authentication/loginViewModel.dart';
+export 'package:helbage/view/authentication/userSignUp.dart';
+export 'package:helbage/view/authentication/signUpViewModel.dart';

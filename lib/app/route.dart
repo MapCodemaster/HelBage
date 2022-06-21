@@ -1,20 +1,20 @@
 import 'package:helbage/services/FirebaseServices/_services.dart';
 import 'package:helbage/view/admin/CollectionPoint/editCollectionPointScreen.dart';
-import 'package:helbage/view/admin/Guideline/AddGuidelineView.dart';
-import 'package:helbage/view/admin/Guideline/EditGuidelineView.dart';
-import 'package:helbage/view/admin/Guideline/SingleGuidelineView.dart';
+import 'package:helbage/view/admin/Guideline/addGuidelineView.dart';
+import 'package:helbage/view/admin/Guideline/editGuidelineView.dart';
+import 'package:helbage/view/admin/Guideline/singleGuidelineView.dart';
 import 'package:helbage/view/admin/noticeboard/newsList.dart';
-import 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
-import 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
+import 'package:helbage/view/admin/Schedule/createSchedule.dart';
+import 'package:helbage/view/admin/Schedule/editScheduleView.dart';
 
-import 'package:helbage/view/authentication/ForgetPassword.dart';
-import 'package:helbage/view/authentication/UserSignUp.dart';
-import 'package:helbage/view/home/HomeScreen.dart';
-import 'package:helbage/view/main/AdminMainScreen.dart';
-import 'package:helbage/view/main/ResidentMainScreen.dart';
+import 'package:helbage/view/authentication/forgetPassword.dart';
+import 'package:helbage/view/authentication/userSignUp.dart';
+import 'package:helbage/view/home/homeScreen.dart';
+import 'package:helbage/view/main/adminMainScreen.dart';
+import 'package:helbage/view/main/residentMainScreen.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:helbage/view/authentication/UserLogin.dart';
+import 'package:helbage/view/authentication/userLogin.dart';
 
 @StackedApp(routes: [
   MaterialRoute(page: HomeScreen, initial: true),

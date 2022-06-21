@@ -2,7 +2,7 @@ import 'package:helbage/app/_route.dart';
 import 'package:helbage/model/guideLineModel.dart';
 import 'package:helbage/model/tagModel.dart';
 import 'package:helbage/shared/_shared.dart';
-import 'package:helbage/view/admin/Guideline/SingleGuidelineView.dart';
+import 'package:helbage/view/admin/Guideline/singleGuidelineView.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 

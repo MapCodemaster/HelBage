@@ -1,2 +1,2 @@
-export 'package:helbage/view/resident/CollectionPoint/CollectionPointScreen.dart';
-export 'package:helbage/view/resident/CollectionPoint/CollectionPointViewModel.dart';
+export 'package:helbage/view/resident/CollectionPoint/collectionPointScreen.dart';
+export 'package:helbage/view/resident/CollectionPoint/collectionPointViewModel.dart';

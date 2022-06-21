@@ -1,14 +1,14 @@
-export 'package:helbage/view/admin/Schedule/CreateSchedule.dart';
-export 'package:helbage/view/admin/Schedule/CreateScheduleViewModel.dart';
+export 'package:helbage/view/admin/Schedule/createSchedule.dart';
+export 'package:helbage/view/admin/Schedule/createScheduleViewModel.dart';
 
-export 'package:helbage/view/admin/Schedule/EditScheduleView.dart';
-export 'package:helbage/view/admin/Schedule/EditScheduleViewModel.dart';
+export 'package:helbage/view/admin/Schedule/editScheduleView.dart';
+export 'package:helbage/view/admin/Schedule/editScheduleViewModel.dart';
 
-export 'package:helbage/view/admin/Schedule/SingleScheduleView.dart';
-export 'package:helbage/view/admin/Schedule/SingleScheduleViewModel.dart';
+export 'package:helbage/view/admin/Schedule/singleScheduleView.dart';
+export 'package:helbage/view/admin/Schedule/singleScheduleViewModel.dart';
 
-export 'package:helbage/view/admin/Schedule/VehicleDialog.dart';
-export 'package:helbage/view/admin/Schedule/VehicleDialogViewModel.dart';
+export 'package:helbage/view/admin/Schedule/vehicleDialog.dart';
+export 'package:helbage/view/admin/Schedule/vehicleDialogViewModel.dart';
 
-export 'package:helbage/view/admin/Schedule/ViewSchedule.dart';
-export 'package:helbage/view/admin/Schedule/ViewScheduleViewModel.dart';
+export 'package:helbage/view/admin/Schedule/viewSchedule.dart';
+export 'package:helbage/view/admin/Schedule/viewScheduleViewModel.dart';

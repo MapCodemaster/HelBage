@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helbage/shared/_shared.dart';
-import 'package:helbage/view/authentication/LoginViewModel.dart';
+import 'package:helbage/view/authentication/loginViewModel.dart';
 import 'package:stacked/stacked.dart';
 
 class UserLogin extends StatefulWidget {

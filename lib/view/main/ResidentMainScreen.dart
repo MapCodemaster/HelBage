@@ -3,7 +3,7 @@ import 'package:helbage/view/admin/Schedule/_schedule.dart';
 import 'package:helbage/view/authentication/_authentication.dart';
 import 'package:helbage/view/main/_main.dart';
 import 'package:helbage/view/resident/CollectionPoint/_resident_Collection_Point.dart';
-import 'package:helbage/view/resident/Guideline/ViewGuideline.dart';
+import 'package:helbage/view/resident/Guideline/viewGuideline.dart';
 import 'package:helbage/view/resident/noticeboard/_resident_Noticeboard.dart';
 import 'package:stacked/stacked.dart';
 

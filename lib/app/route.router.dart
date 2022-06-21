@@ -12,17 +12,17 @@ import 'package:stacked/stacked_annotations.dart';
 
 import '../model/_model.dart';
 import '../model/guideLineModel.dart';
-import '../view/admin/Guideline/AddGuidelineView.dart';
-import '../view/admin/Guideline/SingleGuidelineView.dart';
-import '../view/admin/Schedule/CreateSchedule.dart';
-import '../view/admin/Schedule/EditScheduleView.dart';
+import '../view/admin/Guideline/addGuidelineView.dart';
+import '../view/admin/Guideline/singleGuidelineView.dart';
+import '../view/admin/Schedule/createSchedule.dart';
+import '../view/admin/Schedule/editScheduleView.dart';
 import '../view/admin/noticeboard/newsList.dart';
-import '../view/authentication/ForgetPassword.dart';
-import '../view/authentication/UserLogin.dart';
-import '../view/authentication/UserSignUp.dart';
-import '../view/home/HomeScreen.dart';
-import '../view/main/AdminMainScreen.dart';
-import '../view/main/ResidentMainScreen.dart';
+import '../view/authentication/forgetPassword.dart';
+import '../view/authentication/userLogin.dart';
+import '../view/authentication/userSignUp.dart';
+import '../view/home/homeScreen.dart';
+import '../view/main/adminMainScreen.dart';
+import '../view/main/residentMainScreen.dart';
 
 class Routes {
   static const String homeScreen = '/';
