@@ -121,4 +121,8 @@ class FirebaseStor implements storage_service {
   Future<void> newsSetup(String url) async {
     db.collection("news").add({'url': url, 'datetime': DateTime.now()});
   }
+
+  String getCreatedDocumentID(String collection) {
+    return db.collection(collection).doc().id;
+  }
 }

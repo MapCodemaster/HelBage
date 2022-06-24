@@ -12,6 +12,7 @@ class viewScheduleViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
+  final datapassing = locator<DataPassingService>();
   var listener;
   //Stream<QuerySnapshot<Map<String, dynamic>>>? listener;
 
@@ -71,6 +72,7 @@ class viewScheduleViewModel extends BaseViewModel {
     // _navigationService.navigateTo(Routes.singleScheduleView,
     //     arguments: scheduleItem);
     // //pass to router.router.dart
+    datapassing.assign(scheduleItem);
     _navigationService.navigateToView(SingleScheduleView(
       value: scheduleItem,
       isAdmin: isAdmin,

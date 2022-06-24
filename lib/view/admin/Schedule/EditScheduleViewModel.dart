@@ -22,7 +22,6 @@ class EditScheduleViewModel extends BaseViewModel {
       {required this.oriLocationList,
       required this.oriDurationList,
       required this.originalschedule}) {
-    print(originalschedule.state);
     //oriLocationList = originalschedule.getPath().location_List;
     //oriDurationList = originalschedule.getPath().durationList;
     // for (int i = 0; i < locationList.length; i++) {
@@ -103,21 +102,6 @@ class EditScheduleViewModel extends BaseViewModel {
           subCollection: "Path",
           subColDoc: schedule.pathName,
           data: schedule.getPath().toFirestore());
-      // await stor.delete(
-      //   originalschedule.pathName,
-      //   "schedule/" + originalschedule.state + "/Path",
-      // );
-      // bool successInsert = await stor.insert(
-      //     schedule.pathName,
-      //     'schedule/' + schedule.state + "/Path",
-      //     schedule.getPath().toFirestore());
-      // if (!successInsert) {
-      //   _dialogService.showDialog(
-      //       title: "Personal Information Error",
-      //       description: "Error happen in registration, try again later",
-      //       dialogPlatform: DialogPlatform.Material);
-      //   return false;
-      // }
 
       notifyListeners();
       _navigationService.popRepeated(2);

@@ -36,6 +36,8 @@ import 'package:helbage/view/authentication/userLogin.dart';
   LazySingleton(classType: FirebaseStor, asType: storage_service),
   LazySingleton(classType: BottomSheetService),
   LazySingleton(classType: FirebaseFileStorage, asType: FileStorage),
-  Singleton(classType: DataPassingService)
+  Singleton(classType: DataPassingService),
+  LazySingleton(
+      classType: FirebaseCloudMessaging, asType: PushNotificationService)
 ])
 class AppSetup {}
