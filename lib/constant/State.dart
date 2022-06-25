@@ -23,3 +23,34 @@ enum MalaysiaState {
     }
   }
 }
+
+MalaysiaState getState(String state) {
+  switch (state) {
+    case "Johor":
+      return MalaysiaState.Johor;
+    case "Kedah":
+      return MalaysiaState.Kedah;
+    case "Pahang":
+      return MalaysiaState.Pahang;
+    case "Kelatan":
+      return MalaysiaState.Kelantan;
+    case "Kuala Lumpur":
+      return MalaysiaState.Kuala_Lumpur;
+    case "Malacca":
+      return MalaysiaState.Malacca;
+    case "Negeri Sembilan":
+      return MalaysiaState.Negeri_Sembilan;
+    case "Perak":
+      return MalaysiaState.Perak;
+    case "Perlis":
+      return MalaysiaState.Perlis;
+    case "Sabah":
+      return MalaysiaState.Sabah;
+    case "Sarawak":
+      return MalaysiaState.Sarawak;
+    case "Selangor":
+      return MalaysiaState.Selangor;
+    default:
+      return MalaysiaState.Johor;
+  }
+}

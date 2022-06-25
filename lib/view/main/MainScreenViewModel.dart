@@ -80,6 +80,4 @@ class MainScreenViewModel extends IndexTrackingViewModel {
         content: NotificationContent(
             id: id, channelKey: 'scheduled_channel', title: title, body: body));
   }
-
-  void openNotification() {}
 }

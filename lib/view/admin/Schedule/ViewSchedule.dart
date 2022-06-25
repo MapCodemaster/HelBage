@@ -43,7 +43,10 @@ class _viewSchedule extends State<ViewSchedule> {
                     title: Center(child: Text("Schedule")),
                     actions: [
                       IconButton(
-                          onPressed: () {}, icon: Icon(Icons.notifications))
+                          onPressed: () {
+                            model.navigateToActiveReminder();
+                          },
+                          icon: Icon(Icons.notifications))
                     ],
                     backgroundColor: logoColor,
                   ),

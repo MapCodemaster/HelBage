@@ -50,6 +50,7 @@ dependencies:
   flutter_osm_plugin: ^0.34.1
   another_flushbar: ^1.10.29
   awesome_notifications: ^0.6.21
+  share_plus: ^4.0.9
 
 
 

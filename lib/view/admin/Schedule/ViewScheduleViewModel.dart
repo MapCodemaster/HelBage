@@ -3,6 +3,7 @@ import 'package:helbage/constant/_constant.dart';
 import 'package:helbage/model/_model.dart';
 import 'package:helbage/services/FirebaseServices/_services.dart';
 import 'package:helbage/view/admin/Schedule/_schedule.dart';
+import 'package:helbage/view/resident/schedule/scheduleActiveReminderList.dart';
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -79,6 +80,10 @@ class viewScheduleViewModel extends BaseViewModel {
     ));
   }
 
+  void navigateToActiveReminder() {
+    _navigationService.navigateToView(ScheduleActiveReminderList());
+  }
+
   void addSchedule() {
     _navigationService.navigateTo(Routes.createSchedule);
   }
@@ -87,36 +92,5 @@ class viewScheduleViewModel extends BaseViewModel {
   void dispose() {
     print("Widget Dispose");
     listener?.cancel();
-  }
-
-  MalaysiaState getState(String state) {
-    switch (state) {
-      case "Johor":
-        return MalaysiaState.Johor;
-      case "Kedah":
-        return MalaysiaState.Kedah;
-      case "Pahang":
-        return MalaysiaState.Pahang;
-      case "Kelatan":
-        return MalaysiaState.Kelantan;
-      case "Kuala Lumpur":
-        return MalaysiaState.Kuala_Lumpur;
-      case "Malacca":
-        return MalaysiaState.Malacca;
-      case "Negeri Sembilan":
-        return MalaysiaState.Negeri_Sembilan;
-      case "Perak":
-        return MalaysiaState.Perak;
-      case "Perlis":
-        return MalaysiaState.Perlis;
-      case "Sabah":
-        return MalaysiaState.Sabah;
-      case "Sarawak":
-        return MalaysiaState.Sarawak;
-      case "Selangor":
-        return MalaysiaState.Selangor;
-      default:
-        return MalaysiaState.Johor;
-    }
   }
 }

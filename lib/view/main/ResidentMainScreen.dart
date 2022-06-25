@@ -16,7 +16,6 @@ class ResidentMainScreen extends StatelessWidget {
       fireOnModelReadyOnce: true,
       onModelReady: (model) {
         model.initializeNotification();
-        model.openNotification();
       },
       builder: (context, viewModel, child) {
         // viewModel.initializeNotification();

@@ -42,6 +42,19 @@ class SingleScheduleViewModel extends BaseViewModel {
       schedule.pathName,
       "schedule/" + schedule.state + "/Path",
     );
+    List<ReminderModel> reminderList = [];
+    stor.readCollectionAsFuture("reminder").then((value) {
+      reminderList = value.docs
+          .map((e) => ReminderModel.fromJson(e.data()))
+          .toList()
+          .where((element) =>
+              element.schedule ==
+              "schedule/" + schedule.state + "/Path/" + schedule.pathName)
+          .toList();
+      reminderList.forEach((element) {
+        stor.delete(element.docID, "reminder");
+      });
+    });
 
     _navigationService.back();
     notifyListeners();

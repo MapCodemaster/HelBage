@@ -92,6 +92,7 @@ class EditScheduleViewModel extends BaseViewModel {
           durationList: createDurationList,
           vehicle: platno);
       scheduleModel schedule = new scheduleModel(s, newPath, city);
+
       await stor.delete(
         originalschedule.pathName,
         "schedule/" + originalschedule.state + "/Path",
@@ -102,7 +103,24 @@ class EditScheduleViewModel extends BaseViewModel {
           subCollection: "Path",
           subColDoc: schedule.pathName,
           data: schedule.getPath().toFirestore());
-
+      List<ReminderModel> reminderList = [];
+      stor.readCollectionAsFuture("reminder").then((value) {
+        reminderList = value.docs
+            .map((e) => ReminderModel.fromJson(e.data()))
+            .toList()
+            .where((element) =>
+                element.schedule ==
+                "schedule/" +
+                    originalschedule.state +
+                    "/Path/" +
+                    originalschedule.pathName)
+            .toList();
+        reminderList.forEach((element) {
+          element.schedule =
+              "schedule/" + schedule.state + "/Path/" + schedule.pathName;
+          stor.update(element.docID, "reminder", element.toJson());
+        });
+      });
       notifyListeners();
       _navigationService.popRepeated(2);
       return true;

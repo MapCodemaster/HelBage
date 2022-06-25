@@ -313,6 +313,18 @@ class _CollectionPointScreenState extends State<CollectionPointScreen> {
                                               },
                                               child: Card(
                                                 child: ListTile(
+                                                  trailing: IconButton(
+                                                      onPressed: () {
+                                                        viewmodel.share(
+                                                            list![index]
+                                                                .location
+                                                                .longitude,
+                                                            list![index]
+                                                                .location
+                                                                .latitude,
+                                                            list![index].title);
+                                                      },
+                                                      icon: Icon(Icons.share)),
                                                   subtitle: Text(
                                                       list![index].address),
                                                   title:
