@@ -75,8 +75,8 @@ class MainScreenViewModel extends IndexTrackingViewModel {
     String? body = startlocation! + " to " + endlocation!;
 
     AwesomeNotifications().createNotification(
-        schedule: NotificationCalendar(
-            hour: startime!.hour, minute: startime!.minute),
+        schedule:
+            NotificationCalendar(hour: startime!.hour, minute: startime.minute),
         content: NotificationContent(
             id: id, channelKey: 'scheduled_channel', title: title, body: body));
   }
