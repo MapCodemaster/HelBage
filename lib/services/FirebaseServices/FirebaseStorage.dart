@@ -134,6 +134,7 @@ class FirebaseStor implements storage_service {
     db.collection("news").add({'url': url, 'datetime': DateTime.now()});
   }
 
+
   @override
   Future<bool> addByIModel(String table,IModel data) async
   {
@@ -146,5 +147,10 @@ class FirebaseStor implements storage_service {
     return true;
   }
   
+
+
+  String getCreatedDocumentID(String collection) {
+    return db.collection(collection).doc().id;
+  }
 
 }

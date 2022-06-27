@@ -3,6 +3,7 @@ import 'package:helbage/constant/_constant.dart';
 import 'package:helbage/model/_model.dart';
 import 'package:helbage/services/FirebaseServices/_services.dart';
 import 'package:helbage/view/admin/Schedule/_schedule.dart';
+import 'package:helbage/view/resident/schedule/scheduleActiveReminderList.dart';
 
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -12,6 +13,7 @@ class viewScheduleViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
+  final datapassing = locator<DataPassingService>();
   var listener;
   //Stream<QuerySnapshot<Map<String, dynamic>>>? listener;
 
@@ -71,10 +73,15 @@ class viewScheduleViewModel extends BaseViewModel {
     // _navigationService.navigateTo(Routes.singleScheduleView,
     //     arguments: scheduleItem);
     // //pass to router.router.dart
+    datapassing.assign(scheduleItem);
     _navigationService.navigateToView(SingleScheduleView(
       value: scheduleItem,
       isAdmin: isAdmin,
     ));
+  }
+
+  void navigateToActiveReminder() {
+    _navigationService.navigateToView(ScheduleActiveReminderList());
   }
 
   void addSchedule() {
@@ -85,36 +92,5 @@ class viewScheduleViewModel extends BaseViewModel {
   void dispose() {
     print("Widget Dispose");
     listener?.cancel();
-  }
-
-  MalaysiaState getState(String state) {
-    switch (state) {
-      case "Johor":
-        return MalaysiaState.Johor;
-      case "Kedah":
-        return MalaysiaState.Kedah;
-      case "Pahang":
-        return MalaysiaState.Pahang;
-      case "Kelatan":
-        return MalaysiaState.Kelantan;
-      case "Kuala Lumpur":
-        return MalaysiaState.Kuala_Lumpur;
-      case "Malacca":
-        return MalaysiaState.Malacca;
-      case "Negeri Sembilan":
-        return MalaysiaState.Negeri_Sembilan;
-      case "Perak":
-        return MalaysiaState.Perak;
-      case "Perlis":
-        return MalaysiaState.Perlis;
-      case "Sabah":
-        return MalaysiaState.Sabah;
-      case "Sarawak":
-        return MalaysiaState.Sarawak;
-      case "Selangor":
-        return MalaysiaState.Selangor;
-      default:
-        return MalaysiaState.Johor;
-    }
   }
 }

@@ -28,4 +28,6 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton<FileStorage>(() => FirebaseFileStorage());
   locator.registerSingleton(DataPassingService());
+  locator.registerLazySingleton<PushNotificationService>(
+      () => FirebaseCloudMessaging());
 }

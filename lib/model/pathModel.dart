@@ -67,8 +67,10 @@ class pathModel {
     tempList.forEach((element) {
       totalDuration += element;
     });
-    totalDuration += _startTime!.minute;
+
+    // totalDuration += _startTime!.minute;
     _endTime = _startTime?.clone();
+
     _endTime?.addMinute(totalDuration);
   }
 
@@ -92,5 +94,9 @@ class pathModel {
 
   Time? getStartTime() {
     return _startTime;
+  }
+
+  Time? getEndTime() {
+    return _endTime;
   }
 }

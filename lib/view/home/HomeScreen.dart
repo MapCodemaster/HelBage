@@ -1,7 +1,7 @@
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:helbage/shared/_shared.dart';
 import 'package:helbage/view/home/_home.dart';
-
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,6 +15,47 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     initialization();
+    AwesomeNotifications().isNotificationAllowed().then(
+      (isAllowed) {
+        if (!isAllowed) {
+          showDialog(
+            context: context,
+            builder: (context) => NotificationPermissionDialog(context),
+          );
+        }
+      },
+    );
+  }
+
+  AlertDialog NotificationPermissionDialog(BuildContext context) {
+    return AlertDialog(
+      title: Text('Allow Notifications'),
+      content: Text('Our app would like to send you notifications'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            'Don\'t Allow',
+            style: TextStyle(color: Colors.grey, fontSize: 18),
+          ),
+        ),
+        TextButton(
+          onPressed: () => AwesomeNotifications()
+              .requestPermissionToSendNotifications()
+              .then((_) => Navigator.pop(context)),
+          child: Text(
+            'Allow',
+            style: TextStyle(
+              color: Colors.teal,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   void initialization() async {

@@ -2,6 +2,10 @@ import 'package:helbage/model/_model.dart';
 
 class DataPassingService {
   dynamic object;
+  void assign(dynamic x) {
+    object = x;
+  }
+
   void assignToPointModel(CollectionPointModel x) {
     object = x;
   }

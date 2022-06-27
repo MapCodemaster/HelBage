@@ -7,7 +7,8 @@ abstract class storage_service {
   Future<bool> addByIModel(String table,IModel data);
   Future<bool> update(String docid, String table, dynamic data);
   Future<bool> delete(String docid, String table);
-  Future<bool> updateSingleField(String collection,String document,String field,dynamic data);
+  Future<bool> updateSingleField(
+      String collection, String document, String field, dynamic data);
   Future<DocumentSnapshot<Map<String, dynamic>>> read(
       String collection, String document);
   Stream<DocumentSnapshot<Map<String, dynamic>>> readDocumentAsStream(
@@ -16,11 +17,17 @@ abstract class storage_service {
       String collection);
   Future<QuerySnapshot<Map<String, dynamic>>> readCollectionAsFuture(
       String collection);
+
       Stream<QuerySnapshot<Map<String, dynamic>>> readCollectionAsStreamArrayCondition(
       String collection,String field,String item);
       Stream<QuerySnapshot<Map<String, dynamic>>>
       readCollectionAsStreamCondition(
           String collection, String field, dynamic item);
+
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      readCollectionAsStreamArrayCondition(
+          String collection, String field, String item);
+
   Future<void> insertLevel2(
       {required collection,
       required document,
@@ -28,4 +35,5 @@ abstract class storage_service {
       required subColDoc,
       required data});
   Future<void> newsSetup(String url);
+  String getCreatedDocumentID(String collection);
 }

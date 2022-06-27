@@ -84,7 +84,7 @@ class StackedRouter extends RouterBase {
     },
     ResidentMainScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const ResidentMainScreen(),
+        builder: (context) => ResidentMainScreen(),
         settings: data,
       );
     },

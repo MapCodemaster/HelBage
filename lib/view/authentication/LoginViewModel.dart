@@ -39,7 +39,9 @@ class LoginViewModel extends BaseViewModel {
     UserModel user = UserModel.fromJson(temp);
 
     if (user.userType.toString() == "User") {
-      _navigationService.navigateTo(Routes.residentMainScreen);
+      _navigationService.navigateTo(
+        Routes.residentMainScreen,
+      );
     } else {
       _navigationService.navigateTo(Routes.adminMainScreen);
     }

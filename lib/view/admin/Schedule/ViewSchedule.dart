@@ -41,6 +41,13 @@ class _viewSchedule extends State<ViewSchedule> {
                 : AppBar(
                     leading: Container(),
                     title: Center(child: Text("Schedule")),
+                    actions: [
+                      IconButton(
+                          onPressed: () {
+                            model.navigateToActiveReminder();
+                          },
+                          icon: Icon(Icons.notifications))
+                    ],
                     backgroundColor: logoColor,
                   ),
             body: Column(

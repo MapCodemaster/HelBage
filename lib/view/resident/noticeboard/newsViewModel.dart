@@ -6,6 +6,7 @@ import 'package:helbage/view/resident/noticeboard/_resident_Noticeboard.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 
 class NewsViewModel extends StreamViewModel<List<NewsModel>> {
   final navigate = locator<NavigationService>();
@@ -24,5 +25,9 @@ class NewsViewModel extends StreamViewModel<List<NewsModel>> {
     } catch (e) {
       return false;
     }
+  }
+
+  void share(String url) {
+    Share.share(url);
   }
 }

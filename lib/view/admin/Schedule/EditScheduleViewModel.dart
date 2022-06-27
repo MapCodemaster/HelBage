@@ -22,7 +22,6 @@ class EditScheduleViewModel extends BaseViewModel {
       {required this.oriLocationList,
       required this.oriDurationList,
       required this.originalschedule}) {
-    print(originalschedule.state);
     //oriLocationList = originalschedule.getPath().location_List;
     //oriDurationList = originalschedule.getPath().durationList;
     // for (int i = 0; i < locationList.length; i++) {
@@ -93,6 +92,7 @@ class EditScheduleViewModel extends BaseViewModel {
           durationList: createDurationList,
           vehicle: platno);
       scheduleModel schedule = new scheduleModel(s, newPath, city);
+
       await stor.delete(
         originalschedule.pathName,
         "schedule/" + originalschedule.state + "/Path",
@@ -103,22 +103,24 @@ class EditScheduleViewModel extends BaseViewModel {
           subCollection: "Path",
           subColDoc: schedule.pathName,
           data: schedule.getPath().toFirestore());
-      // await stor.delete(
-      //   originalschedule.pathName,
-      //   "schedule/" + originalschedule.state + "/Path",
-      // );
-      // bool successInsert = await stor.insert(
-      //     schedule.pathName,
-      //     'schedule/' + schedule.state + "/Path",
-      //     schedule.getPath().toFirestore());
-      // if (!successInsert) {
-      //   _dialogService.showDialog(
-      //       title: "Personal Information Error",
-      //       description: "Error happen in registration, try again later",
-      //       dialogPlatform: DialogPlatform.Material);
-      //   return false;
-      // }
-
+      List<ReminderModel> reminderList = [];
+      stor.readCollectionAsFuture("reminder").then((value) {
+        reminderList = value.docs
+            .map((e) => ReminderModel.fromJson(e.data()))
+            .toList()
+            .where((element) =>
+                element.schedule ==
+                "schedule/" +
+                    originalschedule.state +
+                    "/Path/" +
+                    originalschedule.pathName)
+            .toList();
+        reminderList.forEach((element) {
+          element.schedule =
+              "schedule/" + schedule.state + "/Path/" + schedule.pathName;
+          stor.update(element.docID, "reminder", element.toJson());
+        });
+      });
       notifyListeners();
       _navigationService.popRepeated(2);
       return true;
