@@ -30,6 +30,11 @@ class _ViewGuidelineState extends State<ViewGuideline> {
                       },
                       icon: Icon(Icons.arrow_back))
                   : Container(),
+              actions: [
+                IconButton(
+                  onPressed: (){ model.navigateToAdd();}, 
+                  icon:Icon(Icons.add))
+              ],
             ),
             body: buildBody(model.status, model)));
   }
