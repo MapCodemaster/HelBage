@@ -16,6 +16,10 @@ class AccountBodyScreenViewModel extends BaseViewModel {
     navigate.navigateToView(ViewVehicle());
   }
 
+  void NavigateToSummary() {
+    //navigate.navigateToView(ViewVehicle());
+  }
+
   void SignOut() {
     auth.signOut();
     navigate.pushNamedAndRemoveUntil(Routes.homeScreen);
