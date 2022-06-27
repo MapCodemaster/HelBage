@@ -80,7 +80,9 @@ class ResidentMainScreen extends StatelessWidget {
       case 3:
         return ViewGuideline();
       default:
-        return MoreScreen();
+        return MoreScreen(
+          isAdmin: false,
+        );
     }
   }
 }

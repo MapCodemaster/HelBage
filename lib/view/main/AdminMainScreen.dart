@@ -66,7 +66,9 @@ class AdminMainScreen extends StatelessWidget {
         return ViewGuidelineView();
 
       default:
-        return MoreScreen();
+        return MoreScreen(
+          isAdmin: true,
+        );
     }
   }
 }

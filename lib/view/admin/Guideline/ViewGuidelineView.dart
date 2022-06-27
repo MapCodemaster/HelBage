@@ -43,9 +43,10 @@ class _ViewGuidelineViewState extends State<ViewGuidelineView> {
                       },
                       icon: Icon(Icons.add)),
                   IconButton(
-                    icon:Icon(Icons.local_post_office_outlined),
-
-                    onPressed: () { model.navigateToRequest();},
+                    icon: Icon(Icons.local_post_office_outlined),
+                    onPressed: () {
+                      model.navigateToRequest();
+                    },
                   ),
                   // PopupMenuButton(itemBuilder: (BuildContext context) {
                   //     return getGuidelinetag(model.tagList);},

@@ -32,8 +32,10 @@ class _ViewGuidelineState extends State<ViewGuideline> {
                   : Container(),
               actions: [
                 IconButton(
-                  onPressed: (){ model.navigateToAdd();}, 
-                  icon:Icon(Icons.add))
+                    onPressed: () {
+                      model.navigateToAdd();
+                    },
+                    icon: Icon(Icons.add))
               ],
             ),
             body: buildBody(model.status, model)));
@@ -84,12 +86,19 @@ List<Widget> getGuidelinetagWidget(model,
 
 Widget buildBody(status, model) {
   if (!model.selected) {
-    return Center(
-        heightFactor: 1.0,
-        child: Wrap(
-            spacing: 10.0,
-            alignment: WrapAlignment.center,
-            children: getGuidelinetagWidget(model)));
+    return SingleChildScrollView(
+      child: Column(
+        children: getGuidelinetagWidget(model),
+      ),
+    )
+        // return Center(
+        //     heightFactor: 1.0,
+        //     child: Wrap(
+        //         spacing: 10.0,
+        //         alignment: WrapAlignment.center,
+        //         children: ))
+
+        ;
   }
   if (!status) {
     return Center(

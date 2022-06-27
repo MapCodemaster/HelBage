@@ -2,7 +2,8 @@ import 'package:helbage/shared/_shared.dart';
 import 'package:helbage/view/main/_main.dart';
 
 class MoreScreen extends StatefulWidget {
-  const MoreScreen({Key? key}) : super(key: key);
+  final bool isAdmin;
+  const MoreScreen({Key? key, required this.isAdmin}) : super(key: key);
 
   @override
   _MoreScreenState createState() => _MoreScreenState();
@@ -20,7 +21,9 @@ class _MoreScreenState extends State<MoreScreen> {
         centerTitle: true,
         title: Text("Account"),
       ),
-      body: AccountBodyScreen(),
+      body: AccountBodyScreen(
+        isAdmin: widget.isAdmin,
+      ),
     );
   }
 }
