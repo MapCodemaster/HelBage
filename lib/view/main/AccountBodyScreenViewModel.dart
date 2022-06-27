@@ -1,6 +1,7 @@
 import 'package:helbage/app/_route.dart';
 import 'package:helbage/services/FirebaseServices/_services.dart';
 import 'package:helbage/view/Profile/_profile.dart';
+import 'package:helbage/view/admin/Summary/SummaryView.dart';
 import 'package:helbage/view/admin/Vehicle/ViewVehicle.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -17,7 +18,7 @@ class AccountBodyScreenViewModel extends BaseViewModel {
   }
 
   void NavigateToSummary() {
-    //navigate.navigateToView(ViewVehicle());
+    navigate.navigateToView(SummaryView());
   }
 
   void SignOut() {
