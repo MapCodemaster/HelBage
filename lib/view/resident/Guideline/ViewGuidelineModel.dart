@@ -1,5 +1,5 @@
 import 'package:helbage/model/guideLineModel.dart';
-import 'package:helbage/view/admin/Guideline/addGuidelineView.dart';
+import 'package:helbage/view/admin/Guideline/AddGuidelineView.dart';
 import 'package:helbage/view/admin/Guideline/singleGuidelineView.dart';
 import 'package:helbage/view/resident/Guideline/singleGuideline.dart';
 import 'package:stacked/stacked.dart';
@@ -97,5 +97,9 @@ class ViewGuidelineModel extends BaseViewModel {
         }
       });
     }
+  }
+  void navigateToAdd()
+  {
+    _navigationService.navigateToView(AddGuidelineView(isAdmin: false));
   }
 }

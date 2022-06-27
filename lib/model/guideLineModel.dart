@@ -7,8 +7,9 @@ class guidelineModel{
   List<tagModel> tag;
   DateTime? datetime;
   String? docid;
+  String? userId;
   //constructor for created new guideline
-  guidelineModel({required this.title,required this.content,required this.author,required this.tag})
+  guidelineModel({required this.title,required this.content,required this.author,required this.tag,this.userId})
   {
     this.datetime=DateTime.now();
   }
@@ -20,6 +21,7 @@ class guidelineModel{
       "author": author,
       "datetime": datetime,
       "tag":converTag(tag),
+      "authorId":userId,
     };
   }
   guidelineModel.fromFireStore(

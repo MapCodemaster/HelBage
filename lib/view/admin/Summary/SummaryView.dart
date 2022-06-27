@@ -4,51 +4,129 @@ import 'package:helbage/view/admin/Summary/SummaryViewModel.dart';
 import 'package:helbage/view/admin/Vehicle/ViewVehicleModel.dart';
 import 'package:stacked/stacked.dart';
 
-class SummaryView extends StatefulWidget{
+import 'package:sliver_bar_chart/sliver_bar_chart.dart';
+
+class SummaryView extends StatefulWidget {
   const SummaryView({super.key});
 
   @override
-    State<SummaryView> createState() => _SummaryViewState();
+  State<SummaryView> createState() => _SummaryViewState();
 }
 
-class _SummaryViewState extends State<SummaryView>{
-  
+class _SummaryViewState extends State<SummaryView> {
   @override
-  Widget build(BuildContext){
-    return ViewModelBuilder<SummaryViewModel>.reactive(viewModelBuilder: () => SummaryViewModel(),
-    builder: (context, model, child) => Scaffold(
-      appBar: AppBar(
-        backgroundColor: logoColor,
-        title: Text("Summary Detail")
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(
-            child: 
-            Center(
-              child: Text("The total user is:" + model.returnUser(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
-              )
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: Center(
-            child: Text("The total collection point is:" + model.returnCollection(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
-        ),
-        ),
-        SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: Center(
-            child: Text("The total newst is:" + model.returnNews(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold))
-        ),
-        ),
-        ]
-      ),
-    ));
+  Widget build(BuildContext) {
+    return ViewModelBuilder<SummaryViewModel>.reactive(
+        viewModelBuilder: () => SummaryViewModel(),
+        builder: (context, model, child) {
+          return Scaffold(
+              appBar: AppBar(
+                  backgroundColor: logoColor, title: Text("Summary Detail")),
+              body: GridView.count(
+                childAspectRatio: (1 / .7),
+                padding: const EdgeInsets.all(10),
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 5,
+                crossAxisCount: 2,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Color(
+                          Colors.orangeAccent.value,
+                        ),
+                        Color(Colors.deepOrange.value)
+                      ]),
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Total number of users:",
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(model.returnUser(),
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Color(
+                          Colors.lightBlue[200]!.value,
+                        ),
+                        Color(Colors.blueAccent.value)
+                      ]),
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Total number of bulky waste collection points:",
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(model.returnCollection(),
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Color(
+                          Colors.purple[200]!.value,
+                        ),
+                        Color(logoColor.value)
+                      ]),
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Total number of news:",
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(model.returnNews(),
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ));
+        });
   }
 }

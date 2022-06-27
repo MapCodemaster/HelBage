@@ -1,9 +1,12 @@
+import 'package:helbage/model/IModel.dart';
 import 'package:helbage/services/FirebaseServices/storage_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseStor implements storage_service {
   FirebaseFirestore db = FirebaseFirestore.instance;
   static const pointCollection = 'points';
+  static const user='user';
+  static const vehicle='vehicle';
   Future<bool> insert(String uid, String table, dynamic data) async {
     try {
       if (await db
@@ -102,6 +105,15 @@ class FirebaseStor implements storage_service {
         .where(field, arrayContains: item)
         .snapshots();
   }
+  Stream<QuerySnapshot<Map<String, dynamic>>>
+      readCollectionAsStreamCondition(
+          String collection, String field, dynamic item) {
+            print("hello");
+    return db
+        .collection(collection)
+        .where(field, isEqualTo: item)
+        .snapshots();
+  }
 
   Future<void> insertLevel2(
       {required collection,
@@ -122,7 +134,23 @@ class FirebaseStor implements storage_service {
     db.collection("news").add({'url': url, 'datetime': DateTime.now()});
   }
 
+
+  @override
+  Future<bool> addByIModel(String table,IModel data) async
+  {
+    
+    try {
+      db.collection(table).add(data.toFirestore()).onError((error, stackTrace) {throw Exception();});
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+  
+
+
   String getCreatedDocumentID(String collection) {
     return db.collection(collection).doc().id;
   }
+
 }

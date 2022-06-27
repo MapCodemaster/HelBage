@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:helbage/app/_route.dart';
 import 'package:helbage/model/guideLineModel.dart';
+import 'package:helbage/model/userModel.dart';
 import 'package:helbage/view/admin/Guideline/editGuidelineView.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -12,12 +14,11 @@ class SingleGuidelineViewModel extends BaseViewModel {
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
   guidelineModel workingGuideline;
-  bool editable = false;
-  SingleGuidelineViewModel({required this.workingGuideline}) {
-    if (workingGuideline.author == "Admin" ||
-        workingGuideline.author == auth.getUID()) {
-      editable = true;
-    }
+  bool editable = true;
+  SingleGuidelineViewModel({required this.workingGuideline})  {
+    
+    
+    //setEditable();
   }
   void edit(guideline) {
     _navigationService.navigateToView(EditGuidelineView(guideline: guideline));
@@ -42,5 +43,17 @@ class SingleGuidelineViewModel extends BaseViewModel {
 
       _navigationService.back();
     });
+  }
+  void setEditable() async
+  {
+    DocumentSnapshot snapshotc =
+        await stor.read("user", auth.getUID());
+    var temp = snapshotc.data() as Map<String, dynamic>;
+    UserModel user = UserModel.fromJson(temp);
+
+    if (user.userType.toString() == "Admin") {
+      editable=true;
+    }
+    
   }
 }
