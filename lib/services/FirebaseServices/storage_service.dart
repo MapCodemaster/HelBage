@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:helbage/model/IModel.dart';
 
 abstract class storage_service {
   Future<bool> insert(String uid, String table, dynamic data);
   Future<bool> add(String table, dynamic data);
+  Future<bool> addByIModel(String table,IModel data);
   Future<bool> update(String docid, String table, dynamic data);
   Future<bool> delete(String docid, String table);
   Future<bool> updateSingleField(String collection,String document,String field,dynamic data);
@@ -16,6 +18,9 @@ abstract class storage_service {
       String collection);
       Stream<QuerySnapshot<Map<String, dynamic>>> readCollectionAsStreamArrayCondition(
       String collection,String field,String item);
+      Stream<QuerySnapshot<Map<String, dynamic>>>
+      readCollectionAsStreamCondition(
+          String collection, String field, dynamic item);
   Future<void> insertLevel2(
       {required collection,
       required document,
