@@ -1,5 +1,5 @@
 import 'package:helbage/shared/_shared.dart';
-import 'package:helbage/view/admin/Guideline/viewGuidelineViewModel.dart';
+import 'package:helbage/view/admin/Guideline/ViewGuidelineViewModel.dart';
 import 'package:stacked/stacked.dart';
 import 'dart:math';
 
@@ -42,6 +42,11 @@ class _ViewGuidelineViewState extends State<ViewGuidelineView> {
                         model.addGuideline();
                       },
                       icon: Icon(Icons.add)),
+                  IconButton(
+                    icon:Icon(Icons.local_post_office_outlined),
+
+                    onPressed: () { model.navigateToRequest();},
+                  ),
                   // PopupMenuButton(itemBuilder: (BuildContext context) {
                   //     return getGuidelinetag(model.tagList);},
                   //     onSelected: (vale){model.getGuideline(vale);},)
