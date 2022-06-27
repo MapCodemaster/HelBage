@@ -4,7 +4,6 @@ import 'package:helbage/view/admin/Summary/SummaryViewModel.dart';
 import 'package:helbage/view/admin/Vehicle/ViewVehicleModel.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:sliver_bar_chart/sliver_bar_chart.dart';
 
 class SummaryView extends StatefulWidget {
   const SummaryView({super.key});
