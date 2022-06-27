@@ -6,3 +6,4 @@ export 'package:helbage/services/FirebaseServices/fileStorage.dart';
 export 'package:helbage/services/FirebaseServices/firebaseAuth.dart';
 export 'package:helbage/services/FirebaseServices/firebaseFileStorage.dart';
 export 'package:helbage/services/FirebaseServices/firebaseStorage.dart';
+export 'package:helbage/services/FirebaseServices/firebaseConfig.dart';
