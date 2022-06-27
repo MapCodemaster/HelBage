@@ -1,10 +1,11 @@
 import 'package:flutter/services.dart';
 import 'package:helbage/shared/_shared.dart';
-import 'package:helbage/view/admin/Guideline/addGuidelineViewModel.dart';
+import 'package:helbage/view/admin/Guideline/AddGuidelineViewModel.dart';
 import 'package:stacked/stacked.dart';
 
 class AddGuidelineView extends StatefulWidget {
-  const AddGuidelineView({Key? key}) : super(key: key);
+  bool isAdmin;
+  AddGuidelineView({Key? key,this.isAdmin=true}) : super(key: key);
   @override
   State<AddGuidelineView> createState() => _AddGuidelineViewState();
 }
@@ -21,10 +22,10 @@ class _AddGuidelineViewState extends State<AddGuidelineView> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddGuidelineViewModel>.reactive(
-        viewModelBuilder: () => AddGuidelineViewModel(),
+        viewModelBuilder: () => AddGuidelineViewModel(isAdmin:widget.isAdmin),
         builder: (context, model, child) => Scaffold(
             appBar: AppBar(
-              title: Text("Add New Guideline"),
+              title: widget.isAdmin?Text("Add New Guideline"):Text("Submit Guideline"),
               backgroundColor: logoColor,
             ),
             body: SingleChildScrollView(

@@ -1,5 +1,6 @@
 import 'package:helbage/model/guideLineModel.dart';
 import 'package:helbage/view/admin/Guideline/addGuidelineView.dart';
+import 'package:helbage/view/admin/Guideline/pendingGuidelineView.dart';
 import 'package:helbage/view/admin/Guideline/singleGuidelineView.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -44,7 +45,7 @@ class ViewGuidelineViewModel extends BaseViewModel {
         sortTagList();
       });
     } catch (e) {
-      print(e.toString());
+     
     }
   }
 
@@ -94,6 +95,11 @@ class ViewGuidelineViewModel extends BaseViewModel {
   void clearSelected() {
     selected = false;
     notifyListeners();
+  }
+  
+  void navigateToRequest()
+  {
+    _navigationService.navigateToView(pendingGuidelineView());
   }
 
   void sortTagList() async {
