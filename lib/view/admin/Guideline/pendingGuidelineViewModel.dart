@@ -21,8 +21,9 @@ class pendingGuidelineViewModel extends BaseViewModel
     
     //stor.readCollectionAsStream(firebaseConfig.guidelineRequest)
     stor.readCollectionAsStreamCondition(firebaseConfig.guidelineRequest,'status',false).listen((event) { }).onData((data) {
+      requestList.clear();
       data.docs.forEach((element){
-        
+        print(element['authorId']);
         if(!element['status'])
         {
           requestList.add(guidelineRequestModel.FromFireStore(element));
