@@ -29,7 +29,11 @@ class _processPendingGuidelineViewState extends State<processPendingGuidelineVie
                     children: [
                     GuidelineWidget(
                       10.0, widget.request.title, FontWeight.bold, 20.0),
-                    TextButton(onPressed: (){model.approve();}, child: Text("Approve")),
+                    TextButton(onPressed: (){model.approve();}, child: Container(
+                      padding: EdgeInsets.only(left: 20,right: 20,top: 5,bottom: 5),
+                      child:Text("Approve",
+                      style: TextStyle(color:Colors.black),),
+                      decoration: BoxDecoration(border: Border.all(width: 1),borderRadius: BorderRadius.circular(25),color: Colors.green[200]),)),
                   ],),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +44,7 @@ class _processPendingGuidelineViewState extends State<processPendingGuidelineVie
                       onPressed: (){model.reject();}, 
                       child:Container(
                         
-                        padding: EdgeInsets.only(left: 20,right: 20,top: 5,bottom: 5),
+                        padding: EdgeInsets.only(left: 25,right: 25,top: 5,bottom: 5),
                         child:Text("Reject",
                           style: TextStyle(color:Colors.black),
                           ),
