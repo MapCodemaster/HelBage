@@ -12,7 +12,7 @@ class guidelineRequestModel extends guidelineModel implements IModel
   
   static guidelineRequestModel FromFireStore(QueryDocumentSnapshot<Map<String,dynamic>> element)
   {
-    print("In Model"+element.id);
+    
     try{
       return guidelineRequestModel(
         author: element['author'], 
@@ -45,7 +45,7 @@ class guidelineRequestModel extends guidelineModel implements IModel
   }
   guidelineModel  getGuidelineModel()
   {
-    return new guidelineModel(title: this.title, content: this.content, author: this.author, tag: this.tag);
+    return new guidelineModel(title: this.title, content: this.content, author: this.author, tag: this.tag,userId:this.userId);
   }
   
 }
