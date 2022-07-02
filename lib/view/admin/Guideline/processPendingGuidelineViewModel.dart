@@ -30,7 +30,7 @@ class processPendingGuidelineiViewModel extends BaseViewModel
   }
   void addGuideline()
   {
-    print(workingRequest.userId);
+    
     guidelineModel guideline=workingRequest.getGuidelineModel();
         stor.add('guideline', guideline.toFirestore());
         var guidelineTagListener = stor
