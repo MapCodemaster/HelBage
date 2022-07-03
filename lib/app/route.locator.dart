@@ -6,6 +6,8 @@
 
 // ignore_for_file: public_member_api_docs
 
+import 'package:helbage/services/FileService/guidelinePdf.dart';
+import 'package:helbage/services/FileService/pdfServices.dart';
 import 'package:helbage/services/FirebaseServices/localNotification.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -24,6 +26,7 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => SnackbarService());
+  locator.registerLazySingleton<pdfServices>(() => guidelinePdf());
   locator.registerLazySingleton<AuthService>(() => FirebaseAuthService());
   locator.registerLazySingleton<storage_service>(() => FirebaseStor());
   locator.registerLazySingleton(() => BottomSheetService());
