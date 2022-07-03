@@ -51,7 +51,9 @@ dependencies:
   another_flushbar: ^1.10.29
   awesome_notifications: ^0.6.21
   share_plus: ^4.0.9
-
+  syncfusion_flutter_pdf: ^20.2.36
+  permission_handler: ^8.3.0
+  
 
 
 
