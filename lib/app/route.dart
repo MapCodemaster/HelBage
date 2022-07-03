@@ -1,4 +1,5 @@
 import 'package:helbage/services/FirebaseServices/_services.dart';
+import 'package:helbage/services/FirebaseServices/localNotification.dart';
 import 'package:helbage/view/admin/CollectionPoint/editCollectionPointScreen.dart';
 import 'package:helbage/view/admin/Guideline/addGuidelineView.dart';
 import 'package:helbage/view/admin/Guideline/editGuidelineView.dart';
@@ -37,7 +38,6 @@ import 'package:helbage/view/authentication/userLogin.dart';
   LazySingleton(classType: BottomSheetService),
   LazySingleton(classType: FirebaseFileStorage, asType: FileStorage),
   Singleton(classType: DataPassingService),
-  LazySingleton(
-      classType: FirebaseCloudMessaging, asType: PushNotificationService)
+  LazySingleton(classType: LocalNotification, asType: PushNotificationService)
 ])
 class AppSetup {}

@@ -1,5 +1,6 @@
 import 'package:helbage/app/route.locator.dart';
 import 'package:helbage/model/_model.dart';
+import 'package:helbage/model/guideLineModel.dart';
 import 'package:helbage/model/tagModel.dart';
 import 'package:helbage/model/userModel.dart';
 import 'package:helbage/model/vehicleModel.dart';
@@ -15,12 +16,13 @@ class SummaryViewModel extends BaseViewModel {
   List<CollectionPointModel> cList = [];
   List<NewsModel> nList = [];
   List<tagModel> tList = [];
+  int? guidelineListCount;
   @override
   SummaryViewModel() {
     fetchData();
   }
 
-  void fetchData() {
+  Future<void> fetchData() async {
     var user = stor.readCollectionAsStream("user").listen((event) {});
     user.onData((data) {
       uList = data.docs.map((e) => UserModel.fromJson(e.data())).toList();
@@ -40,6 +42,16 @@ class SummaryViewModel extends BaseViewModel {
       nList = data.docs.map((e) => NewsModel.fromJson(e.data(), e.id)).toList();
       notifyListeners();
     });
+
+    await stor.readCollectionAsFuture("guideline").then((value) {
+      guidelineListCount = value.docs.length;
+      print(guidelineListCount);
+      notifyListeners();
+    });
+  }
+
+  String returnGuidelineCount() {
+    return "${guidelineListCount}";
   }
 
   String returnUser() {

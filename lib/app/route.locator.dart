@@ -6,6 +6,7 @@
 
 // ignore_for_file: public_member_api_docs
 
+import 'package:helbage/services/FirebaseServices/localNotification.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -29,5 +30,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton<FileStorage>(() => FirebaseFileStorage());
   locator.registerSingleton(DataPassingService());
   locator.registerLazySingleton<PushNotificationService>(
-      () => FirebaseCloudMessaging());
+      () => LocalNotification());
 }

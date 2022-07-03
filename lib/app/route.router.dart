@@ -135,9 +135,8 @@ class StackedRouter extends RouterBase {
       );
     },
     AddGuidelineView: (data) {
-      
       return MaterialPageRoute<dynamic>(
-        builder: (context) =>  AddGuidelineView(),
+        builder: (context) => AddGuidelineView(),
         settings: data,
       );
     },

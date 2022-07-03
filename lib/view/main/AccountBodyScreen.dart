@@ -69,13 +69,13 @@ class _AccountBodyScreenState extends State<AccountBodyScreen> {
                             child: Row(
                               children: [
                                 Icon(
-                                  Icons.edit,
+                                  Icons.fire_truck_sharp,
                                   size: 20,
                                   color: primaryColor,
                                 ),
                                 SizedBox(width: 20),
                                 Text(
-                                  "Vehicle Detail",
+                                  "Vehicle List",
                                   style: TextStyle(
                                     fontSize: 16, //16
                                     color: Colors.black,
@@ -105,7 +105,7 @@ class _AccountBodyScreenState extends State<AccountBodyScreen> {
                             child: Row(
                               children: [
                                 Icon(
-                                  Icons.edit,
+                                  Icons.file_copy_sharp,
                                   size: 20,
                                   color: primaryColor,
                                 ),

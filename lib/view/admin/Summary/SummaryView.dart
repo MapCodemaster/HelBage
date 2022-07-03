@@ -4,7 +4,6 @@ import 'package:helbage/view/admin/Summary/SummaryViewModel.dart';
 import 'package:helbage/view/admin/Vehicle/ViewVehicleModel.dart';
 import 'package:stacked/stacked.dart';
 
-
 class SummaryView extends StatefulWidget {
   const SummaryView({super.key});
 
@@ -116,6 +115,38 @@ class _SummaryViewState extends State<SummaryView> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(model.returnNews(),
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Color(
+                          Colors.green[200]!.value,
+                        ),
+                        Color(Colors.green[800]!.value)
+                      ]),
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Total number of guidelines:",
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(model.returnGuidelineCount(),
                               style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
