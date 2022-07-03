@@ -3,6 +3,7 @@ import 'package:helbage/app/_route.dart';
 import 'package:helbage/model/_model.dart';
 
 import 'package:helbage/services/FirebaseServices/auth_service.dart';
+import 'package:helbage/services/FirebaseServices/pushNotificationService.dart';
 import 'package:helbage/services/FirebaseServices/storage_service.dart';
 import 'package:helbage/shared/_shared.dart';
 import 'package:stacked/stacked.dart';
@@ -12,6 +13,7 @@ class MainScreenViewModel extends IndexTrackingViewModel {
   final _navigator = locator<NavigationService>();
   final _storageService = locator<storage_service>();
   final _auth = locator<AuthService>();
+  final _notification = locator<PushNotificationService>();
 
   void initializeNotification() {
     List<ReminderModel> reminderList = [];
@@ -45,10 +47,7 @@ class MainScreenViewModel extends IndexTrackingViewModel {
               endTimeString: value['EndTime']);
 
           counter++;
-
-          // createNotification(counter, temp, element);
-
-          // }
+          _notification.createNotification(counter, temp, element);
         });
       });
     });
