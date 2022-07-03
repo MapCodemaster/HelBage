@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:helbage/app/_route.dart';
 import 'package:helbage/model/guideLineModel.dart';
 import 'package:helbage/model/userModel.dart';
+import 'package:helbage/services/FileService/pdfServices.dart';
 import 'package:helbage/view/admin/Guideline/editGuidelineView.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 import '../../../services/FirebaseServices/_services.dart';
 
@@ -13,10 +19,10 @@ class SingleGuidelineViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
+  final pdfConverter = locator<pdfServices>();
   guidelineModel workingGuideline;
   bool editable = true;
   SingleGuidelineViewModel({required this.workingGuideline})  {
-    
     
     //setEditable();
   }
@@ -56,4 +62,17 @@ class SingleGuidelineViewModel extends BaseViewModel {
     }
     
   }
+  void toPDF() async
+  {
+    if(await pdfConverter.toPDF(workingGuideline))
+    {
+     _dialogService.showDialog(
+              title: "File downloaded",
+              description: "Pdf file downloaded in folder helbage",
+              dialogPlatform: DialogPlatform.Material);
+    }
+  }
+  
+
+  
 }

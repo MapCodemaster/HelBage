@@ -24,6 +24,7 @@ class _SingleGuidelineViewState extends State<SingleGuidelineView> {
                 title: Text(
                     widget.guideline.author + ": " + widget.guideline.title),
                 actions: [
+                  IconButton(onPressed: (){model.toPDF();}, icon: Icon(Icons.picture_as_pdf)),
                   model.editable
                       ? IconButton(
                           onPressed: () {

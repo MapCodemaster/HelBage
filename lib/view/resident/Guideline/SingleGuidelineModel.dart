@@ -1,6 +1,6 @@
 import 'package:helbage/app/_route.dart';
 import 'package:helbage/model/guideLineModel.dart';
-import 'package:helbage/view/admin/Guideline/editGuidelineView.dart';
+import 'package:helbage/services/FileService/pdfServices.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -11,6 +11,8 @@ class SingleGuidelineModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
   final auth = locator<AuthService>();
   final stor = locator<storage_service>();
+  final pdfConverter = locator<pdfServices>();
+
   guidelineModel workingGuideline;
   bool editable = false;
   SingleGuidelineModel({required this.workingGuideline}) {
@@ -18,5 +20,18 @@ class SingleGuidelineModel extends BaseViewModel {
         workingGuideline.author == auth.getUID()) {
       editable = false;
     }
+    
   }
+
+  void toPDF() async
+  {
+    if(await pdfConverter.toPDF(workingGuideline))
+    {
+     _dialogService.showDialog(
+              title: "File downloaded",
+              description: "Pdf file downloaded in folder helbage",
+              dialogPlatform: DialogPlatform.Material);
+    }
+  }
+  
 }

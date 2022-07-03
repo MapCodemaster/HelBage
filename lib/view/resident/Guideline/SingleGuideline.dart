@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helbage/model/guideLineModel.dart';
 import 'package:helbage/shared/_shared.dart';
-import 'package:helbage/view/admin/Guideline/singleGuidelineViewModel.dart';
-import 'package:helbage/view/resident/Guideline/singleGuidelineModel.dart';
+import 'package:helbage/view/resident/Guideline/SingleGuidelineModel.dart';
 import 'package:stacked/stacked.dart';
 
 class SingleGuideline extends StatefulWidget {
@@ -25,6 +24,9 @@ class _SingleGuidelineState extends State<SingleGuideline> {
                 title: Text(
                     widget.guideline.author + ": " + widget.guideline.title),
                 backgroundColor: logoColor,
+                actions: [
+                  IconButton(onPressed: (){model.toPDF();}, icon: Icon(Icons.picture_as_pdf)),
+                ],
               ),
               body: SingleChildScrollView(
                   child: Column(
