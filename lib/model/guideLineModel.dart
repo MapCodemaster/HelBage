@@ -1,6 +1,7 @@
+import 'package:helbage/model/IModel.dart';
 import 'package:helbage/model/tagModel.dart';
 
-class guidelineModel{
+class guidelineModel implements IModel{
   String title;
   String content;
   String author;
