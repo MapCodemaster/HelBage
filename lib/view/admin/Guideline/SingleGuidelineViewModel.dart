@@ -22,8 +22,7 @@ class SingleGuidelineViewModel extends BaseViewModel {
   final pdfConverter = locator<pdfServices>();
   guidelineModel workingGuideline;
   bool editable = true;
-  SingleGuidelineViewModel({required this.workingGuideline})  {
-    
+  SingleGuidelineViewModel({required this.workingGuideline}) {
     //setEditable();
   }
   void edit(guideline) {
@@ -50,29 +49,23 @@ class SingleGuidelineViewModel extends BaseViewModel {
       _navigationService.back();
     });
   }
-  void setEditable() async
-  {
-    DocumentSnapshot snapshotc =
-        await stor.read("user", auth.getUID());
+
+  void setEditable() async {
+    DocumentSnapshot snapshotc = await stor.read("user", auth.getUID());
     var temp = snapshotc.data() as Map<String, dynamic>;
     UserModel user = UserModel.fromJson(temp);
 
     if (user.userType.toString() == "Admin") {
-      editable=true;
-    }
-    
-  }
-  void toPDF() async
-  {
-    if(await pdfConverter.toPDF(workingGuideline))
-    {
-     _dialogService.showDialog(
-              title: "File downloaded",
-              description: "Pdf file downloaded in folder helbage",
-              dialogPlatform: DialogPlatform.Material);
+      editable = true;
     }
   }
-  
 
-  
+  void toPDF() async {
+    if (await pdfConverter.toPDF(workingGuideline)) {
+      await _dialogService.showDialog(
+          title: "File downloaded",
+          description: "Pdf file downloaded in files folder ",
+          dialogPlatform: DialogPlatform.Material);
+    }
+  }
 }

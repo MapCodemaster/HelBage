@@ -20,18 +20,14 @@ class SingleGuidelineModel extends BaseViewModel {
         workingGuideline.author == auth.getUID()) {
       editable = false;
     }
-    
   }
 
-  void toPDF() async
-  {
-    if(await pdfConverter.toPDF(workingGuideline))
-    {
-     _dialogService.showDialog(
-              title: "File downloaded",
-              description: "Pdf file downloaded in folder helbage",
-              dialogPlatform: DialogPlatform.Material);
+  void toPDF() async {
+    if (await pdfConverter.toPDF(workingGuideline)) {
+      await _dialogService.showDialog(
+          title: "File downloaded",
+          description: "Pdf file downloaded in files folder ",
+          dialogPlatform: DialogPlatform.Material);
     }
   }
-  
 }

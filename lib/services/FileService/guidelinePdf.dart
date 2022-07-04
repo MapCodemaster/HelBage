@@ -6,7 +6,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class guidelinePdf implements pdfServices {
   Future _getStoragePermission() async {
@@ -61,11 +60,13 @@ class guidelinePdf implements pdfServices {
         time.toString(), PdfStandardFont(PdfFontFamily.helvetica, 15));
     document.template.bottom = footerTemplate;
     var path = (await getExternalStorageDirectory())!.path;
-    var filetime = time.toString().replaceAll(":", ".");
-    File('$path/$filetime.pdf').writeAsBytes(await document.save());
+    // var filetime = time.toString().replaceAll(":", ".");
+    File file = File('$path/$time.pdf');
+
+    file.writeAsBytes(await document.save(), flush: true);
     document.dispose();
-    if (await File('$path/$filetime.pdf').exists()) {
-      // await launchUrl(Uri.file('$path/$filetime.pdf'));
+
+    if (await File('$path/$time.pdf').exists()) {
       return true;
     } else {
       return false;
