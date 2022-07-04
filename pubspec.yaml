@@ -53,7 +53,8 @@ dependencies:
   share_plus: ^4.0.9
   syncfusion_flutter_pdf: ^20.2.36
   permission_handler: ^8.3.0
-  
+  path_provider: ^2.0.11
+
 
 
 
